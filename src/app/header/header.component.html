@@ -1,8 +1,32 @@
-<nav class="navbar navbar-dark fixed-top">
+<nav class="navbar navbar-dark " style="position: sticky;top: 0;z-index: 9999;">
   <div class="container pt-3 pb-3">
-    <div class="">
-      <a class="navbar-brand " routerLink="" style="font-size: 14px;">CART (<span>0</span>)</a>
-      <a class="navbar-brand me-0" routerLink="" style="font-size: 14px;"><i class="fa-regular fa-heart"></i> (<span>0</span>)</a>
+    <div>
+      
+      <a class="navbar-brand " routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">CART (<span>0</span>)</a>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header pt-5">
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel">Cart</h5>
+          <p class="m-0">item(<span>0</span>)</p>
+        </div>
+        <div class="offcanvas-body">
+          Your Cart is Currently Empty
+        </div>
+      </div>
+
+      <a class="navbar-brand me-0" routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRighttwo" aria-controls="offcanvasRighttwo"><i class="fa-regular fa-heart"></i> (<span>0</span>)</a>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRighttwo" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header pt-5">
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel">Wishlist</h5>
+          <p class="m-0">item(<span>0</span>)</p>
+        </div>
+        <div class="offcanvas-body">
+          Your Wishlist is Currently Empty
+        </div>
+      </div>
     </div>
     <a class="navbar-brand text-center text-uppercase d-none d-md-block " routerLink="" style="font-size: 29px;letter-spacing: 2px;">Home<span class="text-secondary">ase</span></a>
     <a class="navbar-brand text-center text-uppercase d-block d-md-none" routerLink="" style="font-size: 20px;letter-spacing: 2px;">Home<span class="text-secondary">ase</span></a>
