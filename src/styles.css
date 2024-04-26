@@ -8,4 +8,9 @@
     font-style: normal;
     background-color: rgb(23, 23, 23);
     color: rgb(255, 255, 255);
+    letter-spacing: 1px;
+}
+
+::-webkit-scrollbar{
+    display: none;
 }
