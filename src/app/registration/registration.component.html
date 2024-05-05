@@ -1,1 +1,54 @@
-<p>registration works!</p>
+<section class="d-flex justify-content-center align-items-center" style="height: 90vh;background-color: rgba(231, 231, 227, 0.096);">
+    <div class="bg-black shadow pb-3" style="width: 22rem;">
+        <div class="d-flex justify-content-around"> 
+            <div class="w-100 text-center" >
+                <p class=" text-uppercase text-light p-3 m-0" style="background-color: rgba(83, 84, 85, 0.719);cursor: pointer;" routerLink="/log">login</p>
+            </div>
+            <div class="w-100 text-center">
+                <p class=" text-uppercase text-light p-3 m-0" style="cursor: pointer;" routerLink="/reg">Register</p>
+            </div>    
+        </div>
+        <form class="w-100 mt-4 p-4 pb-0" autocomplete="off" [formGroup]="regForm">
+            <div class="w-100 mb-3 ">
+                <input type="text" placeholder="User name" class="form-control p-3" style="background-color: black;color: #FFF;"  formControlName="username">
+                <div class="text-danger" style="font-size: 12px;" *ngIf="regForm.get('username')?.invalid && regForm.get('username')?.touched" >*Invalid username</div>
+            </div>
+            <div class="w-100 mb-3 ">
+                <input type="email" autocomplete="false" placeholder="Email" class="form-control p-3" style="background-color: black;color: #FFF;" formControlName="email">
+                <div class="text-danger" style="font-size: 12px;" *ngIf="regForm.get('email')?.invalid && regForm.get('email')?.touched">*Invalid email</div>
+
+            </div>
+            <div class="w-100 ">
+                <input type="password" autocomplete="off" placeholder="Password" class="form-control p-3 " style="background-color: black;color: #FFF;" formControlName="password">
+                <div class="text-danger" style="font-size: 12px;" *ngIf="regForm.get('password')?.invalid && regForm.get('password')?.touched">*Invalid password</div>
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <p class="accordion-header" id="flush-headingOne">
+                            <i class=" fa-solid fa-circle-info text-warning " style="font-size: 16px;padding-top: 5px;"  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"></i>
+                      </p>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body pb-0">
+                           <p class="m-0" style="font-size: 12px;"> Password must: </p>
+                           <ul style="font-size: 11px;">
+                            <li>At least 6 characters.</li>
+                            <li>Be a maximum of 9 characters.</li>
+                            <li>Special characters (a-z,A-Z,0-9,@,!,#,_,%,-).</li>
+                           </ul>
+                            <p class="m-0 text-secondary" style="font-size: 11px;">Your password is easily guessed. Try making your password longer. Combine numbers, uppercase and lowercase
+                            letters. Add special characters. Do not use names or dictionary words.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+        </form>
+        <p class="p-4 pb-0" style="color: rgba(255, 255, 255, 0.719);">Your personal data will be used to support your experience throughout this website,
+             to manage access to your account, and for other purposes described in our <span class="text-white" style="cursor: pointer;">privacy policy</span>.</p>
+        <div class="p-4 pt-1 w-100">
+            <button type="submit" class="btn btn-light w-100 p-3 text-uppercase" [disabled]="regForm.invalid" (click)="getFormData()">register</button>
+        </div>
+
+    </div>
+</section>

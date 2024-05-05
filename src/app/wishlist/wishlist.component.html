@@ -1,1 +1,71 @@
-<p>wishlist works!</p>
+<app-header></app-header>
+<section class="h-100">
+    <div class="position-relative">
+      <p class="d-flex justify-content-center m-0"><span class="h2 text-light bg-transparent" style="position: absolute;z-index: 1;top: 50%;font-size: 45px;">Wishlist </span></p>
+      <p class="d-flex justify-content-center m-0"><span class="h2 text-light bg-transparent d-none d-md-block" style="position: absolute;z-index: 1;top: 59%;font-size: 15px;">Browse our collection and start curating your dream wishlist today!</span></p>
+      <img src="https://img.freepik.com/free-photo/smiling-girl-using-mobile-app-smartphone-shopping-credit-card-standing-beige-background-order-smth_1258-121952.jpg?t=st=1714815720~exp=1714819320~hmac=0c156de1d2993eb12119307ba84e90a51e1358690343a3bb10b0f702423e2c4b&w=1380" style="filter: brightness(40%);" width="100%" alt="">
+    </div>
+      <div class="container h-100" *ngIf="products.length>0; else elsediv">
+        <div class="row d-flex justify-content-center align-items-center h-100 mb-3">
+          <div class="col" >
+            <p class="text-end p-3 m-0">You have ({{products.length}}) items in your wishlist</p>
+            <div class="card mb-1 border-0 bg-transparent" *ngFor="let i of products" >
+              <hr>
+              <div class="card-body p-2">
+    
+                <div class="row align-items-center" >
+                  <div class="col-md-1 d-flex justify-content-center">
+                      <div>
+                        <p class="lead fw-normal mb-0 p-3" ><i class="fa-solid fa-xmark" style="color: #ffffff;" (click)="deleteItem(i._id)" ></i></p>
+                      </div>
+                    </div>
+                  <div class="col-md-1 d-flex justify-content-center" style="background-color: rgba(255, 255, 255, 0.61)">
+                    <img src="{{i.image}}"
+                     style="mix-blend-mode: multiply;width: 65%;object-fit: cover;"  class="img-fluid" alt="Generic placeholder image">
+                  </div>
+                  <div class="col-md-2 d-flex  justify-content-center">
+                    <div>
+                      <p class="lead fw-normal mb-0 pb-1" style="font-size: 15px;">{{i.title}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                      <p class="lead fw-normal mb-0 p-1" style="font-size: 14px;">{{i.category}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                      <p class="lead fw-normal mb-0 p-1" style="font-size: 14px;">{{i.tag}}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                
+                      <p class="lead fw-normal mb-0 p-3" style="font-size: 17px;">{{i.price | currency:'INR'}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-flex justify-content-center">
+                    <div>
+                
+                      <p class="lead fw-normal mb-0"><button class="btn btn-outline-light text-uppercase"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;">Add to cart</button></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+        
+          </div>
+        </div>
+      </div>
+      <div>
+        <ng-template #elsediv>
+            <p class="text-danger text-center mt-5 mb-4">No products added to the wishlist</p>
+            <hr class="container mb-4">
+            <div class="d-flex justify-content-center mt-3 mb-5">
+            <p class="btn btn-outline-light" routerLink="">Continue Shopping</p>
+            </div>
+        </ng-template>
+      </div>
+    </section>

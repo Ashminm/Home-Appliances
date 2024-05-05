@@ -1,1 +1,35 @@
-<p>view works!</p>
+<app-header></app-header>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-1 text-center d-flex flex-column" [class.d-none]="!product.photos.length" *ngIf="product.photos.length > 0">
+                <div *ngFor="let item of product.photos" class="border me-3 mb-4 d-md-block d-none">
+                    <img [src]="item" alt="" class="card-img-top " style="width: 100%;height: 100%;"/>
+                </div>
+            </div>
+            
+            <div class="col-md-4 text-center " style="padding: 120px;background-color: rgb(212, 213, 214); ">
+                <img class="card-img-top mb-5 mb-md-0 w-100 card-img-top" style="mix-blend-mode: multiply;" src="{{product?.image}}" alt="..." />
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <p class="fw-bolder display-6 text-uppercase mb-1">{{product?.title}}</p>
+                <p style="font-size: 25px;">₹{{product?.price}}</p>
+                <p class="mb-1 mt-5">Rating: <span class="text-secondary h5
+                    ">{{product?.rating}}</span></p>
+                <p class="lead">{{product?.description}}</p>
+                <div class="btn-group mt-4" role="group" aria-label="Basic example">
+                    <button type="button" style="border-radius: 20px 0 0 20px;padding: 10px;" class="btn btn-outline-light ps-4 pe-4 " (click)="addToWish(product)"><i class="fa-regular fa-heart fa-lg text-secondary"></i></button>
+                    <button type="button" style="border-radius: 0 20px 20px 0;padding: 10px;" class="btn bg-light ps-5 pe-5 "  >add to cart</button>
+                </div>
+                <div class="mt-5">
+                    <p class="mb-1">ID: <span class="text-secondary">{{product?.id}}</span></p>
+                    <p class="mb-1">catagry: <span class="text-secondary">{{product?.category}}</span></p>
+                    <p class="mb-1">Tag: <span class="text-secondary">{{product?.tag}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Related items section-->

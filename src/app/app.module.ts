@@ -13,6 +13,11 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewComponent } from './view/view.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AllproductComponent } from './allproduct/allproduct.component';
+import {HttpClientModule} from '@angular/common/http'
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,11 +31,16 @@ import { ProfileComponent } from './profile/profile.component';
     WishlistComponent,
     CheckoutComponent,
     ViewComponent,
-    ProfileComponent
+    ProfileComponent,
+    AllproductComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

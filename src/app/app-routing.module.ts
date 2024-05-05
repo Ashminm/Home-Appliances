@@ -8,6 +8,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AllproductComponent } from './allproduct/allproduct.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'cart',component:CartComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'prof',component:ProfileComponent},
+  {path:'allpro',component:AllproductComponent},
   {path:'**',redirectTo:''}
 ];
 

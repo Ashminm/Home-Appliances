@@ -15,16 +15,39 @@
         </div>
       </div>
 
-      <a class="navbar-brand me-0" routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRighttwo" aria-controls="offcanvasRighttwo"><i class="fa-regular fa-heart"></i> (<span>0</span>)</a>
+      <a class="navbar-brand me-0" routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRighttwo" aria-controls="offcanvasRighttwo"><i class="fa-regular fa-heart"></i> (<span>{{wishCount}}</span>)</a>
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRighttwo" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header pt-5">
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel">Wishlist</h5>
-          <p class="m-0">item(<span>0</span>)</p>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel" routerLink="/wish" style="cursor: pointer;" title="Click to watch your wishlist">Wishlist</h5>
+          <p class="m-0">item(<span>{{wishItem.length}}</span>)</p>
         </div>
-        <div class="offcanvas-body">
-          Your Wishlist is Currently Empty
+        <div class="offcanvas-body pt-4">
+          <div class="row mb-5"  *ngFor="let i of wishItem" >
+            <div class="d-flex justify-content-around mb-2">
+              <div class="col-md-4 col-sm-2 mx-1 d-flex justify-content-center align-items-center" style="background-color: rgba(255, 255, 255, 0.61);width: 35%;">
+                <img src="{{i.image}}"
+                     style="mix-blend-mode: multiply;width: 100%;object-fit: cover;"  class="img-fluid" alt="Generic placeholder image">
+              </div>
+              <div class="col-md-6 col-sm-9 mx-1 me-0">
+                <p style="font-size: 12px;">{{i.title}}</p>
+                <p class="text-secondary" style="font-size: 12px;"><span class="text-light">category: </span>{{i.category}}</p>
+                <p class="text-secondary" style="font-size: 12px;"><span class="text-light">color: </span>{{i.tag}}</p>
+                <div class="d-flex align-items-center justify-content-center">
+                  <p class="lead fw-normal mb-0"><button class="btn btn-outline-light text-uppercase"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 10px;border-radius: 20px;">Add to cart</button></p>
+                  <p class="lead fw-normal mb-0 mx-2" (click)="deleteItem(i._id)"><i class="fa-solid fa-trash-can btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-1 me-1">
+                <p>{{i.price | currency:'INR'}}</p>
+              </div>
+            </div>
+            
+          </div>
+          <p class="text-secondary "><span class="text-light">Add Order Note</span> Shipping, taxes and discount codes calculated at checkout.</p>
+          <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" (click)="moreWishLink()"  >View in wishlist</button></p>
+
         </div>
       </div>
     </div>
@@ -36,7 +59,7 @@
     <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        <p style="padding: 0; padding-top: 19px;font-size: 19px;">Welcome!</p>
+        <p style="padding: 0; padding-top: 19px;font-size: 19px;">Welcome <span style="color: rgb(207, 125, 17);">{{username}}</span>!</p>
         <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><img src="https://pics.craiyon.com/2023-11-15/BcL2X-ZvT9ShA3Q5RQPjzg.webp" routerLink="/prof" style="width: 40px;border-radius: 50%;border: 1px solid #FFF;padding: 4px;" alt=""></h5>
       </div>
       <div class="offcanvas-body">
@@ -50,7 +73,7 @@
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-store me-3 text-secondary"></i>shop</a>
+            <a class="nav-link text-uppercase" routerLink="/allpro"><i class="fa-solid fa-store me-3 text-secondary"></i>shop</a>
           </li>
           <hr>
           <li class="nav-item">
@@ -66,11 +89,11 @@
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-magnifying-glass me-3 text-secondary"></i>search</a>
+            <a class="nav-link text-uppercase" routerLink="/allpro"><i class="fa-solid fa-magnifying-glass me-3 text-secondary"></i>search</a>
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-bag-shopping me-3 text-secondary"></i>order</a>
+            <a class="nav-link text-uppercase" routerLink="/checkout"><i class="fa-solid fa-bag-shopping me-3 text-secondary"></i>order</a>
           </li>
           <hr>
           <li class="nav-item">
@@ -78,7 +101,18 @@
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink="/log"><i class="fa-regular fa-user me-3 text-secondary"></i>Login</a>
+            <a class="nav-link text-uppercase" routerLink="/log"><i class="fa-regular fa-user me-3 text-secondary"></i>
+              <span class="text-secondary" *ngIf="username;else elsecase">
+                {{username}}
+              </span>
+              <ng-template #elsecase class="text-secondary">
+                Login
+              </ng-template>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="username">
+            <hr>
+            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-arrow-right-from-bracket me-3 text-secondary"></i>Logout</a>
           </li>
         </ul>
         <hr>

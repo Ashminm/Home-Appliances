@@ -1,1 +1,60 @@
-<p>login works!</p>
+<section class="d-flex justify-content-center align-items-center" style="height: 80vh;background-color: rgba(231, 231, 227, 0.096);">
+    <form class="bg-black shadow pb-3" style="width: 22rem;" autocomplete="off" [formGroup]="logForm" (ngSubmit)="getFormLogData()">
+        <div class="d-flex justify-content-around">
+            <div class="w-100 text-center">
+                <p class=" text-uppercase text-light p-3 m-0" style="cursor: pointer;" routerLink="/log">login</p>
+            </div>
+            <div class="w-100 text-center" >
+                <p class=" text-uppercase text-light p-3 m-0" style="background-color: rgba(83, 84, 85, 0.719);cursor: pointer;" routerLink="/reg">register</p>
+            </div>    
+        </div>
+        <div class="w-100 mt-4 p-4">
+            <div class="w-100 mb-3 ">
+                <input type="email" placeholder="Email" class="form-control p-3" style="background-color: rgb(0, 0, 0);color: #FFF;" formControlName="email">
+                <div class="text-danger" style="font-size: 12px;" *ngIf="logForm.get('email')?.invalid && logForm.get('email')?.touched">*Invalid email</div>
+            </div>
+            <div class="w-100 ">
+                <input type="password" placeholder="Password" class="form-control p-3 " style="background-color: rgb(0, 0, 0);color: #FFF;" formControlName="password">
+                <div class="text-danger" style="font-size: 12px;" *ngIf="logForm.get('password')?.invalid && logForm.get('password')?.touched">*Invalid password</div>
+            </div>
+        </div>
+        <div class="px-4 pb-3 d-flex justify-content-between">
+            <div class="form-check ">
+                <input class="form-check-input border" type="checkbox" value="" id="flexCheckDefault" style="background-color: rgb(0, 0, 0);color: #FFF;" formControlName="rememberMe">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Remember me
+                </label>
+            </div>
+            <i class=" fa-solid fa-circle-info text-warning " style="font-size: 16px;padding-top: 5px;float: end;"  data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"></i>
+        </div>
+        <div class="accordion accordion-flush"  id="accordionFlushExample">
+            <div class="accordion-item">
+              <p class="accordion-header" id="flush-headingOne">
+                   
+              </p>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body pb-0 pt-0">
+                    <p class="m-0" style="font-size: 12px;">
+                        <span class="text-warning">Note:</span> For this demo use the following email and password.
+                    </p>
+                    <ul class="m-0" style="font-size: 12px; padding-top: 8px;">
+                        <li class="text-success d-flex justify-content-between align-items-center">
+                            Email: homeasedemo@gmail.com
+                            <p class="btn btn-link text-success m-0" style="font-size: 12px;" (click)="copyToClipboard('homeasedemo@gmail.com')">Copy</p>
+                        </li>
+                        <li class="text-success d-flex justify-content-between align-items-center">
+                            Password: 123456789
+                            <p class="btn btn-link text-success m-0" style="font-size: 12px;" (click)="copyToClipboard('123456789')">Copy</p>
+                        </li>
+                    </ul>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        <p class="p-4 pb-0 text-decoration-line-through">Lost Your pasword?</p>
+        <div class="p-4 pt-1 w-100">
+            <button type="submit" class="btn btn-light w-100 p-3 text-uppercase" [disabled]="logForm.invalid"  >Login</button>
+        </div>
+    </form>
+</section>
