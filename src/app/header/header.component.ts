@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
   username:any=""
   wishCount:any=0;
   wishItem:any[]=[]
+  cartCount:any=0;
+  cartItem:any[]=[]
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
   ngOnInit() {
@@ -23,9 +25,13 @@ export class HeaderComponent implements OnInit {
       this.api.wishListCount.subscribe((res:any)=>{
         this.wishCount=res
       })
+      this.api.cartListCount.subscribe((res:any)=>{
+        this.cartCount=res
+      })
     }
 
     this.getData()
+    this.getWishome()
   }
   
   getData(){
@@ -59,6 +65,66 @@ export class HeaderComponent implements OnInit {
   moreWishLink(){
     if(sessionStorage.getItem('token')){
       this.route.navigateByUrl('/wish')
+    }
+    else{
+      this.toastr.warning("login First!!!")
+    }
+  }
+
+
+  // ------------cart---------------------
+
+  addToCart(data:any){
+    if(sessionStorage.getItem('token')){
+      const { id, title, price, category, tag, image}=data
+      const product={ id, title, price, category, tag, image, quantity:1}
+      this.api.addToCartApi(product).subscribe({
+        next:(res:any)=>{
+          console.log(res);
+          this.api.getCartListCountApi()
+          this.toastr.success("Item Added to Cart")
+        },
+        error:(err)=>[
+          this.toastr.error(err.error)
+        ]
+      })
+    }
+    else{
+      this.toastr.warning("Login first!!")
+    }
+  }
+
+  getWishome(){
+    this.api.getHomeCartListApi().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.cartItem=res
+      },
+      error:(err:any)=>{
+        console.log(err);
+        
+      }
+    })
+  }
+
+  deleteCartItem(id:any){
+    this.api.deleteCartItem(id).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.api.getCartListCountApi()
+        this.toastr.success("Item Remove..!")
+        this.getWishome()
+      },
+      error:(err:any)=>{
+        console.log(err); 
+        this.toastr.error("Item Deletion Faild")
+      }
+    })
+  }
+
+  moreCartLink(){
+    if(sessionStorage.getItem('token')){
+      this.route.navigateByUrl('/cart')
     }
     else{
       this.toastr.warning("login First!!!")

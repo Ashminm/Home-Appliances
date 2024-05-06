@@ -1,32 +1,56 @@
 <nav class="navbar navbar-dark " style="position: sticky;top: 0;z-index: 9999;">
   <div class="container pt-3 pb-3">
+    <!-- ------------------cart---------------- -->
     <div>
-      
-      <a class="navbar-brand " routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">CART (<span>0</span>)</a>
+      <a class="navbar-brand " routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">CART (<span>{{cartCount}}</span>)</a>
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header pt-5">
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel">Cart</h5>
-          <p class="m-0">item(<span>0</span>)</p>
+          <button type="button" class="btn-close btn-close-white border" data-bs-dismiss="offcanvas" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" aria-label="Close"></button>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel" style="cursor: pointer;" (click)="moreCartLink()" >Cart</h5>
+          <p class="m-0" style="border-radius: 20px; background-color: rgba(51, 51, 51, 0.712);padding:4px 11px 5px 11px;font-size: 12px;">items:<span class="bg-transparent">{{cartItem.length}}</span></p>
         </div>
-        <div class="offcanvas-body">
-          Your Cart is Currently Empty
+        <div class="offcanvas-body pt-4">
+          <div class="row mb-4 p-2 shadow-lg" *ngFor="let i of cartItem" >
+            <div class="d-flex justify-content-around mb-2 text-uppercase">
+              <div class="col-md-4 col-sm-2 mx-1 d-flex justify-content-center align-items-center" style="background-color: rgba(255, 255, 255, 0.61);width: 35%;border-radius: 10px;">
+                <img src="{{i.image}}"
+                     style="mix-blend-mode: multiply;width: 100%;object-fit: cover;"  class="img-fluid" alt="Generic placeholder image">
+              </div>
+              <div class="col-md-6 col-sm-9 mx-1 me-0">
+                <p style="font-size: 12px;">{{i.title}}</p>
+                <p class="text-secondary" style="font-size: 12px;"><span class="text-light">color: </span>{{i.tag}}</p>
+                <p style="font-size: 14px;">{{i.price | currency:'INR'}}</p>
+                <div class="d-flex align-items-center justify-content-start">
+                  <p class="lead fw-normal mb-0 mx-2 ms-0" ><i class="fa-solid fa-minus btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
+                  <p class="m-0 mx-2" >{{i.quantity}}</p>
+                  <p class="lead fw-normal mb-0 mx-2" ><i class="fa-solid fa-plus btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-1 me-1 d-flex flex-column justify-content-between">
+                <p>{{i.totalPrice | currency:'INR'}}</p>
+                <p class="lead fw-normal mb-0 mx-2" (click)="deleteCartItem(i._id)"><i class="fa-solid fa-trash-can btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
+              </div>
+            </div>
+            
+          </div>
+          <p class="text-secondary " style="font-size: 12px;"><span class="text-light">Add Order Note</span>:Shipping, taxes and discount codes calculated at checkout..</p>
+          <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" (click)="moreCartLink()" >Check out now</button></p>
         </div>
       </div>
-
+<!-- ------------------------wish------------------------- -->
       <a class="navbar-brand me-0" routerLink="" style="font-size: 14px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRighttwo" aria-controls="offcanvasRighttwo"><i class="fa-regular fa-heart"></i> (<span>{{wishCount}}</span>)</a>
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRighttwo" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header pt-5">
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel" routerLink="/wish" style="cursor: pointer;" title="Click to watch your wishlist">Wishlist</h5>
-          <p class="m-0">item(<span>{{wishItem.length}}</span>)</p>
+          <button type="button" class="btn-close btn-close-white border" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel"  style="cursor: pointer;" title="Click to watch your wishlist" (click)="moreWishLink()" >Wishlist</h5>
+          <p class="m-0" style="border-radius: 20px; background-color: rgba(51, 51, 51, 0.712);padding:4px 11px 5px 11px;font-size: 12px;">items:<span class="bg-transparent">{{wishItem.length}}</span></p>
         </div>
         <div class="offcanvas-body pt-4">
-          <div class="row mb-5"  *ngFor="let i of wishItem" >
-            <div class="d-flex justify-content-around mb-2">
-              <div class="col-md-4 col-sm-2 mx-1 d-flex justify-content-center align-items-center" style="background-color: rgba(255, 255, 255, 0.61);width: 35%;">
+          <div class="row mb-4 p-2 shadow-lg" *ngFor="let i of wishItem" >
+            <div class="d-flex justify-content-around mb-2 text-uppercase">
+              <div class="col-md-4 col-sm-2 mx-1 d-flex justify-content-center align-items-center" style="background-color: rgba(255, 255, 255, 0.61);width: 35%;border-radius: 10px;">
                 <img src="{{i.image}}"
                      style="mix-blend-mode: multiply;width: 100%;object-fit: cover;"  class="img-fluid" alt="Generic placeholder image">
               </div>
@@ -34,8 +58,8 @@
                 <p style="font-size: 12px;">{{i.title}}</p>
                 <p class="text-secondary" style="font-size: 12px;"><span class="text-light">category: </span>{{i.category}}</p>
                 <p class="text-secondary" style="font-size: 12px;"><span class="text-light">color: </span>{{i.tag}}</p>
-                <div class="d-flex align-items-center justify-content-center">
-                  <p class="lead fw-normal mb-0"><button class="btn btn-outline-light text-uppercase"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 10px;border-radius: 20px;">Add to cart</button></p>
+                <div class="d-flex align-items-center justify-content-start">
+                  <p class="lead fw-normal mb-0"><button class="btn btn-outline-light text-uppercase"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 10px;border-radius: 20px;" (click)="addToCart(i)" >Add to cart</button></p>
                   <p class="lead fw-normal mb-0 mx-2" (click)="deleteItem(i._id)"><i class="fa-solid fa-trash-can btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
                 </div>
               </div>
@@ -45,20 +69,23 @@
             </div>
             
           </div>
-          <p class="text-secondary "><span class="text-light">Add Order Note</span> Shipping, taxes and discount codes calculated at checkout.</p>
+          <p class="text-secondary " style="font-size: 12px;"><span class="text-light">Add Order Note</span>: Shipping, taxes, and discounts applied at checkout.</p>
           <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" (click)="moreWishLink()"  >View in wishlist</button></p>
 
         </div>
       </div>
+
+      <!-- ------------------------------------------------- -->
     </div>
+
     <a class="navbar-brand text-center text-uppercase d-none d-md-block " routerLink="" style="font-size: 29px;letter-spacing: 2px;">Home<span class="text-secondary">ase</span></a>
     <a class="navbar-brand text-center text-uppercase d-block d-md-none" routerLink="" style="font-size: 20px;letter-spacing: 2px;">Home<span class="text-secondary">ase</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+    <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasDarkNavbar"  aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white border" data-bs-dismiss="offcanvas" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" aria-label="Close"></button>
         <p style="padding: 0; padding-top: 19px;font-size: 19px;">Welcome <span style="color: rgb(207, 125, 17);">{{username}}</span>!</p>
         <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><img src="https://pics.craiyon.com/2023-11-15/BcL2X-ZvT9ShA3Q5RQPjzg.webp" routerLink="/prof" style="width: 40px;border-radius: 50%;border: 1px solid #FFF;padding: 4px;" alt=""></h5>
       </div>

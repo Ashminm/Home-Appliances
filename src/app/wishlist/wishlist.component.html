@@ -1,9 +1,9 @@
 <app-header></app-header>
 <section class="h-100">
     <div class="position-relative">
-      <p class="d-flex justify-content-center m-0"><span class="h2 text-light bg-transparent" style="position: absolute;z-index: 1;top: 50%;font-size: 45px;">Wishlist </span></p>
-      <p class="d-flex justify-content-center m-0"><span class="h2 text-light bg-transparent d-none d-md-block" style="position: absolute;z-index: 1;top: 59%;font-size: 15px;">Browse our collection and start curating your dream wishlist today!</span></p>
-      <img src="https://img.freepik.com/free-photo/smiling-girl-using-mobile-app-smartphone-shopping-credit-card-standing-beige-background-order-smth_1258-121952.jpg?t=st=1714815720~exp=1714819320~hmac=0c156de1d2993eb12119307ba84e90a51e1358690343a3bb10b0f702423e2c4b&w=1380" style="filter: brightness(40%);" width="100%" alt="">
+      <p class="d-flex justify-content-center m-0"><span class="h2 text-light bg-transparent text-uppercase" style="position: absolute;z-index: 1;top: 50%;font-size: 45px;">Wishlist </span></p>
+      <p class="d-flex justify-content-center m-0"><span class="h2 text-light bg-transparent d-none d-md-block text-uppercase" style="position: absolute;z-index: 1;top: 66%;font-size: 13px;">Browse our collection and start curating your dream wishlist today!</span></p>
+      <img src="https://depot.qodeinteractive.com/wp-content/uploads/2017/01/faq-title-img.jpg" style="filter: brightness(40%);object-fit: cover;" width="100%" height="400px" alt="">
     </div>
       <div class="container h-100" *ngIf="products.length>0; else elsediv">
         <div class="row d-flex justify-content-center align-items-center h-100 mb-3">
@@ -13,19 +13,19 @@
               <hr>
               <div class="card-body p-2">
     
-                <div class="row align-items-center" >
+                <div class="row align-items-center text-uppercase" >
                   <div class="col-md-1 d-flex justify-content-center">
                       <div>
                         <p class="lead fw-normal mb-0 p-3" ><i class="fa-solid fa-xmark" style="color: #ffffff;" (click)="deleteItem(i._id)" ></i></p>
                       </div>
                     </div>
-                  <div class="col-md-1 d-flex justify-content-center" style="background-color: rgba(255, 255, 255, 0.61)">
+                  <div class="col-md-1 d-flex justify-content-center" style="background-color: rgba(255, 255, 255, 0.61);border-radius: 10px;">
                     <img src="{{i.image}}"
                      style="mix-blend-mode: multiply;width: 65%;object-fit: cover;"  class="img-fluid" alt="Generic placeholder image">
                   </div>
                   <div class="col-md-2 d-flex  justify-content-center">
                     <div>
-                      <p class="lead fw-normal mb-0 pb-1" style="font-size: 15px;">{{i.title}}</p>
+                      <p class="lead fw-normal mb-0 pb-1" style="font-size: 15px;">{{i.title.slice(0,10)}}...</p>
                     </div>
                   </div>
                   <div class="col-md-2 d-flex justify-content-center">
@@ -64,7 +64,7 @@
             <p class="text-danger text-center mt-5 mb-4">No products added to the wishlist</p>
             <hr class="container mb-4">
             <div class="d-flex justify-content-center mt-3 mb-5">
-            <p class="btn btn-outline-light" routerLink="">Continue Shopping</p>
+            <p class="btn btn-outline-light" routerLink="/allpro">Continue Shopping</p>
             </div>
         </ng-template>
       </div>

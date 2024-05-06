@@ -28,6 +28,7 @@ export class LoginComponent {
         sessionStorage.setItem('existingUser',JSON.stringify(res.existingUser))
         sessionStorage.setItem('token',res.token)
         this.api.getWishlistCountApi()
+        this.api.getCartListCountApi()
         this.toastr.success(`Successfully Login!!`)  
         this.route.navigateByUrl('/')
       },

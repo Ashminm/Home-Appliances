@@ -13,11 +13,11 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewComponent } from './view/view.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AllproductComponent } from './allproduct/allproduct.component';
 import {HttpClientModule} from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AllproductsComponent } from './allproducts/allproducts.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CheckoutComponent,
     ViewComponent,
     ProfileComponent,
-    AllproductComponent
+    AllproductsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,65 +1,17 @@
 <app-header></app-header>
-
-<div id="carouselDarkVariant" class="carousel slide carousel-fade container-fluid pb-2 pt-3" data-bs-ride="carousel" data-bs-interval="2000" style="height: 80vh; width: 85%;">
-    <div class="carousel-indicators" style="background-color: rgba(0, 0, 0, 0.027)">
-        <button type="button" data-bs-target="#carouselDarkVariant" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselDarkVariant" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselDarkVariant" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
-    <div class="carousel-inner" style="height: 76vh;">
-        <div class="carousel-item active" >
-            <div class="row" style="height: 100%;">
-                <div class="col-md-12 col-lg-6 d-flex align-items-end p-5 justify-content-start" style="background-color: rgba(0, 0, 0, 0.527);">
-                    <div style="background-color: rgba(0, 0, 0, 0);">
-                        <h2 class="text-uppercase" style="letter-spacing: 5px;background-color: rgba(0, 0, 0, 0);">contemporarsy design.</h2>
-                        <p style="letter-spacing: 2px;background-color: rgba(0, 0, 0, 0);">A large set of beautiful & fully flexible homepage layouts lets you create your website quickly & easily.</p>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6 p-0 d-flex justify-content-center">
-                    <img src="https://depot.qodeinteractive.com/wp-content/uploads/2017/01/h1-slide1-img.png" style="filter: brightness(50%); height: 76vh; width: 100%;" class="d-block" alt="Motorbike Smoke">
-                </div>
-            </div>
-        </div>
-
-        <div class="carousel-item">
-            <div class="row" style="height: 100%;"> <!-- Row height set to 100% to match the carousel height -->
-                <div class="col-md-12 col-lg-6 d-flex align-items-end p-5 justify-content-start" style="background-color:rgba(0, 0, 0, 0.527);">
-                    <div style="background-color: rgba(0, 0, 0, 0);">
-                        <h2 class="text-uppercase" style="letter-spacing: 5px;background-color: rgba(0, 0, 0, 0);">think different.</h2>
-                        <p style="letter-spacing: 2px;background-color: rgba(0, 0, 0, 0);">Depot is a unique & captivating theme designed specifically for all types of shops and online stores.</p>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6 p-0 d-flex justify-content-center">
-                    <img src="https://pngimg.com/d/bed_PNG17422.png" style="filter: brightness(50%); height: 76vh; width: 100%;" class="d-block" alt="Bed Image">
-                </div>
-            </div>
-        </div>
-
-        <div class="carousel-item">
-            <div class="row" style="height: 100%;"> <!-- Row height set to 100% to match the carousel height -->
-                <div class="col-md-12 col-lg-6 d-flex align-items-end p-5 justify-content-start" style="background-color:rgba(0, 0, 0, 0.527);">
-                    <div style="background-color: rgba(0, 0, 0, 0);">
-                        <h2 class="text-uppercase" style="letter-spacing: 5px;background-color: rgba(0, 0, 0, 0);">premium comfort.</h2>
-                        <p style="letter-spacing: 2px;background-color: rgba(0, 0, 0, 0);">One-click import feature lets you import the complete Depot demo content with a single mouse click.</p>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6 p-0 d-flex justify-content-center">
-                    <img src="https://freepngimg.com/save/160799-interior-kitchen-png-free-photo/1500x1500" style="filter: brightness(50%); height: 76vh; width: 100%;" class="d-block" alt="Kitchen Image">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end carosel -->
+<h2 class="text-center text-light text-uppercase">All Products</h2>
+<hr class="container" style="width: 20%;">
 <div class="container mt-5 d-flex justify-content-between">
-    <div class="d-flex justify-content-start" style="cursor: pointer;overflow-x: scroll;width: 60%;">
+    <div class="d-flex justify-content-start " style="cursor: pointer;overflow-x: scroll;width: 60%;">
         <div class="mx-3 ms-0">ALL</div>
         <div class="mx-3">NEW</div>
         <div class="mx-3">KITCHEN</div>
         <div class="mx-3">BEDROOM</div>
         <div class="mx-3">HALL</div>
         <div class="mx-3">BASICS</div>
+    </div>
+    <div class="w-100">
+        <input type="search" class="form-control w-50 bg-transparent text-light" placeholder="Search">
     </div>
     <div>
         <div class="dropdown me-3">
@@ -77,7 +29,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-5 justify-content-center">
-            <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of products">
+            <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of allproducts">
                 <div class="card h-100 border-0 bg-transparent rounded" style="width: 15.80rem; position: relative;">
                     <!-- Wishlist icon and Quick Review button -->
                     <div class="d-flex" style="position: absolute; top: 10px; left: 10px; right: 14px; justify-content: space-between; background-color: transparent;">
@@ -109,7 +61,7 @@
                                                 <p class="lead m-0">{{i?.description}}</p>
                                                 <div class="d-flex justify-content-start mt-4">
                                                     <p class=" me-4 text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-regular fa-heart fa-xl text-light"></i>Add to wishlist</p>
-                                                    <p class=" text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-solid fa-cart-shopping fa-xl text-light"></i>Add to cart</p>
+                                                    <p class=" text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-solid fa-cart-shopping fa-xl text-light" ></i>Add to cart</p>
                                                 </div>
                                                 
                                                 <!-- <div class="btn-group" role="group" aria-label="Basic example">
@@ -147,8 +99,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
-        <p class="text-center"><button class="btn btn-outline-light text-uppercase" style="border-radius: 20px;padding: 8px 27px 8px 27px;" (click)="moreAllProducts()">Shop all collections</button></p>
     </div>
 </section>

@@ -2,44 +2,31 @@ import { Component } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-Router
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-allproducts',
+  templateUrl: './allproducts.component.html',
+  styleUrls: ['./allproducts.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AllproductsComponent implements OnInit {
 
+  allproducts:any[]=[]
 
-  products:any[]=[]
+  constructor(private api:ApiCallService,private toastr:ToastrService){}
 
-  constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
-
-
-  ngOnInit() {
-    this.getData()  
+  ngOnInit(){
+    this.getData()
   }
 
   getData(){
-    const res=this.api.getAllLimitProducts().subscribe((res:any)=>{
+    const res=this.api.getAllProducts().subscribe((res:any)=>{
       // console.log(res);
-      this.products=res
+      this.allproducts=res
     },
     (err:any)=>{
       console.log(err);
       
     })
-  }
-
-  moreAllProducts(){
-    if(sessionStorage.getItem('token')){
-      this.route.navigateByUrl('/allpro')
-    }
-    else{
-      this.toastr.warning("Login First!!")
-    }
   }
 
   addToWish(data:any){
@@ -81,5 +68,4 @@ export class HomeComponent implements OnInit {
       this.toastr.warning("Login first!!")
     }
   }
-  
 }
