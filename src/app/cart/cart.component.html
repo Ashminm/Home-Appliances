@@ -8,9 +8,9 @@
       </div>
       <div class="container mt-4">
         <h2 class="text-uppercase mb-4">Shopping cart</h2>
-        <div class="h-100" *ngIf="products.length>0; else elsediv">
+        <div class="h-100 " *ngIf="products.length>0; else elsediv">
             <div class="row d-flex justify-content-center  h-100 mb-3" >
-                <div class="col-lg-8 col-md-8 "  style="border: 1px solid rgb(43, 42, 42);border-radius: 20px;">
+                <div class="col-lg-9 col-md-8 "  style="border: 1px solid rgb(43, 42, 42);border-radius: 20px;">
                   <div class="d-flex justify-content-between p-3">
                     <p style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 14px 5px 14px;background-color: rgba(56, 56, 56, 0.829);">items:{{products.length}}</p>
                     <p class="text-light" style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 12px 5px 12px;background-color: rgba(56, 56, 56, 0.829);" (click)="clearAllCart()"><i class="fa-solid fa-xmark me-2 bg-transparent text-danger"></i>Clear cart</p>
@@ -60,7 +60,52 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="card mb-4 " style="border: 1px solid rgba(46, 46, 46, 0.973); border-radius: 20px;overflow: hidden;" >
                       <div class="card-header py-3" style="background-color: rgba(0, 0, 0, 0.911);">
-                        <h5 class="mb-0 bg-transparent">Summary</h5>
+                        <div class="d-flex justify-content-between align-items-center"style="border: 1px solid rgba(46, 46, 46, 0.973); border-radius: 20px;padding: 2px 2px;" >
+                          <p class="m-0 mx-3">Offers</p>
+                          <p class="m-0 bg-light btn" style="border: 1px solid rgba(46, 46, 46, 0.973); border-radius: 20px;padding: 4px 12px;"   (click)="getCartOffer()" > {{ cartOffer ? 'Close' : 'Show' }}</p>
+                        </div>
+                        <div class="mt-2" *ngIf="cartOffer">
+
+                          <ng-container *ngIf="totalAmount>10 && totalAmount<250 && !couponClick">
+                            <div class="card border-0 bg-transparent" (click)="getDiscound10()">
+                              <div class="card-body d-flex justify-content-between" style="background-color: #38883c1c;color: #18f323;font-size: 12px;"> 
+                               <p class="m-0 bg-transparent" style="color: #18f323;">10% off entire order. Minimum purchase of ₹100.00</p>
+                               <p class="m-0 bg-transparent" style="color: #18f323;">10%</p>
+                              </div>
+                            </div>
+                          </ng-container>
+                          
+                          <ng-container *ngIf="totalAmount>250 && totalAmount<500 && !couponClick">
+                            <div class="card border-0 bg-transparent"(click)="getDiscound25()" >
+                              <div class="card-body d-flex justify-content-between" style="background-color: #38883c1c;color: #18f323;font-size: 12px;"> 
+                               <p class="m-0 bg-transparent" style="color: #18f323;">25% off entire order. Minimum <br> purchase of ₹250.00</p>
+                               <p class="m-0 bg-transparent" style="color: #18f323;">25%</p>
+                              </div>
+                            </div>
+                          </ng-container>
+                          
+                          <ng-container *ngIf="totalAmount>500 && totalAmount<1500 && !couponClick">
+                            <div class="card border-0 bg-transparent" (click)="getDiscound50()">
+                              <div class="card-body d-flex justify-content-between" style="background-color: #38883c1c;color: #18f323;font-size: 12px;"> 
+                               <p class="m-0 bg-transparent" style="color: #18f323;">50% off entire order. Minimum <br> purchase of ₹500.00</p>
+                               <p class="m-0 bg-transparent" style="color: #18f323;">50%</p>
+                              </div>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *ngIf="totalAmount>=1500 && !couponClick">
+                            <div class="card border-0 bg-transparent" (click)="getDiscound70()">
+                              <div class="card-body d-flex justify-content-between" style="background-color: #38883c1c;color: #18f323;font-size: 12px;"> 
+                               <p class="m-0 bg-transparent" style="color: #18f323;">70% off entire order. Minimum <br> purchase of ₹1000.00</p>
+                               <p class="m-0 bg-transparent" style="color: #18f323;">70%</p>
+                              </div>
+                            </div>
+                          </ng-container>
+                          
+
+                          
+                          
+                        </div>
                       </div>
                       <div class="card-body">
                         <ul class="list-group list-group-flush">
@@ -72,32 +117,33 @@
                           <li
                             class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 bg-transparent "style="color: #f0eeee71;">
                             Discount
-                            <span style="color: #f0eeee71;font-size: 12px;">$53.98</span>
+                            <span style="color: #f0eeee71;font-size: 12px;">{{cartDiscount |currency:'INR'}}</span>
                           </li>
                           
                           <li
                             class="list-group-item d-flex justify-content-between align-items-center border-0 bg-transparent px-0 mb-3">
                             <div>
-                              <strong>Total</strong>
+                              <strong>Estimated Total</strong>
                             </div>
                               <span><strong>{{totalAmount | currency:'INR'}}</strong></span>
                           </li>
                         </ul>
-                        <p class="lead fw-normal text-center w-100"><button class="btn bg-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" >Check out now</button></p>
+                        <p class="lead fw-normal text-center w-100"><button class="btn bg-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" (click)="CheckOut()" ><i class="fa-solid fa-lock pe-1 bg-transparent text-dark"></i> Pay {{totalAmount | currency:'INR'}}</button></p>
                       </div>
                     </div>
                   </div>
             
-            </div>
-          </div>
-          <div>
-            <ng-template #elsediv>
-                <p class="text-danger text-center mt-5 mb-4">No products added to the cart</p>
-                <hr class="container mb-4">
-                <div class="d-flex justify-content-center mt-3 mb-5">
-                <p class="btn btn-outline-light" routerLink="/allpro">Continue Shopping</p>
                 </div>
-            </ng-template>
-          </div>
+              </div>
+              
+              <div>
+                <ng-template #elsediv>
+                    <p class="text-danger text-center mt-5 mb-4">No products added to the cart</p>
+                    <hr class="container mb-4">
+                    <div class="d-flex justify-content-center mt-3 mb-5">
+                    <p class="btn btn-outline-light" routerLink="/allpro">Continue Shopping</p>
+                    </div>
+                </ng-template>
+              </div>
       </div>
 </section>

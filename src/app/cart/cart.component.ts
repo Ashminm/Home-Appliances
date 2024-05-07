@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { ToastrService } from 'ngx-toastr';
 import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +14,11 @@ export class CartComponent implements OnInit {
 
   products:any[]=[]
   totalAmount:any=0
-  constructor(private api:ApiCallService,private toastr:ToastrService){}
+  cartOffer:any=false
+  couponClick:any=false
+  cartDiscount:any=0
+
+  constructor(private api:ApiCallService,private toastr:ToastrService,private router:Router){}
 
   ngOnInit() {
     this.getdata()
@@ -48,8 +54,13 @@ export class CartComponent implements OnInit {
   }
 
   getTotalAmount(){
-  this.totalAmount= this.products.map((item:any)=>item.totalPrice).reduce((p1:any,p2:any)=>p1+p2)
-  // console.log(this.totalAmount); 
+    if(this.products.length>0){
+      this.totalAmount=Math.ceil(this.products.map((item:any)=>item.totalPrice).reduce((p1:any,p2:any)=>p1+p2))
+      // console.log(this.totalAmount); 
+    }else{
+      this.totalAmount=0
+    }
+
   }
 
   getIncrese(id:any){
@@ -93,6 +104,40 @@ export class CartComponent implements OnInit {
         this.toastr.error("Cart Clear faild!!")
       }
     })
+  }
+
+  getCartOffer(){
+    this.cartOffer = !this.cartOffer;
+  }
+
+  getDiscound10(){
+    this.couponClick=true
+    const discound=this.totalAmount * 0.1
+    this.cartDiscount=discound
+    this.totalAmount=Math.ceil(this.totalAmount-discound)  
+  }
+  getDiscound25(){
+    this.couponClick=true
+    const discound=this.totalAmount * 0.25
+    this.cartDiscount=discound
+    this.totalAmount=Math.ceil(this.totalAmount-discound)
+  }
+  getDiscound50(){
+    this.couponClick=true
+    const discound=this.totalAmount * 0.5
+    this.cartDiscount=discound
+    this.totalAmount=Math.ceil(this.totalAmount-discound)
+  }
+  getDiscound70(){
+    this.couponClick=true
+    const discound=this.totalAmount * 0.7
+    this.cartDiscount=discound
+    this.totalAmount=Math.ceil(this.totalAmount-discound)
+  }
+
+  CheckOut(){
+    sessionStorage.setItem('totalAmount',this.totalAmount)
+    this.router.navigateByUrl('/checkout')
   }
 
 }

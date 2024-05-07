@@ -3,7 +3,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-1 text-center d-flex flex-column"  [class.d-none]="!product.photos.length" *ngIf="product.photos.length > 0">
+            <div class="col-md-2 text-center d-flex flex-column"  [class.d-none]="!product.photos.length" *ngIf="product.photos.length > 0">
                 <div *ngFor="let item of product.photos" class="border me-3 mb-4 d-md-block d-none" style="border-radius: 10px;">
                     <img [src]="item" alt="" class="card-img-top " style="width: 100%;height: 100%; border-radius: 10px"/>
                 </div>

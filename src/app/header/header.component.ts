@@ -131,5 +131,32 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  getIncrese(id:any){
+    this.api.getQuaIncreaseApi(id).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.getData()
+      },
+      error:(err:any)=>{
+        console.log(err);
+        
+      }
+    })
+  }
+
+  getdecrese(id:any){
+    this.api.getQuadecreaseApi(id).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.getData()
+        this.api.getCartListCountApi()
+      },
+      error:(err:any)=>{
+        console.log(err);
+        
+      }
+    })
+  }
+
   
 }

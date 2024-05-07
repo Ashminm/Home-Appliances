@@ -22,9 +22,9 @@
                 <p class="text-secondary" style="font-size: 12px;"><span class="text-light">color: </span>{{i.tag}}</p>
                 <p style="font-size: 14px;">{{i.price | currency:'INR'}}</p>
                 <div class="d-flex align-items-center justify-content-start">
-                  <p class="lead fw-normal mb-0 mx-2 ms-0" ><i class="fa-solid fa-minus btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
+                  <p class="lead fw-normal mb-0 mx-2 ms-0" (click)="getdecrese(i?._id)" ><i class="fa-solid fa-minus btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
                   <p class="m-0 mx-2" >{{i.quantity}}</p>
-                  <p class="lead fw-normal mb-0 mx-2" ><i class="fa-solid fa-plus btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
+                  <p class="lead fw-normal mb-0 mx-2"(click)="getIncrese(i?._id)" ><i class="fa-solid fa-plus btn-outline-light" style="padding: 12px 12px; border: 1px solid #eeeaea1e; font-size: 10px;border-radius: 50%;"></i></p>
                 </div>
               </div>
               <div class="col-md-2 col-sm-1 me-1 d-flex flex-column justify-content-between">

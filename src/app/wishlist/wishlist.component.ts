@@ -45,4 +45,24 @@ export class WishlistComponent implements OnInit {
       }
     })
   }
+
+  addToCart(data:any){
+    if(sessionStorage.getItem('token')){
+      const { id, title, price, category, tag, image}=data
+      const product={ id, title, price, category, tag, image, quantity:1}
+      this.api.addToCartApi(product).subscribe({
+        next:(res:any)=>{
+          console.log(res);
+          this.api.getCartListCountApi()
+          this.toastr.success("Item Added to Cart")
+        },
+        error:(err)=>[
+          this.toastr.error(err.error)
+        ]
+      })
+    }
+    else{
+      this.toastr.warning("Login first!!")
+    }
+  }
 }
