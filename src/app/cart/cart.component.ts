@@ -17,11 +17,13 @@ export class CartComponent implements OnInit {
   cartOffer:any=false
   couponClick:any=false
   cartDiscount:any=0
+  trendingItems:any[]=[]
 
   constructor(private api:ApiCallService,private toastr:ToastrService,private router:Router){}
 
   ngOnInit() {
     this.getdata()
+    this.getTrending()
   }
 
   getdata(){
@@ -137,7 +139,17 @@ export class CartComponent implements OnInit {
 
   CheckOut(){
     sessionStorage.setItem('totalAmount',this.totalAmount)
+    sessionStorage.setItem('totalProduct', this.products.length.toString());
+    sessionStorage.setItem('discount', this.cartDiscount);
     this.router.navigateByUrl('/checkout')
+  }
+
+  getTrending(){
+    this.api.getTrendingProducts().subscribe((res:any)=>{
+      this.trendingItems=res
+      console.log("trending",res);
+      
+    })
   }
 
 }

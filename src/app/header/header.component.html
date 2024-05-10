@@ -7,7 +7,7 @@
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header pt-5">
           <button type="button" class="btn-close btn-close-white border" data-bs-dismiss="offcanvas" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" aria-label="Close"></button>
-          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel" style="cursor: pointer;" (click)="moreCartLink()" >Cart</h5>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel" style="cursor: pointer;" routerLink="/cart" >Cart</h5>
           <p class="m-0" style="border-radius: 20px; background-color: rgba(51, 51, 51, 0.712);padding:4px 11px 5px 11px;font-size: 12px;">items:<span class="bg-transparent">{{cartItem.length}}</span></p>
         </div>
         <div class="offcanvas-body pt-4">
@@ -35,7 +35,7 @@
             
           </div>
           <p class="text-secondary " style="font-size: 12px;"><span class="text-light">Add Order Note</span>:Shipping, taxes and discount codes calculated at checkout..</p>
-          <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" (click)="moreCartLink()" >Check out now</button></p>
+          <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" routerLink="/cart">Check out now</button></p>
         </div>
       </div>
 <!-- ------------------------wish------------------------- -->
@@ -44,7 +44,7 @@
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRighttwo" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header pt-5">
           <button type="button" class="btn-close btn-close-white border" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel"  style="cursor: pointer;" title="Click to watch your wishlist" (click)="moreWishLink()" >Wishlist</h5>
+          <h5 class="offcanvas-title text-uppercase" id="offcanvasRightLabel"  style="cursor: pointer;" title="Click to watch your wishlist" routerLink="/wish" >Wishlist</h5>
           <p class="m-0" style="border-radius: 20px; background-color: rgba(51, 51, 51, 0.712);padding:4px 11px 5px 11px;font-size: 12px;">items:<span class="bg-transparent">{{wishItem.length}}</span></p>
         </div>
         <div class="offcanvas-body pt-4">
@@ -70,7 +70,7 @@
             
           </div>
           <p class="text-secondary " style="font-size: 12px;"><span class="text-light">Add Order Note</span>: Shipping, taxes, and discounts applied at checkout.</p>
-          <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" (click)="moreWishLink()"  >View in wishlist</button></p>
+          <p class="lead fw-normal text-center w-100"><button class="btn btn-outline-light text-uppercase w-100"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;" routerLink="/wish" >View in wishlist</button></p>
 
         </div>
       </div>
@@ -94,17 +94,18 @@
           <li class="nav-item">
             <a class="nav-link active text-uppercase" aria-current="page" routerLink=""><i class="fa-regular fa-file me-3"></i>Landing page</a>
           </li>
-          <hr>
-          <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-regular fa-star me-3 text-secondary"></i>new</a>
-          </li>
+          
           <hr>
           <li class="nav-item">
             <a class="nav-link text-uppercase" routerLink="/allpro"><i class="fa-solid fa-store me-3 text-secondary"></i>shop</a>
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-images me-3 text-secondary"></i>gallery</a>
+            <a class="nav-link text-uppercase" routerLink="/cart"><i class="fa-solid fa-cart-shopping me-3 text-secondary"></i>Cart</a>
+          </li>
+          <hr>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase" routerLink="/wish"><i class="fa-solid fa-heart me-3 text-secondary"></i>wishlist</a>
           </li>
           <hr>
           <li class="nav-item">
@@ -139,7 +140,24 @@
           </li>
           <li class="nav-item" *ngIf="username">
             <hr>
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-arrow-right-from-bracket me-3 text-secondary"></i>Logout</a>
+            <a class="nav-link text-uppercase" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fa-solid fa-arrow-right-from-bracket me-3 text-secondary"></i>Logout</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content" style="border: 1px solid rgb(117, 117, 117);border-radius: 20px;">
+                      <div class="modal-body" style="border-radius: 20px;background-color: rgba(26, 26, 26, 0.932);">
+                        <h4 class="bg-transparent">Logout?</h4>
+                        <p class="m-0 mt-4 bg-transparent"> Are you sure want to log out <span class="text-success bg-transparent">{{username}}</span>?</p>
+                        <div class="mt-4 d-flex justify-content-around bg-transparent">
+                          <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px; border: 1px solid rgb(117, 117, 117);" type="button"  data-bs-dismiss="modal">Cancel</button>
+                          <button class="btn text-uppercase text-light bg-light text-dark" style="font-size: 12px;border-radius: 20px; border: 1px solid rgb(117, 117, 117);" type="button" (click)="logout()"> Log out</button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ----------------------- -->
           </li>
         </ul>
         <hr>

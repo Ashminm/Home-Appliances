@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AllproductsComponent implements OnInit {
 
   allproducts:any[]=[]
-
+  searchKey:any=""
   constructor(private api:ApiCallService,private toastr:ToastrService){}
 
   ngOnInit(){
@@ -68,4 +68,14 @@ export class AllproductsComponent implements OnInit {
       this.toastr.warning("Login first!!")
     }
   }
+
+  lowToHight(){
+    this.allproducts.sort((product1,product2)=>product1.price-product2.price)
+  }
+  highToLow(){
+    this.allproducts.sort((product1,product2)=>product2.price-product1.price)
+  }
+
+
+  
 }

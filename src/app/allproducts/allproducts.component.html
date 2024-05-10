@@ -11,25 +11,25 @@
         <div class="mx-3">BASICS</div>
     </div>
     <div class="w-100">
-        <input type="search" class="form-control w-50 bg-transparent text-light" placeholder="Search">
+        <input type="search" class="form-control w-50 bg-transparent text-light" placeholder="Search for all appliances"  [(ngModel)]="searchKey" > 
     </div>
     <div>
         <div class="dropdown me-3">
             <p class=" border-dark pe-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dop1">
              Filter
             </p>
-            <ul class="dropdown-menu bg-transparent" aria-labelledby="drop1">
-              <li><a class="dropdown-item text-light" >Low to High</a></li>
-              <li><a class="dropdown-item text-light">High to Low</a></li>
+            <ul class="dropdown-menu bg-transparent shadow" style="border: 1px solid rgba(128, 128, 128, 0.068);" aria-labelledby="drop1">
+                <li><a class="dropdown-item text-light" (click)="lowToHight()" >Price: Low to High</a></li>
+                <li><a class="dropdown-item text-light" (click)="highToLow()" >Price: High to Low</a></li>
             </ul>
           </div>
     </div>
 </div>
 
 <section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-5 justify-content-center">
-            <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of allproducts">
+    <div class="container-fluid px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
+            <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of allproducts | search:searchKey">
                 <div class="card h-100 border-0 bg-transparent rounded" style="width: 15.80rem; position: relative;">
                     <!-- Wishlist icon and Quick Review button -->
                     <div class="d-flex" style="position: absolute; top: 10px; left: 10px; right: 14px; justify-content: space-between; background-color: transparent;">
@@ -48,8 +48,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
                                         <div class="d-flex row ">
                                             <div class=" col-lg-5 col-md-12 col-sm-12 text-center d-flex " style="overflow-x: scroll;" [class.d-none]="!i.photos.length" *ngIf="i.photos.length > 0">
-                                                <div *ngFor="let item of i.photos" class="me-2">
-                                                        <img [src]="item" alt="" style="width: 400px;height: 100%;"/>
+                                                <div *ngFor="let item of i.photos">
+                                                        <img [src]="item" alt="" style="width: 450px;height: 100%;"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-1"></div>
@@ -63,11 +63,7 @@
                                                     <p class=" me-4 text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-regular fa-heart fa-xl text-light"></i>Add to wishlist</p>
                                                     <p class=" text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-solid fa-cart-shopping fa-xl text-light" ></i>Add to cart</p>
                                                 </div>
-                                                
-                                                <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-outline-light p-3"></button>
-                                                    <button type="button" class="btn bg-light p-3 "  ></button>
-                                                </div> -->
+                
                                             </div>
                                         </div>
                                         
@@ -82,8 +78,7 @@
                             <i class="fa-solid fa-heart fa-xl" style="color: rgba(0, 0, 0, 0.925);"></i>
                         </span>
                     </div>
-                    <span style="position: absolute;top: 220px;left: 10px;background-color: transparent;color: #000;">-NEW</span>
-                    <div style="background-color: rgba(255, 255, 255, 0.61); padding: 50px;border-radius: 10px;">
+                    <div style="background-color: rgba(255, 255, 255, 0.61); padding: 30px;border-radius: 10px;">
                         <img class="card-img-top" routerLink="/view/{{i?.id}}" style="cursor: pointer; mix-blend-mode: multiply; aspect-ratio: 3/4; object-fit: cover;" src="{{i?.image}}" alt="...">
                     </div>
                                        
@@ -94,11 +89,15 @@
                         </div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center w-100">
-                        <div class="text-center">
-                            <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px;" type="button" (click)="addToCart(i)" >ADD TO CART</button>
+                        <div class="text-center mt-3">
+                            <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px;border: 1px solid rgba(128, 128, 128, 0.151);" type="button" (click)="addToCart(i)" >ADD TO CART</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="(allproducts | search:searchKey).length === 0" class="text-center text-light w-100">
+                <p>We couldn't find anything for "<span class="text-secondary">{{ searchKey }}</span>" with your filters. Try to refine your search.</p>
+                <p class="btn btn-outline-light m-0 mt-5 text-uppercase" style="font-size: 20px;" routerLink="/">Go to the home page</p>
             </div>
         </div>
     </div>

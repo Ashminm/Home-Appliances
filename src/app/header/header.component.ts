@@ -28,10 +28,13 @@ export class HeaderComponent implements OnInit {
       this.api.cartListCount.subscribe((res:any)=>{
         this.cartCount=res
       })
+      
     }
 
     this.getData()
     this.getWishome()
+    
+   
   }
   
   getData(){
@@ -62,15 +65,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  moreWishLink(){
-    if(sessionStorage.getItem('token')){
-      this.route.navigateByUrl('/wish')
-    }
-    else{
-      this.toastr.warning("login First!!!")
-    }
-  }
-
 
   // ------------cart---------------------
 
@@ -82,6 +76,7 @@ export class HeaderComponent implements OnInit {
         next:(res:any)=>{
           console.log(res);
           this.api.getCartListCountApi()
+          this.getWishome()
           this.toastr.success("Item Added to Cart")
         },
         error:(err)=>[
@@ -122,15 +117,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  moreCartLink(){
-    if(sessionStorage.getItem('token')){
-      this.route.navigateByUrl('/cart')
-    }
-    else{
-      this.toastr.warning("login First!!!")
-    }
-  }
-
   getIncrese(id:any){
     this.api.getQuaIncreaseApi(id).subscribe({
       next:(res:any)=>{
@@ -158,5 +144,49 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  
+  clearAllCart(){
+    this.api.getClearCart().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        console.log("Clear all cart items");  
+        this.api.getCartListCountApi()
+        this.getData()
+        // this.getTotalAmount()
+      },
+      error:(err)=>{
+        console.log(err);
+        console.log ("Cart Clear faild!!");
+       
+      }
+    })
+  }
+
+  clearAllwish(){
+    this.api.getClearWish().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        console.log("clear all wishlist items");    
+        this.api.getWishlistCountApi()
+        this.getData()
+      },
+      error:(err)=>{
+        console.log(err);
+       console.log("Wishlist clear faild..!!");
+       
+      }
+    })
+  }
+
+  logout() { 
+    this.clearAllCart()
+    this.clearAllwish()
+    sessionStorage.clear();
+    localStorage.clear();
+    this.wishCount = 0;
+    this.cartCount = 0;
+    this.getData()
+    this.route.navigateByUrl('/log')
+}
+
+
 }

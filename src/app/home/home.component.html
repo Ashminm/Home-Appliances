@@ -66,17 +66,17 @@
             <p class=" border-dark pe-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dop1">
              Filter
             </p>
-            <ul class="dropdown-menu bg-transparent" aria-labelledby="drop1">
-              <li><a class="dropdown-item text-light" >Low to High</a></li>
-              <li><a class="dropdown-item text-light">High to Low</a></li>
+            <ul class="dropdown-menu bg-transparent shadow" style="border: 1px solid rgba(128, 128, 128, 0.068);" aria-labelledby="drop1">
+                <li><a class="dropdown-item text-light" (click)="lowToHight()" >Price: Low to High</a></li>
+                <li><a class="dropdown-item text-light" (click)="highToLow()" >Price: High to Low</a></li>
             </ul>
           </div>
     </div>
 </div>
 
 <section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-5 justify-content-center">
+    <div class="container-fluid px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
             <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of products">
                 <div class="card h-100 border-0 bg-transparent rounded" style="width: 15.80rem; position: relative;">
                     <!-- Wishlist icon and Quick Review button -->
@@ -131,7 +131,7 @@
                         </span>
                     </div>
                     <span style="position: absolute;top: 220px;left: 10px;background-color: transparent;color: #000;">-NEW</span>
-                    <div style="background-color: rgba(255, 255, 255, 0.61); padding: 50px;border-radius: 10px;">
+                    <div style="background-color: rgba(255, 255, 255, 0.61); padding: 35px;border-radius: 10px;">
                         <img class="card-img-top" routerLink="/view/{{i?.id}}" style="cursor: pointer; mix-blend-mode: multiply; aspect-ratio: 3/4; object-fit: cover;" src="{{i?.image}}" alt="...">
                     </div>
                                        
@@ -142,8 +142,8 @@
                         </div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center w-100">
-                        <div class="text-center">
-                            <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px;" type="button" (click)="addToCart(i)" >ADD TO CART</button>
+                        <div class="text-center mt-3">
+                            <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px;border: 1px solid rgba(128, 128, 128, 0.151);" type="button" (click)="addToCart(i)" >ADD TO CART</button>
                         </div>
                     </div>
                 </div>

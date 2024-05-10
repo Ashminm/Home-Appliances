@@ -10,13 +10,11 @@ export class ApiCallService {
   SERVER_URL="http://localhost:3000"
   wishListCount=new BehaviorSubject(0)
   cartListCount=new BehaviorSubject(0)
-  // homeWishList=new BehaviorSubject("")
 
   constructor(private http:HttpClient) { 
     if(sessionStorage.getItem('token')){
     this.getWishlistCountApi()
     this.getCartListCountApi()
-    // this.getHomeWishListApi()
     }
   }
 
@@ -34,6 +32,9 @@ export class ApiCallService {
   }
   userLoginApi(data:any){
     return this.http.post(`${this.SERVER_URL}/user-login`,data) 
+  }
+  getTrendingProducts(){
+    return this.http.get(`${this.SERVER_URL}/trending-product`)
   }
 
 
@@ -77,8 +78,17 @@ export class ApiCallService {
   getQuadecreaseApi(id:any){
     return this.http.get(`${this.SERVER_URL}/decri-item/${id}`,this.appendTokenToHeader()) 
   }
+  // getQuaViewdecreaseApi(id:any){
+  //   return this.http.get(`${this.SERVER_URL}/decri-view-item/${id}`,this.appendTokenToHeader()) 
+  // }
   getClearCart(){
     return this.http.delete(`${this.SERVER_URL}/clear-cart`,this.appendTokenToHeader()) 
+  }
+  getClearWish(){
+    return this.http.delete(`${this.SERVER_URL}/clear-wish`,this.appendTokenToHeader()) 
+  }
+  getUserProfile(){
+    return this.http.get(`${this.SERVER_URL}/user-profile`,this.appendTokenToHeader()) 
   }
   
 
@@ -91,6 +101,10 @@ export class ApiCallService {
      this.http.get(`${this.SERVER_URL}/get-cart`,this.appendTokenToHeader()).subscribe((res:any)=>{
       this.cartListCount.next(res.length)
     })
+  }
+
+  isLoggedIn(){
+    return !!sessionStorage.getItem('token')
   }
   
 }

@@ -9,16 +9,17 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AllproductsComponent } from './allproducts/allproducts.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'log',component:LoginComponent},
   {path:'reg',component:RegistrationComponent},
   {path:'view/:id',component:ViewComponent},
-  {path:'wish',component:WishlistComponent},
-  {path:'cart',component:CartComponent},
-  {path:'checkout',component:CheckoutComponent},
-  {path:'prof',component:ProfileComponent},
+  {path:'wish',canActivate:[authGuard],component:WishlistComponent},
+  {path:'cart',canActivate:[authGuard],component:CartComponent},
+  {path:'checkout',canActivate:[authGuard],component:CheckoutComponent},
+  {path:'prof',canActivate:[authGuard],component:ProfileComponent},
   {path:'allpro',component:AllproductsComponent},
   {path:'**',redirectTo:''}
 ];

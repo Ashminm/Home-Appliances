@@ -1,1 +1,124 @@
 <app-header></app-header>
+
+<section class="h-100">
+    <div class="d-flex justify-content-center align-items-center " >
+        <div class="col-lg-3 col-md-6 shadow" style="border: 1px solid rgb(150, 149, 149);border-radius: 20px;">   
+            <form class="p-4 w-100" style="border-radius: 20px;" autocomplete="off" [formGroup]="checkOutForm" *ngIf="!checkOutStatus" >
+                <div class="d-flex justify-content-between">
+                    <p class="m-0  m-0 p-3 pb-5 pe-0" (click)="cancelCheckOut()" style="cursor: pointer;"><i class="fa-regular fa-circle-xmark fa-xl pe-2"></i>Cancel</p>
+                    <p class="text-end m-0 p-3 pb-5 pe-0" ><span >({{totalProduct}})Items<i class="fa-solid fa-bag-shopping fa-xl bg-transparent ps-2"></i></span></p>
+                </div>
+                <h5 class="mb-5 mt-5">How would you like to get your order?</h5>
+                <div class="d-flex justify-content-between w-100 mb-5">
+                    <div class="me-5">
+                        <label for="">First name</label>
+                        <input type="text" placeholder="Jhone" formControlName="firstname" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
+                    </div>
+                    <div class="">
+                        <label for="">Last name</label>
+                        <input type="text" placeholder="Silva" formControlName="lastname" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
+                    </div>
+                </div>
+                <div class="">
+                    <label for="">Street address</label>
+                    <textarea name="" placeholder="Address" formControlName="address" id="" rows="1" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required></textarea>
+                </div>
+                <div class="d-flex justify-content-between w-100 mb-4 mt-4">
+                    <div class="me-5">
+                        <label for="">Town / City</label>
+                        <input type="text" placeholder="City" formControlName="town" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
+                    </div>
+                    <div class="">
+                        <label for="">State</label>
+                        <input type="text" placeholder="State" formControlName="state" class="form-control w-75 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
+                    </div>
+                    <div class="">
+                        <label for="">Postcode</label>
+                        <input type="number" placeholder="Pin" formControlName="pincode" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
+                    </div>
+                </div>
+                <div class="">
+                    <label for="">Country</label>
+                    <select class="form-control w-100 bg-transparent text-light  " formControlName="country" style="border-radius: 10px; border: 1px solid gray;" required>
+                        <option value="" disabled selected>Select</option>
+                        <option value="Caneda" class="text-secondary" disabled>Caneda</option>
+                        <option value="India">India</option>
+                        <option value="United State" class="text-secondary" disabled>United State</option>
+                        <option value="Englend" class="text-secondary" disabled>Englend</option>
+                    </select>
+                </div>
+                <div class="mt-5">
+                    <label for="">Email address</label>
+                    <input type="email" placeholder="hello@gmail.com" formControlName="email" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
+                </div>
+                <div class="mt-4">
+                    <p class="lead fw-normal text-center w-100"><button type="submit" class="btn bg-light text-uppercase w-100" (click)="checkForm()"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;"  ><i class="fa-solid fa-lock pe-1 bg-transparent text-dark"></i> Pay {{total|currency:'INR'}}</button></p>
+                </div>
+            </form>
+            <div *ngIf="checkOutStatus" class="row  shadow p-3" style="border: 1px solid rgb(150, 149, 149);border-radius: 20px;">
+                <div style="width: 100%;" class="d-flex justify-content-center align-items-center">
+                    <img src="https://www.lappymaker.com/images/greentick-unscreen.gif" width="40%" alt="">
+                </div>
+                <div class=" row mt-2">
+                   <div class="d-flex justify-content-between">
+                    <h3 class="mb-4">Order Confirmation </h3>
+                    <p class="m-0" style="font-size: 12px;">Order Total: <span style="font-size: 18px;">{{total|currency:'INR'}}</span></p>
+                   </div>
+                   <hr>
+                   <div class="col-md-7 mb-3">
+                        <p class="m-0">Your information</p>
+                        <hr >
+                        <p class="m-0 text-secondary h4">{{checkOutForm.value.firstname}} {{checkOutForm.value.lastname}}</p>
+                        <p class="text-secondary">{{checkOutForm.value.email}}</p>
+
+                        <p class="m-0 mt-5">Billing Address</p>
+                        <hr >
+                        <p class="m-0 text-secondary h4">{{checkOutForm.value.firstname}} {{checkOutForm.value.lastname}}</p>
+                        <p class="text-secondary" style="font-size: 14px;">{{checkOutForm.value.address}}</p>
+                        <p>Town: <span class="text-secondary"> {{checkOutForm.value.town}}</span></p>
+                        <p>State: <span class="text-secondary"> {{checkOutForm.value.state}}</span></p>
+                        <p>Pin: <span class="text-secondary">{{checkOutForm.value.pincode}}</span></p>
+                        <p>Country: <span class="text-secondary">{{checkOutForm.value.country}}</span></p>    
+                   </div>
+                   <div class="col-md-5">
+                        <p class="m-0">Payment</p>
+                        <hr>
+                        <p>Total Products: <span class="text-secondary">{{totalProduct}}(items)</span></p>
+                        <p>Discount: <span class="text-secondary">{{discount|currency:'INR'}}</span></p>
+                        <p>You Pay: <strong>{{total | currency:'INR'}}</strong></p>
+                       
+                    </div>
+                    <div class="w-100">
+                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h5 class="text-uppercase py-4">Low price</h5>
+        <div class="container d-flex justify-content-start" style="overflow-x: scroll;">
+            <div class="col me-5 d-flex justify-content-center" *ngFor="let i of trendingItems" style="cursor: auto;">
+                <div class="card h-100 border-0 bg-transparent rounded" style="width: 11rem; position: relative;">
+                    <span class="text-uppercase" style="position: absolute;top: 130px;left: 10px;background-color: transparent;color: #a30d0d;font-size: 11px;font-weight: 800;">offer</span>
+                    <div style="background-color: rgba(255, 255, 255, 0.61); padding: 20px;border-radius: 10px;">
+                        <img class="card-img-top" routerLink="/view/{{i?.id}}" style="cursor: pointer; mix-blend-mode: multiply; aspect-ratio: 3/3; object-fit: cover;" src="{{i?.image}}" alt="...">
+                    </div>
+                                    
+                    <div class="card-body p-3 pb-0">
+                        <div class="text-center">
+                            <p class="text-uppercase mb-1">{{i?.title.slice(0,10)}}..</p>
+                            <p class="fw-bolder mb-1">₹{{i?.price}}</p>
+                            <p class="fw-normal mb-1">Rating: {{i?.rating}}</p>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</section>
+

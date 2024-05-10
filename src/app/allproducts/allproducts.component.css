@@ -1,0 +1,11 @@
+.wish_quick_ho {
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.card:hover .wish_quick_ho {
+    pointer-events: auto;
+    opacity: 1;
+    
+}

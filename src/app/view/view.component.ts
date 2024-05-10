@@ -13,6 +13,8 @@ export class ViewComponent implements OnInit{
 
   pid:any=0
   product:any={}
+  trendingItems:any[]=[]
+ 
   constructor(private aroute:ActivatedRoute, private api:ApiCallService,private toastr:ToastrService){
     this.aroute.params.subscribe((res:any)=>{
       // console.log(res.id);
@@ -23,6 +25,7 @@ export class ViewComponent implements OnInit{
 
   ngOnInit(){
     this.getData()
+    this.getTrending()
   }
 
   getData(){
@@ -58,6 +61,7 @@ export class ViewComponent implements OnInit{
       this.api.addToCartApi(product).subscribe({
         next:(res:any)=>{
           console.log(res);
+          this.api.getCartListCountApi()
           this.toastr.success("Item Added to Cart")
         },
         error:(err)=>[
@@ -69,5 +73,17 @@ export class ViewComponent implements OnInit{
       this.toastr.warning("Login first!!")
     }
   }
+
+  
+
+  getTrending(){
+    this.api.getTrendingProducts().subscribe((res:any)=>{
+      this.trendingItems=res
+      // console.log("trending",res);
+      
+    })
+  }
+
+  
 
 }

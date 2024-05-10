@@ -43,10 +43,12 @@ export class LoginComponent {
   copyToClipboard(text:string) {
     navigator.clipboard.writeText(text)
       .then(() => {
-        this.toastr.success('Copied');
+        console.log("copy");
+        
       })
       .catch(() => {
-        this.toastr.error('Failed to copy');
+        console.log('Failed to copy');
+    
       });
   }
 }

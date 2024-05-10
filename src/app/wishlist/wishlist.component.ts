@@ -39,9 +39,22 @@ export class WishlistComponent implements OnInit {
         this.getdata()
       },
       error:(err:any)=>{
-        console.log(err);
-        
+        console.log(err);  
         this.toastr.error("Item Deletion Faild")
+      }
+    })
+  }
+  deleteCartItem(id:any){
+    this.api.deleteWishItem(id).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.api.getWishlistCountApi()
+        // this.toastr.success("Item Remove..!")
+        this.getdata()
+      },
+      error:(err:any)=>{
+        console.log(err);  
+        // this.toastr.error("Item Deletion Faild")
       }
     })
   }
@@ -54,7 +67,8 @@ export class WishlistComponent implements OnInit {
         next:(res:any)=>{
           console.log(res);
           this.api.getCartListCountApi()
-          this.toastr.success("Item Added to Cart")
+          this.toastr.success("Item Added to Cart!!")
+          this.deleteCartItem(data._id)
         },
         error:(err)=>[
           this.toastr.error(err.error)
