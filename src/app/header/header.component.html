@@ -87,7 +87,7 @@
       <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white border" data-bs-dismiss="offcanvas" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" aria-label="Close"></button>
         <p style="padding: 0; padding-top: 19px;font-size: 19px;">Welcome <span style="color: rgb(207, 125, 17);">{{username}}</span>!</p>
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><img src="https://pics.craiyon.com/2023-11-15/BcL2X-ZvT9ShA3Q5RQPjzg.webp" routerLink="/prof" style="width: 40px;border-radius: 50%;border: 1px solid #FFF;padding: 4px;" alt=""></h5>
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><img [src]="profilePicture" routerLink="/prof" style="width: 40px;border-radius: 50%;border: 1px solid #FFF;padding: 4px;" alt=""></h5>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">

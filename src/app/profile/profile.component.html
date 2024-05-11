@@ -1,3 +1,84 @@
+<app-header></app-header>
 <section class="h-100">
+  <div class="container py-4">
+    <div class="row ">
+      <div class="col-md-5 col-lg-3">
+        <div class="border shadow p-5">
+          <div class=" d-flex justify-content-center flex-column align-items-center ">
+            <img [src]="profilePicture"
+                    style="width: 80px; height: 80px; border-radius: 50%;object-fit: cover;" alt="Profile Picture">
+                <label for="imageUpload" style="cursor: pointer;">
+                    <p class="m-0" style="font-size: 10px;">change photo</p>
+                </label>
+                <input id="imageUpload" type="file" (change)="getFile($event)" accept="image/*" style="display: none;">
+            <div style="height: 25vh;">
+              <h5 class="mt-4 mb-3 text-center text-uppercase">{{userData.username}}</h5>
+              <div style="background-color: rgba(43, 43, 43, 0.897);border-radius: 15px;">
+                <p class="m-0 p-2 px-4 bg-transparent">{{userData.email}}</p>
+              <p class="text-center m-0 pb-2 bg-transparent" style="font-size: 9px;">ID: {{userData._id}}</p>
+              </div>
+            </div>
+          </div>
+            <div class="">
+              <p><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
+              <p class="text-danger m-0"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
+            </div>
+        </div>
+      </div>
 
+      <div class="col-md-7 col-lg-6 ">
+        <div class="border shadow px-4 py-5 ">
+          <h5 class="pb-4 text-uppercase">Profile Info</h5>
+            <form (ngSubmit)="handleUpdateUser()">
+                <div class="d-flex justify-content-between w-100">
+                    <div class="w-100">
+                      <p class="m-0" style="font-size: 12px;">Display Name Change</p>
+                      <input type="text" class="form-control bg-transparent text-light" style="width: 95%;border-radius: 20px;" placeholder="Name" name="uname" [(ngModel)]="userData.username" >
+                    </div>
+                    <div class="w-100">
+                      <p class="m-0" style="font-size: 12px;">Password Change</p>
+                      <input type="text" class="form-control bg-transparent text-light" style="width: 95%;border-radius: 20px;" placeholder="Password" name="psw" [(ngModel)]="userData.password">
+                    </div>
+                </div>
+                  <div class="text-start">
+                    <button class="mt-4 btn btn-light py-2 w-25 text-uppercase" style="border-radius: 20px;">Save</button>
+                  </div>
+            </form>
+              <!-- <p class="m-0 mt-5 text-uppercase">Last Update: {{lastModifyImg | date }}</p> -->
+        </div>
+        <div class="border shadow p-4 mt-4">
+          <p class="text-uppercase">Your review</p>
+        </div>
+      </div>
+      <div class="col-md-5 col-lg-3 ">
+        <div class="border shadow p-4">
+          <h4>Related product</h4>
+          <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

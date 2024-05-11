@@ -90,6 +90,9 @@ export class ApiCallService {
   getUserProfile(){
     return this.http.get(`${this.SERVER_URL}/user-profile`,this.appendTokenToHeader()) 
   }
+  updateUserProfile(data:any){
+    return this.http.put(`${this.SERVER_URL}/user-profile`,data,this.appendTokenToHeader()) 
+  }
   
 
   getWishlistCountApi(){
