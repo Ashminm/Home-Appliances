@@ -19,6 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllproductsComponent } from './allproducts/allproducts.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { SearchPipe } from './pips/search.pipe';
+import { CategoriesComponent } from './categories/categories.component';
+import { ViewCategoryComponent } from './view-category/view-category.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { SearchPipe } from './pips/search.pipe';
     ViewComponent,
     ProfileComponent,
     AllproductsComponent,
-    SearchPipe, 
+    SearchPipe,
+    CategoriesComponent,
+    ViewCategoryComponent,
+    ContactComponent, 
   ],
   imports: [
     BrowserModule,

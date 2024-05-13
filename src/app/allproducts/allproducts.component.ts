@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AllproductsComponent implements OnInit {
 
+  filterCategory: any[] = [];
   allproducts:any[]=[]
   searchKey:any=""
   constructor(private api:ApiCallService,private toastr:ToastrService){}
@@ -22,6 +23,7 @@ export class AllproductsComponent implements OnInit {
     const res=this.api.getAllProducts().subscribe((res:any)=>{
       // console.log(res);
       this.allproducts=res
+      this.filterCategory = res;
     },
     (err:any)=>{
       console.log(err);
@@ -75,6 +77,21 @@ export class AllproductsComponent implements OnInit {
   highToLow(){
     this.allproducts.sort((product1,product2)=>product2.price-product1.price)
   }
+
+  
+filterCate(category: string) {
+  if (category === "") {
+    this.filterCategory = this.allproducts;
+  } else {
+    this.filterCategory = this.allproducts.filter((product: any) => product.category === category);
+  }
+  // console.log(this.filterCategory);
+  
+}
+
+
+
+  
 
 
   

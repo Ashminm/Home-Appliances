@@ -13,6 +13,7 @@ Router
 export class HomeComponent implements OnInit {
 
 
+  filterCategory: any[] = [];
   products:any[]=[]
 
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
     const res=this.api.getAllLimitProducts().subscribe((res:any)=>{
       // console.log(res);
       this.products=res
+      this.filterCategory = res;
     },
     (err:any)=>{
       console.log(err);
@@ -86,6 +88,16 @@ export class HomeComponent implements OnInit {
   }
   highToLow(){
     this.products.sort((product1,product2)=>product2.price-product1.price)
+  }
+
+  filterCate(category: string) {
+    if (category === "") {
+      this.filterCategory = this.products;
+    } else {
+      this.filterCategory = this.products.filter((product: any) => product.category === category);
+    }
+    // console.log(this.filterCategory);
+    
   }
   
 }

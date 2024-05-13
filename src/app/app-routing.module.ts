@@ -10,6 +10,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AllproductsComponent } from './allproducts/allproducts.component';
 import { authGuard } from './guards/auth.guard';
+import { CategoriesComponent } from './categories/categories.component';
+import { ContactComponent } from './contact/contact.component';
+import { ViewCategoryComponent } from './view-category/view-category.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -21,6 +24,9 @@ const routes: Routes = [
   {path:'checkout',canActivate:[authGuard],component:CheckoutComponent},
   {path:'prof',canActivate:[authGuard],component:ProfileComponent},
   {path:'allpro',component:AllproductsComponent},
+  {path:'cate',component:CategoriesComponent},
+  {path:'viewcate/:category',component:ViewCategoryComponent},
+  {path:'contact',component:ContactComponent},
   {path:'**',redirectTo:''}
 ];
 

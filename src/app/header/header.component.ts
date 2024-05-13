@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  profilePicture:string='https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'
+  profilePicture:any
   username:any=""
   wishCount:any=0;
   wishItem:any[]=[]
@@ -34,8 +34,8 @@ export class HeaderComponent implements OnInit {
 
     this.getData()
     this.getWishome()
-    
-   
+    this.getProfile()
+
   }
   
   getData(){
@@ -56,6 +56,7 @@ export class HeaderComponent implements OnInit {
       next:(res:any)=>{
         console.log(res);
         this.api.getWishlistCountApi()
+        sessionStorage.removeItem('totalAmount');
         this.toastr.success("Item Remove..!")
         this.getData()
       },
@@ -93,12 +94,11 @@ export class HeaderComponent implements OnInit {
   getWishome(){
     this.api.getHomeCartListApi().subscribe({
       next:(res:any)=>{
-        console.log(res);
+        // console.log(res);
         this.cartItem=res
       },
       error:(err:any)=>{
-        console.log(err);
-        
+        console.log(err);     
       }
     })
   }
@@ -175,6 +175,14 @@ export class HeaderComponent implements OnInit {
        console.log("Wishlist clear faild..!!");
        
       }
+    })
+  }
+// ------------profile------------
+
+  getProfile(){
+    this.api.getUserProfile().subscribe((res:any)=>{
+      this.profilePicture=res
+      // console.log(this.profilePicture);
     })
   }
 

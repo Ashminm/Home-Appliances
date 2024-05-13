@@ -52,7 +52,7 @@
                     <input type="email" placeholder="hello@gmail.com" formControlName="email" class="form-control w-100 bg-transparent text-light " style="border-radius: 10px; border: 1px solid gray;" required>
                 </div>
                 <div class="mt-4">
-                    <p class="lead fw-normal text-center w-100"><button type="submit" class="btn bg-light text-uppercase w-100" (click)="checkForm()"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;"  ><i class="fa-solid fa-lock pe-1 bg-transparent text-dark"></i> Pay {{total|currency:'INR'}}</button></p>
+                    <p class="lead fw-normal text-center w-100"><button type="submit" class="btn bg-light text-uppercase w-100" (click)="checkForm()"  style="padding: 9px 20px;border: 1px solid #f0eeee1e;font-size: 12px;border-radius: 20px;"  ><i class="fa-solid fa-lock pe-1 bg-transparent text-dark"></i> Pay {{ total ? (total | currency:'INR') : '₹0' }}</button></p>
                 </div>
             </form>
             <div *ngIf="checkOutStatus" class="row  shadow p-3" style="border: 1px solid rgb(150, 149, 149);border-radius: 20px;">

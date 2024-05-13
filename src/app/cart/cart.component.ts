@@ -45,6 +45,7 @@ export class CartComponent implements OnInit {
       next:(res:any)=>{
         console.log(res);
         this.api.getCartListCountApi()
+        sessionStorage.removeItem('totalAmount');
         this.toastr.success("Item Remove..!")
         this.getdata()
       },

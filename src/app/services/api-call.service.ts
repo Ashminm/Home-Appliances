@@ -93,6 +93,11 @@ export class ApiCallService {
   updateUserProfile(data:any){
     return this.http.put(`${this.SERVER_URL}/user-profile`,data,this.appendTokenToHeader()) 
   }
+  deteteAccountApi(){
+    return this.http.delete(`${this.SERVER_URL}/delete-account`,this.appendTokenToHeader()) 
+  }
+
+
   
 
   getWishlistCountApi(){

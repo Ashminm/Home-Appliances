@@ -2,16 +2,9 @@
 <h2 class="text-center text-light text-uppercase">All Products</h2>
 <hr class="container" style="width: 20%;">
 <div class="container mt-5 d-flex justify-content-between">
-    <div class="d-flex justify-content-start " style="cursor: pointer;overflow-x: scroll;width: 60%;">
-        <div class="mx-3 ms-0">ALL</div>
-        <div class="mx-3">NEW</div>
-        <div class="mx-3">KITCHEN</div>
-        <div class="mx-3">BEDROOM</div>
-        <div class="mx-3">HALL</div>
-        <div class="mx-3">BASICS</div>
-    </div>
-    <div class="w-100">
-        <input type="search" class="form-control w-50 bg-transparent text-light" placeholder="Search for all appliances"  [(ngModel)]="searchKey" > 
+    
+    <div class="w-100 d-flex justify-content-center">
+        <input type="search" class="form-control bg-transparent text-light  " style="width: 75%;" placeholder="Search for all appliances"  [(ngModel)]="searchKey" > 
     </div>
     <div>
         <div class="dropdown me-3">
@@ -27,77 +20,94 @@
 </div>
 
 <section class="py-5">
-    <div class="container-fluid px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
-            <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of allproducts | search:searchKey">
-                <div class="card h-100 border-0 bg-transparent rounded" style="width: 15.80rem; position: relative;">
-                    <!-- Wishlist icon and Quick Review button -->
-                    <div class="d-flex" style="position: absolute; top: 10px; left: 10px; right: 14px; justify-content: space-between; background-color: transparent;">
-                        <!-- Quick Review button -->
-                        <span class="wish_quick_ho d-none" style="background-color: transparent; padding: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fa-solid fa-eye fa-xl" style="color: rgba(0, 0, 0, 0.925);"></i>
-                            <!-- <span class="p-2">Quick Look</span> -->
-                        </span>
-                        <!-- Button trigger modal -->
-                        
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered w-100 modal-xl" >
-                                <div class="modal-content w-100 border-dark shadow">
-                                    <div class="modal-body w-100 ">
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
-                                        <div class="d-flex row ">
-                                            <div class=" col-lg-5 col-md-12 col-sm-12 text-center d-flex " style="overflow-x: scroll;" [class.d-none]="!i.photos.length" *ngIf="i.photos.length > 0">
-                                                <div *ngFor="let item of i.photos">
-                                                        <img [src]="item" alt="" style="width: 450px;height: 100%;"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1"></div>
-                                            <div class="col-lg-6 col-md-12 col-sm-12 row align-items-center justify-content-center">
-                                                <p class="fw-bolder m-0 display-6 text-uppercase mb-1">{{i?.title}}</p>
-                                                <p class="m-0" style="font-size: 28px;">₹{{i?.price}}</p>
-                                                <p class="m-0">Rating: <span class="text-secondary h5
-                                                    ">{{i?.rating}}</span></p>
-                                                <p class="lead m-0">{{i?.description}}</p>
-                                                <div class="d-flex justify-content-start mt-4">
-                                                    <p class=" me-4 text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-regular fa-heart fa-xl text-light"></i>Add to wishlist</p>
-                                                    <p class=" text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-solid fa-cart-shopping fa-xl text-light" ></i>Add to cart</p>
-                                                </div>
-                
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Wishlist icon -->
-                        <span class="wish_quick_ho" style="background-color: transparent; font-size: 16px;padding-top: 8px;" (click)="addToWish(i)" >
-                            <i class="fa-solid fa-heart fa-xl" style="color: rgba(0, 0, 0, 0.925);"></i>
-                        </span>
-                    </div>
-                    <div style="background-color: rgba(255, 255, 255, 0.61); padding: 30px;border-radius: 10px;">
-                        <img class="card-img-top" routerLink="/view/{{i?.id}}" style="cursor: pointer; mix-blend-mode: multiply; aspect-ratio: 3/4; object-fit: cover;" src="{{i?.image}}" alt="...">
-                    </div>
-                                       
-                    <div class="card-body p-3 pb-0">
-                        <div class="text-center">
-                            <p class="text-uppercase mb-1">{{i?.title}}</p>
-                            <p class="fw-bolder mb-1">₹{{i?.price}}</p>
-                        </div>
-                    </div>
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center w-100">
-                        <div class="text-center mt-3">
-                            <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px;border: 1px solid rgba(128, 128, 128, 0.151);" type="button" (click)="addToCart(i)" >ADD TO CART</button>
-                        </div>
+    <div class="container-fluid px-5 mt-3">
+        <div class="row">
+            <div class="col-lg-2 col-md-4">
+                <div class="align-items-center d-flex flex-wrap flex-md-column" style="cursor: pointer; overflow-x: auto; width: 100%; line-height: 40px;">
+                    <div class="d-flex flex-row flex-md-column mb-3">
+                    <h4 class="text-uppercase pb-4 d-none d-md-block"><strong>categories</strong></h4>
+                        <div class="mx-2"><a (click)="filterCate('')">ALL</a></div>
+                        <div class="mx-2"><a (click)="filterCate('home')">HOME</a></div>
+                        <div class="mx-2"><a (click)="filterCate('kitchen')">KITCHEN</a></div>
+                        <div class="mx-2"><a (click)="filterCate('bedroom')">BEDROOM</a></div>
+                        <div class="mx-2"><a (click)="filterCate('electronics')">ELECTRONICS</a></div>
+                        <div class="mx-2"><a (click)="filterCate('laundry')">LAUNDRY</a></div>
+                        <div class="mx-2"><a (click)="filterCate('bathroom')">BATHROOM</a></div>
                     </div>
                 </div>
             </div>
-            <div *ngIf="(allproducts | search:searchKey).length === 0" class="text-center text-light w-100">
-                <p>We couldn't find anything for "<span class="text-secondary">{{ searchKey }}</span>" with your filters. Try to refine your search.</p>
-                <p class="btn btn-outline-light m-0 mt-5 text-uppercase" style="font-size: 20px;" routerLink="/">Go to the home page</p>
+            
+            <div class="col-lg-10 col-md-8 row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-start">
+                <div class="col mb-5 me-1 d-flex justify-content-center" *ngFor="let i of filterCategory | search:searchKey">
+                    <div class="card h-100 border-0 bg-transparent rounded" style="width: 15.80rem; position: relative;">
+                        <!-- Wishlist icon and Quick Review button -->
+                        <div class="d-flex" style="position: absolute; top: 10px; left: 10px; right: 14px; justify-content: space-between; background-color: transparent;">
+                            <!-- Quick Review button -->
+                            <span class="wish_quick_ho d-none" style="background-color: transparent; padding: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-solid fa-eye fa-xl" style="color: rgba(0, 0, 0, 0.925);"></i>
+                                <!-- <span class="p-2">Quick Look</span> -->
+                            </span>
+                            <!-- Button trigger modal -->
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered w-100 modal-xl" >
+                                    <div class="modal-content w-100 border-dark shadow">
+                                        <div class="modal-body w-100 ">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float: right;"></button>
+                                            <div class="d-flex row ">
+                                                <div class=" col-lg-5 col-md-12 col-sm-12 text-center d-flex " style="overflow-x: scroll;" [class.d-none]="!i.photos.length" *ngIf="i.photos.length > 0">
+                                                    <div *ngFor="let item of i.photos">
+                                                            <img [src]="item" alt="" style="width: 450px;height: 100%;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                                <div class="col-lg-6 col-md-12 col-sm-12 row align-items-center justify-content-center">
+                                                    <p class="fw-bolder m-0 display-6 text-uppercase mb-1">{{i?.title}}</p>
+                                                    <p class="m-0" style="font-size: 28px;">₹{{i?.price}}</p>
+                                                    <p class="m-0">Rating: <span class="text-secondary h5
+                                                        ">{{i?.rating}}</span></p>
+                                                    <p class="lead m-0">{{i?.description}}</p>
+                                                    <div class="d-flex justify-content-start mt-4">
+                                                        <p class=" me-4 text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-regular fa-heart fa-xl text-light"></i>Add to wishlist</p>
+                                                        <p class=" text-uppercase" style="font-size: 14px;cursor: pointer;"><i class="fa-solid fa-cart-shopping fa-xl text-light" ></i>Add to cart</p>
+                                                    </div>
+                    
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Wishlist icon -->
+                            <span class="wish_quick_ho" style="background-color: transparent; font-size: 16px;padding-top: 8px;" (click)="addToWish(i)" >
+                                <i class="fa-solid fa-heart fa-xl" style="color: rgba(0, 0, 0, 0.925);"></i>
+                            </span>
+                        </div>
+                        <div style="background-color: rgba(255, 255, 255, 0.61); padding: 30px;border-radius: 10px;">
+                            <img class="card-img-top" routerLink="/view/{{i?.id}}" style="cursor: pointer; mix-blend-mode: multiply; aspect-ratio: 3/4; object-fit: cover;" src="{{i?.image}}" alt="...">
+                        </div>
+                                           
+                        <div class="card-body p-3 pb-0">
+                            <div class="text-center">
+                                <p class="text-uppercase mb-1">{{i?.title}}</p>
+                                <p class="fw-bolder mb-1">₹{{i?.price}}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center w-100">
+                            <div class="text-center mt-3">
+                                <button class="btn text-uppercase text-light" style="font-size: 12px;border-radius: 20px;border: 1px solid rgba(128, 128, 128, 0.151);" type="button" (click)="addToCart(i)" >ADD TO CART</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="(allproducts | search:searchKey).length === 0" class="text-center text-light w-100">
+                    <p>We couldn't find anything for "<span class="text-secondary">{{ searchKey }}</span>" with your filters. Try to refine your search.</p>
+                    <p class="btn btn-outline-light m-0 mt-5 text-uppercase" style="font-size: 20px;" routerLink="/">Go to the home page</p>
+                </div>
             </div>
         </div>
     </div>

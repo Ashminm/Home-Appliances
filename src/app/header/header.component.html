@@ -87,7 +87,7 @@
       <div class="offcanvas-header">
         <button type="button" class="btn-close btn-close-white border" data-bs-dismiss="offcanvas" style="border-radius: 50%;background-color: rgba(218, 217, 217, 0.863)" aria-label="Close"></button>
         <p style="padding: 0; padding-top: 19px;font-size: 19px;">Welcome <span style="color: rgb(207, 125, 17);">{{username}}</span>!</p>
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><img [src]="profilePicture" routerLink="/prof" style="width: 40px;border-radius: 50%;border: 1px solid #FFF;padding: 4px;" alt=""></h5>
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><img [src]="profilePicture?.profileImage ? profilePicture.profileImage : 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'" routerLink="/prof" style="width: 40px;height: 40px; border-radius: 50%;border: 1px solid #FFF;padding: 4px;object-fit: cover;" alt=""></h5>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -109,11 +109,11 @@
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-list me-3 text-secondary"></i>All Catagory</a>
+            <a class="nav-link text-uppercase" routerLink="/cate"><i class="fa-solid fa-list me-3 text-secondary"></i>All Catagory</a>
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-regular fa-copyright me-3 text-secondary"></i>All brands</a>
+            <a class="nav-link text-uppercase" routerLink="/brands"><i class="fa-regular fa-copyright me-3 text-secondary"></i>All brands</a>
           </li>
           <hr>
           <li class="nav-item">
@@ -125,15 +125,15 @@
           </li>
           <hr>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" routerLink=""><i class="fa-solid fa-headset me-3 text-secondary"></i>contact</a>
+            <a class="nav-link text-uppercase" routerLink="/contact"><i class="fa-solid fa-headset me-3 text-secondary"></i>contact</a>
           </li>
           <hr>
           <li class="nav-item">
             <a class="nav-link text-uppercase" routerLink="/log"><i class="fa-regular fa-user me-3 text-secondary"></i>
-              <span class="text-secondary" *ngIf="username;else elsecase">
+              <span class="text-secondary" *ngIf="username;else elsecasediv">
                 {{username}}
               </span>
-              <ng-template #elsecase class="text-secondary">
+              <ng-template #elsecasediv class="text-secondary">
                 Login
               </ng-template>
             </a>

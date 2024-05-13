@@ -1,12 +1,13 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <section class="h-100">
+  <h4 class="py-5 pb-4 container" routerLink="/"><i class="fa-solid fa-circle-arrow-left"></i></h4>
   <div class="container py-4">
     <div class="row ">
       <div class="col-md-5 col-lg-3">
-        <div class="border shadow p-5">
+        <div class="p-5" style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.068), 0 6px 20px 0 rgba(255, 255, 255, 0.082);">
           <div class=" d-flex justify-content-center flex-column align-items-center ">
             <img [src]="profilePicture"
-                    style="width: 80px; height: 80px; border-radius: 50%;object-fit: cover;" alt="Profile Picture">
+                    style="width: 80px; height: 80px; border-radius: 50%;object-fit: cover; border: 1px solid #c5c5c5;padding: 3px;" alt="Profile Picture">
                 <label for="imageUpload" style="cursor: pointer;">
                     <p class="m-0" style="font-size: 10px;">change photo</p>
                 </label>
@@ -21,13 +22,13 @@
           </div>
             <div class="">
               <p><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
-              <p class="text-danger m-0"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
+              <p class="text-danger m-0" style="cursor: pointer;" (click)="deleteAccount()"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
             </div>
         </div>
       </div>
 
       <div class="col-md-7 col-lg-6 ">
-        <div class="border shadow px-4 py-5 ">
+        <div class="px-4 py-5 " style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.075), 0 6px 20px 0 rgba(255, 255, 255, 0.068);">
           <h5 class="pb-4 text-uppercase">Profile Info</h5>
             <form (ngSubmit)="handleUpdateUser()">
                 <div class="d-flex justify-content-between w-100">
@@ -46,35 +47,21 @@
             </form>
               <!-- <p class="m-0 mt-5 text-uppercase">Last Update: {{lastModifyImg | date }}</p> -->
         </div>
-        <div class="border shadow p-4 mt-4">
+        <div class="p-4 mt-4" style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.062), 0 6px 20px 0 rgba(255, 255, 255, 0.068);">
           <p class="text-uppercase">Your review</p>
+          no review
         </div>
       </div>
-      <div class="col-md-5 col-lg-3 ">
-        <div class="border shadow p-4">
-          <h4>Related product</h4>
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+      <div class="col-md-5 col-lg-2" style="overflow-y: scroll;height: 70vh;box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.096);">
+        <h4 class="text-uppercase pt-2" style="font-size: 18px;">Related product</h4>
+        <div class="w-100 p-2" *ngFor="let i of suggestItem">
+          
+          <div class="card" style="width: 100%;">
+            <img src="{{i.image}}" routerLink="/view/{{i?.id}}" class="card-img-top" height="120px" style="object-fit: cover;" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">{{i?.title}}</h5>
+              <p class="card-text">{{i?.price|currency:'INR'}}</p>
+      
             </div>
           </div>
         </div>
