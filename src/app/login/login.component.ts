@@ -19,6 +19,11 @@ export class LoginComponent {
     password:['',[Validators.required,Validators.pattern('[a-zA-z0-9@!#-_%]*'),Validators.minLength(6),Validators.maxLength(9)]],
     rememberMe: [false, [Validators.requiredTrue]]
   })
+  adminLogForm=this.FormB.group({
+    email:['',[Validators.required,Validators.email]],
+    password:['',[Validators.required,Validators.pattern('[a-zA-z0-9@!#-_%]*'),Validators.minLength(6),Validators.maxLength(9)]],
+    rememberMe: [false, [Validators.requiredTrue]]
+  })
 
   getFormLogData(){
     // console.log(this.logForm.value);
@@ -27,6 +32,7 @@ export class LoginComponent {
         console.log(res); 
         sessionStorage.setItem('existingUser',JSON.stringify(res.existingUser))
         sessionStorage.setItem('token',res.token)
+        sessionStorage.setItem('role',res.data.role)
         this.api.getWishlistCountApi()
         this.api.getCartListCountApi()
         this.toastr.success(`Successfully Login!!`)  
@@ -38,6 +44,23 @@ export class LoginComponent {
       }
     })
     
+  }
+
+  adminLogin() {
+    this.api.adminLoginApi(this.logForm.value).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        sessionStorage.setItem('currentAdmin', JSON.stringify(res.admin));
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('role',res.data.role)
+        this.toastr.success(`Successfully Logged in as Admin!!`);
+        this.route.navigateByUrl('/allpro');
+      },
+      error: (err: any) => {
+        console.log(err.error);
+        this.toastr.error(err.error);
+      }
+    });
   }
 
   copyToClipboard(text:string) {

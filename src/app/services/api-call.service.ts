@@ -33,6 +33,9 @@ export class ApiCallService {
   userLoginApi(data:any){
     return this.http.post(`${this.SERVER_URL}/user-login`,data) 
   }
+  adminLoginApi(data:any){
+    return this.http.post(`${this.SERVER_URL}/admin-login`,data) 
+  }
   getTrendingProducts(){
     return this.http.get(`${this.SERVER_URL}/trending-product`)
   }

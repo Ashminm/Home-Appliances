@@ -9,7 +9,7 @@
       <div class="col-lg-2 col-md-4" *ngFor="let i of categories">
         <div class="text-center">
         
-          <img src="{{ i.image }}" routerLink="/viewcate/{{categories}}"  style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFF; background-color: rgb(126, 126, 126); mix-blend-mode: initial;">
+          <img src="{{ i.image }}" routerLink="/viewcate/{{i.name}}"  style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFF; background-color: rgb(126, 126, 126); mix-blend-mode: initial;">
           <p class="text-uppercase">{{ i.name }}</p>
           </div>
         </div>
