@@ -100,6 +100,18 @@ export class ApiCallService {
     return this.http.delete(`${this.SERVER_URL}/delete-account`,this.appendTokenToHeader()) 
   }
 
+  getAdminProfile(){
+    return this.http.get(`${this.SERVER_URL}/admin-profile`,this.appendTokenToHeader()) 
+  }
+  updateAdminProfile(data:any){
+    return this.http.put(`${this.SERVER_URL}/admin-profile`,data,this.appendTokenToHeader()) 
+  }
+  deteteAdminAccountApi(){
+    return this.http.delete(`${this.SERVER_URL}/delete-admin-account`,this.appendTokenToHeader()) 
+  }
+  getAllUseraApi(){
+    return this.http.get(`${this.SERVER_URL}/all-users`,this.appendTokenToHeader())
+  }
 
   
 

@@ -16,16 +16,27 @@ export class ProfileComponent implements OnInit {
   userData:any={}
   suggestItem:any[]=[]
   // lastModifyImg:any=''
-  constructor(private api:ApiCallService,private toasr:ToastrService,private route:Router){}
+  constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
   ngOnInit() {
     this.getUser()
     this.getTrending()
-   
+   this.getAdmin()
   }
 
   getUser(){
     this.api.getUserProfile().subscribe((res:any)=>{
+      this.userData=res
+      // console.log("profile=",this.userData);
+      if(this.userData.profileImage){
+        this.profilePicture=res.profileImage
+      }
+    })
+  
+  }
+
+  getAdmin(){
+    this.api.getAdminProfile().subscribe((res:any)=>{
       this.userData=res
       // console.log("profile=",this.userData);
       if(this.userData.profileImage){
@@ -50,17 +61,58 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  handleUpdateUser(){     
-    this.api.updateUserProfile(this.userData).subscribe((res:any)=>{
-      this.toasr.success("Profile Updated Successfully!!")
-    },
-    (err:any)=>{
-      this.toasr.error("Updation Faild",err)
-      console.log(err);
+  // handleUpdateUser(){     
+  //   this.api.updateUserProfile(this.userData).subscribe((res:any)=>{
+  //     this.toastr.success("Profile Updated Successfully!!")
+  //   },
+  //   (err:any)=>{
+  //     this.toastr.error("Updation Faild",err)
+  //     console.log(err);
       
+  //   }
+  // )
+  // }
+
+  // handleUpdateAdmin(){     
+  //   this.api.updateAdminProfile(this.userData).subscribe((res:any)=>{
+  //     this.toastr.success("Profile Updated Successfully!!")
+  //   },
+  //   (err:any)=>{
+  //     this.toastr.error("Updation Faild",err)
+  //     console.log(err);
+      
+  //   }
+  // )
+  // }
+
+
+  handleUpdateProfile() {
+    if (sessionStorage.getItem("existingUser")) {
+      this.api.updateUserProfile(this.userData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.toastr.success("Profile Updated Successfully!!");
+        },
+        (err: any) => {
+          console.log(err);
+          this.toastr.error("Updation Failed", err.error);
+        }
+      );
+    } else if (sessionStorage.getItem("existingAdmin")) {
+      this.api.updateAdminProfile(this.userData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.toastr.success("Profile Updated Successfully!!");
+        },
+        (err: any) => {
+          console.log(err);
+          this.toastr.error("Updation Failed", err.error);
+        }
+      );
     }
-  )
   }
+  
+  
   
   deleteAccount(){
     this.api.deteteAccountApi().subscribe({
@@ -71,12 +123,12 @@ export class ProfileComponent implements OnInit {
         this.getUser()
         sessionStorage.clear()
         localStorage.clear()
-        this.toasr.success("Account deleted SuccessFully!!")
+        this.toastr.success("Account deleted SuccessFully!!")
         this.route.navigateByUrl('/')
       },
       error:(err)=>{
         console.log(err);
-        this.toasr.error("Account Deletion Faild!!")
+        this.toastr.error("Account Deletion Faild!!")
       }
     })
   }
@@ -84,12 +136,19 @@ export class ProfileComponent implements OnInit {
   getTrending(){
     this.api.getTrendingProducts().subscribe((res:any)=>{
       this.suggestItem=res
-      console.log("trending",res);
+      // console.log("trending",res);
       
     })
   }
 
-
+  logout() { 
+    sessionStorage.clear();
+    localStorage.clear();
+    // this.wishCount = 0;
+    // this.cartCount = 0;
+    this.getUser()
+    this.route.navigateByUrl('/log')
+}
 
 
 }

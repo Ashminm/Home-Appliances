@@ -13,55 +13,43 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
 
   constructor(private FormB:FormBuilder,private api:ApiCallService,private route:Router,private toastr:ToastrService){}
-
+  
   logForm=this.FormB.group({
     email:['',[Validators.required,Validators.email]],
     password:['',[Validators.required,Validators.pattern('[a-zA-z0-9@!#-_%]*'),Validators.minLength(6),Validators.maxLength(9)]],
     rememberMe: [false, [Validators.requiredTrue]]
   })
-  adminLogForm=this.FormB.group({
-    email:['',[Validators.required,Validators.email]],
-    password:['',[Validators.required,Validators.pattern('[a-zA-z0-9@!#-_%]*'),Validators.minLength(6),Validators.maxLength(9)]],
-    rememberMe: [false, [Validators.requiredTrue]]
-  })
 
-  getFormLogData(){
-    // console.log(this.logForm.value);
+  getFormLogData() {
     this.api.userLoginApi(this.logForm.value).subscribe({
-      next:(res:any)=>{
-        console.log(res); 
-        sessionStorage.setItem('existingUser',JSON.stringify(res.existingUser))
-        sessionStorage.setItem('token',res.token)
-        sessionStorage.setItem('role',res.data.role)
-        this.api.getWishlistCountApi()
-        this.api.getCartListCountApi()
-        this.toastr.success(`Successfully Login!!`)  
-        this.route.navigateByUrl('/')
-      },
-      error:(err:any)=>{
-        console.log(err.error); 
-        this.toastr.error(err)
-      }
-    })
-    
-  }
-
-  adminLogin() {
-    this.api.adminLoginApi(this.logForm.value).subscribe({
       next: (res: any) => {
         console.log(res);
-        sessionStorage.setItem('currentAdmin', JSON.stringify(res.admin));
-        sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('role',res.data.role)
-        this.toastr.success(`Successfully Logged in as Admin!!`);
-        this.route.navigateByUrl('/allpro');
+        if (res.role === 'user') {
+          sessionStorage.removeItem('existingAdmin');
+          sessionStorage.setItem('existingUser', JSON.stringify(res.existingUser));
+          sessionStorage.setItem('token', res.token);
+          this.api.getWishlistCountApi();
+          this.api.getCartListCountApi();
+          this.toastr.success(`Successfully Logged ${res.existingUser.username}!!`);
+          this.route.navigateByUrl('/');
+        } else if (res.role === 'admin') {
+          sessionStorage.removeItem('existingUser');
+          sessionStorage.setItem('existingAdmin', JSON.stringify(res.existingAdmin));
+          sessionStorage.setItem('token', res.token);
+          this.toastr.success(`Successfully Logged in as Admin ${res.existingAdmin.username}!!`);
+          this.route.navigateByUrl('/adash');
+        } else {
+          this.toastr.error(`Unknown role encountered!`);
+        }
       },
       error: (err: any) => {
         console.log(err.error);
-        this.toastr.error(err.error);
+        this.toastr.error(err);
       }
     });
   }
+  
+
 
   copyToClipboard(text:string) {
     navigator.clipboard.writeText(text)

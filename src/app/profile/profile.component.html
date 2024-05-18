@@ -21,7 +21,7 @@
             </div>
           </div>
             <div class="">
-              <p><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
+              <p style="cursor: pointer;" (click)="logout()" ><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
               <p class="text-danger m-0" style="cursor: pointer;" (click)="deleteAccount()"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
             </div>
         </div>
@@ -30,10 +30,10 @@
       <div class="col-md-7 col-lg-6 ">
         <div class="px-4 py-5 " style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.075), 0 6px 20px 0 rgba(255, 255, 255, 0.068);">
           <h5 class="pb-4 text-uppercase">Profile Info</h5>
-            <form (ngSubmit)="handleUpdateUser()">
+            <form (ngSubmit)="handleUpdateProfile()">
                 <div class="d-flex justify-content-between w-100">
                     <div class="w-100">
-                      <p class="m-0" style="font-size: 12px;">Display Name Change</p>
+                      <p class="m-0" style="font-size: 12px;">User Name Change</p>
                       <input type="text" class="form-control bg-transparent text-light" style="width: 95%;border-radius: 20px;" placeholder="Name" name="uname" [(ngModel)]="userData.username" >
                     </div>
                     <div class="w-100">
@@ -44,6 +44,7 @@
                   <div class="text-start">
                     <button class="mt-4 btn btn-light py-2 w-25 text-uppercase" style="border-radius: 20px;">Save</button>
                   </div>
+                  <p routerLink="/adash">dash</p>
             </form>
               <!-- <p class="m-0 mt-5 text-uppercase">Last Update: {{lastModifyImg | date }}</p> -->
         </div>

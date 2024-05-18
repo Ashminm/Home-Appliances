@@ -22,6 +22,8 @@ import { SearchPipe } from './pips/search.pipe';
 import { CategoriesComponent } from './categories/categories.component';
 import { ViewCategoryComponent } from './view-category/view-category.component';
 import { ContactComponent } from './contact/contact.component';
+import { AdmindashComponent } from './admindash/admindash.component';
+import { CalenderComponent } from './calender/calender.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { ContactComponent } from './contact/contact.component';
     SearchPipe,
     CategoriesComponent,
     ViewCategoryComponent,
-    ContactComponent, 
+    ContactComponent,
+    AdmindashComponent,
+    CalenderComponent, 
   ],
   imports: [
     BrowserModule,

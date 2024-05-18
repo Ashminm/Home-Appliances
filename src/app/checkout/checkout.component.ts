@@ -101,6 +101,7 @@ checkForm() {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
             this.api.getClearCart().subscribe((res:any)=>{
               this.api.getCartListCountApi()
+              sessionStorage.setItem('checkoutFormData', JSON.stringify(this.checkOutForm.value));
               this.toster.success("transaction Completed for Checking Out Cart")
               this.checkOutStatus=false
               this.checkOutForm.reset()

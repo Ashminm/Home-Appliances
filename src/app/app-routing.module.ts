@@ -13,6 +13,7 @@ import { authGuard } from './guards/auth.guard';
 import { CategoriesComponent } from './categories/categories.component';
 import { ContactComponent } from './contact/contact.component';
 import { ViewCategoryComponent } from './view-category/view-category.component';
+import { AdmindashComponent } from './admindash/admindash.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path:'cate',component:CategoriesComponent},
   {path:'viewcate/:category',component:ViewCategoryComponent},
   {path:'contact',component:ContactComponent},
+  {path:'adash',component:AdmindashComponent},
   {path:'**',redirectTo:''}
 ];
 

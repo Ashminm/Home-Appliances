@@ -20,18 +20,27 @@ export class HeaderComponent implements OnInit {
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
   ngOnInit() {
-    if(sessionStorage.getItem("existingUser")){
-      const user:any=sessionStorage.getItem("existingUser")
-      this.username=JSON.parse(user).username
-      this.api.wishListCount.subscribe((res:any)=>{
-        this.wishCount=res
-      })
-      this.api.cartListCount.subscribe((res:any)=>{
-        this.cartCount=res
-      })
-      
+    if(sessionStorage.getItem("existingUser") || sessionStorage.getItem("existingAdmin")) {
+      if (sessionStorage.getItem("existingAdmin")) {
+        const admin: any = sessionStorage.getItem("existingAdmin");
+        const adminUsername = JSON.parse(admin).username;
+        this.username = adminUsername;
+      } else if (sessionStorage.getItem("existingUser")) {
+        const user: any = sessionStorage.getItem("existingUser");
+        const userUsername = JSON.parse(user).username;
+        this.username = userUsername;
+      }
+    
+      this.api.wishListCount.subscribe((res:any) => {
+        this.wishCount = res;
+      });
+    
+      this.api.cartListCount.subscribe((res:any) => {
+        this.cartCount = res;
+      });
     }
-
+    
+  
     this.getData()
     this.getWishome()
     this.getProfile()
@@ -180,22 +189,32 @@ export class HeaderComponent implements OnInit {
 // ------------profile------------
 
   getProfile(){
-    this.api.getUserProfile().subscribe((res:any)=>{
-      this.profilePicture=res
-      // console.log(this.profilePicture);
-    })
+    if(sessionStorage.getItem("existingUser")){
+      this.api.getUserProfile().subscribe((res:any)=>{
+        this.profilePicture=res
+        // console.log(this.profilePicture);
+      })
+    } else if(sessionStorage.getItem("existingAdmin")){
+      this.api.getAdminProfile().subscribe((res:any)=>{
+        this.profilePicture=res
+        // console.log(this.profilePicture);
+      })
+    }
+   
   }
 
-  logout() { 
-    this.clearAllCart()
-    this.clearAllwish()
-    sessionStorage.clear();
-    localStorage.clear();
-    this.wishCount = 0;
-    this.cartCount = 0;
-    this.getData()
-    this.route.navigateByUrl('/log')
-}
-
+  clear() { 
+    if(sessionStorage.getItem("existingUser")) {
+      sessionStorage.clear();
+      localStorage.clear();
+      this.clearAllCart()
+      this.clearAllwish()
+      this.getData(); 
+      this.route.navigateByUrl('/log');
+    } else if(sessionStorage.getItem("existingAdmin")) {
+      this.toastr.info("You are an Admin");
+      this.route.navigateByUrl('/prof')
+    }
+  }
 
 }
