@@ -14,6 +14,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ContactComponent } from './contact/contact.component';
 import { ViewCategoryComponent } from './view-category/view-category.component';
 import { AdmindashComponent } from './admindash/admindash.component';
+import { AddproductComponent } from './addproduct/addproduct.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:'viewcate/:category',component:ViewCategoryComponent},
   {path:'contact',component:ContactComponent},
   {path:'adash',component:AdmindashComponent},
+  {path:'addproduct',component:AddproductComponent},
   {path:'**',redirectTo:''}
 ];
 

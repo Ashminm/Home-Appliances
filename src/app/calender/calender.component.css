@@ -1,0 +1,13 @@
+.demo-inline-calendar-card {
+    width: 100%;
+  }
+ ::ng-deep .mat-calendar-body-selected.mat-calendar-body-today{
+    background-color: rgba(235, 79, 18, 0.61);
+  }
+
+ ::ng-deep .mat-calendar-body-cell-content.mat-focus-indicator{
+    color:rgb(255, 255, 255) ;
+  }
+ ::ng-deep .mat-calendar-body-label{
+    color: rgb(255, 255, 255) !important;
+}

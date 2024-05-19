@@ -9,6 +9,7 @@ import { OnInit } from '@angular/core';
 })
 export class AdmindashComponent implements OnInit{
 
+  profilePicture:any
   products:any[]=[]
   allUser:any[]=[]
 constructor(private api:ApiCallService){}
@@ -29,6 +30,11 @@ getUser(){
   this.api.getAllUseraApi().subscribe((res:any)=>{
     this.allUser=res
     // console.log(this.allUser);
+  })
+  this.api.getAdminProfile().subscribe((res:any)=>{
+    this.profilePicture=res
+    console.log(this.profilePicture);
+    
   })
 }
 

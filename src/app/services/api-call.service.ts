@@ -39,6 +39,12 @@ export class ApiCallService {
   getTrendingProducts(){
     return this.http.get(`${this.SERVER_URL}/trending-product`)
   }
+  getrecentProducts(){
+    return this.http.get(`${this.SERVER_URL}/recent-products`)
+  }
+  getLowPriceProducts(){
+    return this.http.get(`${this.SERVER_URL}/low-price-product`)
+  }
 
 
   appendTokenToHeader(){
@@ -111,6 +117,9 @@ export class ApiCallService {
   }
   getAllUseraApi(){
     return this.http.get(`${this.SERVER_URL}/all-users`,this.appendTokenToHeader())
+  }
+  postProductForm(data:any){
+    return this.http.post(`${this.SERVER_URL}/add-product`,data) 
   }
 
   

@@ -16,7 +16,7 @@ import { OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit{
 
-  trendingItems:any[]=[]
+  LowPriceItems:any[]=[]
   checkOutStatus:boolean=false
   total:any=sessionStorage.getItem('totalAmount')
   totalProduct:any=sessionStorage.getItem('totalProduct')
@@ -26,12 +26,12 @@ export class CheckoutComponent implements OnInit{
   constructor(private FormBu:FormBuilder,private toster:ToastrService,private api:ApiCallService,private route:Router){}
 
   ngOnInit(){
-      this.getTrending()
+      this.getLowPrice()
   }
 
-  getTrending(){
-    this.api.getTrendingProducts().subscribe((res:any)=>{
-      this.trendingItems=res
+  getLowPrice(){
+    this.api.getLowPriceProducts().subscribe((res:any)=>{
+      this.LowPriceItems=res
       // console.log("trending",res);
       
     })

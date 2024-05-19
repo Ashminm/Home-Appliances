@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUser()
-    this.getTrending()
+    this.getRecent()
    this.getAdmin()
   }
 
@@ -133,10 +133,10 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  getTrending(){
-    this.api.getTrendingProducts().subscribe((res:any)=>{
+  getRecent(){
+    this.api.getrecentProducts().subscribe((res:any)=>{
       this.suggestItem=res
-      // console.log("trending",res);
+      console.log("Recent",res);
       
     })
   }

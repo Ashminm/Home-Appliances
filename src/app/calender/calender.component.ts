@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./calender.component.css']
 })
 export class CalenderComponent {
-
+  selected:any=new Date()
 }
