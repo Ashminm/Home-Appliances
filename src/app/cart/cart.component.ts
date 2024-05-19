@@ -113,6 +113,9 @@ export class CartComponent implements OnInit {
     this.cartOffer = !this.cartOffer;
   }
 
+  noOffer(){
+    this.couponClick=true
+  }
   getDiscound10(){
     this.couponClick=true
     const discound=this.totalAmount * 0.1

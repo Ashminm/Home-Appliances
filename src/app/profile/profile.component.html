@@ -9,7 +9,7 @@
             <img [src]="profilePicture"
                     style="width: 80px; height: 80px; border-radius: 50%;object-fit: cover; border: 1px solid #c5c5c5;padding: 3px;" alt="Profile Picture">
                 <label for="imageUpload" style="cursor: pointer;">
-                    <p class="m-0" style="font-size: 10px;">change photo</p>
+                    <p class="m-0 p-1" style="font-size: 10px;"><i class="fa-solid fa-cloud-arrow-up pe-1"></i>Upload</p>
                 </label>
                 <input id="imageUpload" type="file" (change)="getFile($event)" accept="image/*" style="display: none;">
             <div style="height: 25vh;">

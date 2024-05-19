@@ -40,10 +40,10 @@
               <p class="px-3 pt-4 m-0 text-secondary">Management</p>
               <hr class="mt-0">
               <ul class="list-group">
-                <li class="list-group-item bg-transparent text-light text-uppercase"style="cursor: pointer;">
+                <li class="list-group-item bg-transparent text-light text-uppercase" style="cursor: pointer;" routerLink="/editproduct">
                   <i class="fa-solid fa-cart-shopping pe-2"></i>products
                 </li>
-                <li class="list-group-item bg-transparent text-light text-uppercase"style="cursor: pointer;" routerLink="/addproduct">
+                <li class="list-group-item bg-transparent text-light text-uppercase" style="cursor: pointer;" routerLink="/addproduct">
                   <i class="fa-solid fa-circle-plus pe-2"></i>Add product
                 </li>
                 <li class="list-group-item bg-transparent text-light text-uppercase d-flex justify-content-between align-items-center">
@@ -64,70 +64,133 @@
         </div>
       </div>
     </nav>
-    <div class="col-12">
-      <hr>
-      <div class="mb-4">
-        <h1>Dashboard</h1>
-        <h6 class="text-uppercase p-3 rounded" style="background-color: rgba(94, 93, 93, 0.534);">Welcome name</h6>
+    <div class="row">
+      <div class="col-lg-2 col-md-3 col-sm-12">
+        
+        <div class="nav flex-column nav-tabs text-center mt-5 border-0" id="v-tabs-tab" role="tablist" aria-orientation="vertical">
+          <p class="text-start text-light" style="font-size: 12px;">Management</p>
+          <a
+            class="nav-link active text-secondary"
+            id="v-tabs-home-tab"
+            data-bs-toggle="tab"
+            href="#v-tabs-home"
+            role="tab"
+            aria-controls="v-tabs-home"
+            aria-selected="true"
+          >Dashboard</a>
+          <a
+            class="nav-link text-secondary"
+            id="v-tabs-profile-tab"
+            data-bs-toggle="tab"
+            href="#v-tabs-profile"
+            role="tab"
+            aria-controls="v-tabs-profile"
+            aria-selected="false"
+          >Add product</a>
+          <a
+            class="nav-link text-secondary"
+            id="v-tabs-messages-tab"
+            data-bs-toggle="tab"
+            href="#v-tabs-messages"
+            role="tab"
+            aria-controls="v-tabs-messages"
+            aria-selected="false"
+          >All product</a>
+        </div>
+        <!-- Tab navs -->
       </div>
-      <div class="row mx-1 justify-content-around">
-        <div class="col-lg-2 col-md-5 col-sm-12 mb-4">
-          <div class="card bg-transparent border">
-            <div class="card-body">
-              <div class="d-flex align-items-center text-hover-success">
-                <div class="avatar w-56 m-2 no-shadow bg-success p-3" style="border-radius: 50%;">
-                  <i class="fa-solid fa-cart-shopping fa-xl bg-transparent"></i>
+      <div class="col-lg-10 col-md-9 col-sm-12">
+        <!-- Tab content -->
+        <div class="tab-content" id="v-tabs-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="v-tabs-home"
+            role="tabpanel"
+            aria-labelledby="v-tabs-home-tab"
+          >
+            <div class="mb-4" style="margin-top: 35px;">
+              <h1>Dashboard</h1>
+              <h6 class="text-uppercase p-3 rounded" style="background-color: rgba(94, 93, 93, 0.534);">Welcome name</h6>
+            </div>
+            <div class="row mx-1 justify-content-between">
+              <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
+                <div class="card bg-transparent border">
+                  <div class="card-body w-100">
+                    <div class="d-flex align-items-center text-hover-success">
+                      <div class="avatar w-56 m-2 no-shadow bg-success p-3" style="border-radius: 50%;">
+                        <i class="fa-solid fa-cart-shopping fa-xl bg-transparent"></i>
+                      </div>
+                      <div class="px-4 flex w-100">
+                        <div>Products</div>
+                        <div class="text-success mt-2">{{products.length}}</div>
+                      </div>
+                      <span>
+                        <i class="fa-solid fa-angles-right fa-lg" routerLink="/allpro"></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div class="px-4 flex w-100">
-                  <div>Products</div>
-                  <div class="text-success mt-2">{{products.length}}</div>
+              </div>
+              <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
+                <div class="card bg-transparent border">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center text-hover-success">
+                      <div class="avatar w-56 m-2 no-shadow bg-danger p-3" style="border-radius: 50%;">
+                        <i class="fa-solid fa-user-group fa-xl bg-transparent"></i>
+                      </div>
+                      <div class="px-4 flex w-100">
+                        <div>Users</div>
+                        <div class="text-success mt-2">{{allUser.length}}</div>
+                      </div>
+                      <span>
+                        <i class="fa-solid fa-angles-right fa-lg"></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <span>
-                  <i class="fa-solid fa-angles-right fa-lg" routerLink="/allpro"></i>
-                </span>
+              </div>
+              <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
+                <div class="card bg-transparent border">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center text-hover-success">
+                      <div class="avatar w-56 m-2 no-shadow bg-warning p-3" style="border-radius: 50%;">
+                        <i class="fa-solid fa-arrow-trend-up fa-xl bg-transparent"></i>
+                      </div>
+                      <div class="px-4 flex w-100">
+                        <div>Order</div>
+                        <div class="text-success mt-2">0</div>
+                      </div>
+                      <span>
+                        <i class="fa-solid fa-angles-right fa-lg"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
+                <app-calender></app-calender>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-2 col-md-5 col-sm-12 mb-4">
-          <div class="card bg-transparent border">
-            <div class="card-body">
-              <div class="d-flex align-items-center text-hover-success">
-                <div class="avatar w-56 m-2 no-shadow bg-danger p-3" style="border-radius: 50%;">
-                  <i class="fa-solid fa-user-group fa-xl bg-transparent"></i>
-                </div>
-                <div class="px-4 flex w-100">
-                  <div>Users</div>
-                  <div class="text-success mt-2">{{allUser.length}}</div>
-                </div>
-                <span>
-                  <i class="fa-solid fa-angles-right fa-lg"></i>
-                </span>
-              </div>
-            </div>
+          <div
+            class="tab-pane fade"
+            id="v-tabs-profile"
+            role="tabpanel"
+            aria-labelledby="v-tabs-profile-tab"
+          >
+            <app-addproduct></app-addproduct>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="v-tabs-messages"
+            role="tabpanel"
+            aria-labelledby="v-tabs-messages-tab"
+          >
+          <app-editproduct></app-editproduct>
           </div>
         </div>
-        <div class="col-lg-2 col-md-5 col-sm-12 mb-4">
-          <div class="card bg-transparent border">
-            <div class="card-body">
-              <div class="d-flex align-items-center text-hover-success">
-                <div class="avatar w-56 m-2 no-shadow bg-warning p-3" style="border-radius: 50%;">
-                  <i class="fa-solid fa-arrow-trend-up fa-xl bg-transparent"></i>
-                </div>
-                <div class="px-4 flex w-100">
-                  <div>Order</div>
-                  <div class="text-success mt-2">0</div>
-                </div>
-                <span>
-                  <i class="fa-solid fa-angles-right fa-lg"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
-          <app-calender></app-calender>
-        </div>
+    
+
       </div>
     </div>
   </div>
