@@ -122,6 +122,10 @@ export class ApiCallService {
     return this.http.post(`${this.SERVER_URL}/add-product`,data) 
   }
 
+  getSpecificProduct(id:any){
+    return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`,this.appendTokenToHeader())
+  }
+
   
 
   getWishlistCountApi(){
