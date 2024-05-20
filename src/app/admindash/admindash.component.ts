@@ -29,11 +29,11 @@ getdata(){
 getUser(){
   this.api.getAllUseraApi().subscribe((res:any)=>{
     this.allUser=res
-    // console.log(this.allUser);
+    console.log(this.allUser);
   })
   this.api.getAdminProfile().subscribe((res:any)=>{
     this.profilePicture=res
-    console.log(this.profilePicture);
+    // console.log(this.profilePicture);
     
   })
 }

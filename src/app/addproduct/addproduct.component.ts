@@ -4,15 +4,21 @@ import { Validators } from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
 // import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-addproduct',
   templateUrl: './addproduct.component.html',
   styleUrls: ['./addproduct.component.css']
 })
-export class AddproductComponent {
+export class AddproductComponent implements OnInit {
 
+  category:any
   constructor(private FormB:FormBuilder,private api:ApiCallService,private toster:ToastrService){}
+
+  ngOnInit(){
+    this.getCategory()
+  }
 
   addProductdata=this.FormB.group({
     id:['',[Validators.required, Validators.pattern('[0-9]*'),Validators.minLength(1)]],
@@ -49,5 +55,20 @@ export class AddproductComponent {
       }
     });
   }
+
+  getCategory() {
+    this.api.getAllProducts().subscribe((res: any) => {
+      const allCategories = res.map((product: any) => product.category);
+      const uniqueCategories = Array.from(new Set(allCategories));
+      
+      this.category = uniqueCategories;
+      // console.log(this.category);
+    });
+  }
+  
+  cancelData(){
+    this.addProductdata.reset()
+  }
+
   
 }
