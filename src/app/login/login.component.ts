@@ -28,6 +28,7 @@ export class LoginComponent {
           sessionStorage.removeItem('existingAdmin');
           sessionStorage.setItem('existingUser', JSON.stringify(res.existingUser));
           sessionStorage.setItem('token', res.token);
+          sessionStorage.setItem('role',res.role);
           this.api.getWishlistCountApi();
           this.api.getCartListCountApi();
           this.toastr.success(`Successfully Logged ${res.existingUser.username}!!`);
@@ -36,6 +37,7 @@ export class LoginComponent {
           sessionStorage.removeItem('existingUser');
           sessionStorage.setItem('existingAdmin', JSON.stringify(res.existingAdmin));
           sessionStorage.setItem('token', res.token);
+          sessionStorage.setItem('role',res.role);
           this.toastr.success(`Successfully Logged in as Admin ${res.existingAdmin.username}!!`);
           this.route.navigateByUrl('/adash');
         } else {

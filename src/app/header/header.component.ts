@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   wishItem:any[]=[]
   cartCount:any=0;
   cartItem:any[]=[]
+  show:boolean= false
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
   ngOnInit() {
@@ -33,24 +34,35 @@ export class HeaderComponent implements OnInit {
     
       this.api.wishListCount.subscribe((res:any) => {
         this.wishCount = res;
+        this.getData()
       });
     
       this.api.cartListCount.subscribe((res:any) => {
         this.cartCount = res;
+        this.getCarthome()
       });
     }
     
-  
     this.getData()
-    this.getWishome()
+    this.getCarthome()
     this.getProfile()
+    this.showAdmi()
+  }
 
+  showAdmi(){
+    const existingAdmin =sessionStorage.getItem("existingAdmin");
+    const role= sessionStorage.getItem("role")
+    if(existingAdmin && role ==="admin"){
+      this.show=true
+    }else{
+      this.show=false
+    }
   }
   
   getData(){
     this.api.getHomeWishListApi().subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);
         this.wishItem=res
       },
       error:(err:any)=>{
@@ -63,7 +75,7 @@ export class HeaderComponent implements OnInit {
   deleteItem(id:any){
     this.api.deleteWishItem(id).subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);
         this.api.getWishlistCountApi()
         sessionStorage.removeItem('totalAmount');
         this.toastr.success("Item Remove..!")
@@ -87,7 +99,7 @@ export class HeaderComponent implements OnInit {
         next:(res:any)=>{
           console.log(res);
           this.api.getCartListCountApi()
-          this.getWishome()
+          this.getCarthome()
           this.toastr.success("Item Added to Cart")
         },
         error:(err)=>[
@@ -100,10 +112,9 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  getWishome(){
+  getCarthome(){
     this.api.getHomeCartListApi().subscribe({
       next:(res:any)=>{
-        // console.log(res);
         this.cartItem=res
       },
       error:(err:any)=>{
@@ -115,10 +126,10 @@ export class HeaderComponent implements OnInit {
   deleteCartItem(id:any){
     this.api.deleteCartItem(id).subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);
         this.api.getCartListCountApi()
         this.toastr.success("Item Remove..!")
-        this.getWishome()
+        this.getCarthome()
       },
       error:(err:any)=>{
         console.log(err); 
@@ -130,7 +141,7 @@ export class HeaderComponent implements OnInit {
   getIncrese(id:any){
     this.api.getQuaIncreaseApi(id).subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);
         this.getData()
       },
       error:(err:any)=>{
@@ -143,7 +154,7 @@ export class HeaderComponent implements OnInit {
   getdecrese(id:any){
     this.api.getQuadecreaseApi(id).subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);;
         this.getData()
         this.api.getCartListCountApi()
       },
@@ -157,7 +168,7 @@ export class HeaderComponent implements OnInit {
   clearAllCart(){
     this.api.getClearCart().subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);
         console.log("Clear all cart items");  
         this.api.getCartListCountApi()
         this.getData()
@@ -174,7 +185,7 @@ export class HeaderComponent implements OnInit {
   clearAllwish(){
     this.api.getClearWish().subscribe({
       next:(res:any)=>{
-        console.log(res);
+        console.warn(res);
         console.log("clear all wishlist items");    
         this.api.getWishlistCountApi()
         this.getData()

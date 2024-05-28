@@ -125,8 +125,17 @@ export class ApiCallService {
   getSpecificProduct(id:any){
     return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`,this.appendTokenToHeader())
   }
-
   
+  deteteProdectAdmiApi(id:any){
+  return this.http.delete(`${this.SERVER_URL}/product-delete/${id}`,this.appendTokenToHeader()) 
+  }
+
+  deteteUserAccountApi(id:any){
+  return this.http.delete(`${this.SERVER_URL}/delete-user/${id}`,this.appendTokenToHeader()) 
+  }
+
+
+
 
   getWishlistCountApi(){
     return this.http.get(`${this.SERVER_URL}/get-wish`,this.appendTokenToHeader()).subscribe((res:any)=>{

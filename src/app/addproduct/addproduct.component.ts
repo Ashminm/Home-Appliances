@@ -14,6 +14,7 @@ import { OnInit } from '@angular/core';
 export class AddproductComponent implements OnInit {
 
   category:any
+ 
   constructor(private FormB:FormBuilder,private api:ApiCallService,private toster:ToastrService){}
 
   ngOnInit(){
@@ -69,6 +70,7 @@ export class AddproductComponent implements OnInit {
   cancelData(){
     this.addProductdata.reset()
   }
+
 
   
 }

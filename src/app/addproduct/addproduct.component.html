@@ -1,70 +1,61 @@
-
-<section class="d-flex justify-content-center align-items-center " style="height: 90vh;background-color: rgba(231, 231, 227, 0);">
-    <div class="bg-black shadow pb-3 rounded" style="width: 30rem;">
-        <form class="w-100 mt-1 p-4 pb-0" autocomplete="off" [formGroup]="addProductdata"  (ngSubmit)="formProductData()" >
-            <div class="d-flex align-items-center justify-content-around">
-                <span routerLink="/adash" title="Back to Admin Dashboard"><i class="fa-solid fa-circle-chevron-left fa-lg"></i></span>
-                <h4 class="text-uppercase mx-2 m-0">Add HomeAppliance</h4>
-                <span (click)="cancelData()" class="d-flex justify-content-end" title="Cancel" ><i class="fa-solid fa-circle-xmark fa-lg text-danger"></i></span>
+<section style="min-height: calc(100vh - 56px);">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between pt-5" >
+            <div class="d-flex align-items-center">
+                <span class="border px-3 py-2"><i class="fa-solid fa-arrow-left fa-lg"></i></span>
+            <h3 class="m-0 ps-4">New products</h3>
             </div>
-            <hr> 
-            <div class="w-100 mb-3 ">
-                <input type="text" placeholder="Title" formControlName="title" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('title')?.invalid && addProductdata.get('title')?.touched " >*Invalid Title</div>
-
+            <div class="">
+                <button class="btn btn-outline-light" (click)="cancelData()">Clear All</button>
             </div>
-            <div class="d-flex justify-content-between">
-                <div class="w-100 mb-3 ">
-                    <input type="number" placeholder="Id" formControlName="id" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('id')?.invalid && addProductdata.get('id')?.touched "  >*Invalid Id</div>
+        </div>
+        <hr>
+        <form autocomplete="off" [formGroup]="addProductdata"  (ngSubmit)="formProductData()" >
+            <div class="row" >
+                <div class="col-lg-6" style="border-radius: 12px;background-color: rgba(128, 128, 128, 0.336);">
+                    <div class="m-4 mx-3 p-4" style="border-radius: 12px;">
+                        <div class="mb-5">
+                            <h5 class="">Description</h5>
+                            <div class="border p-3" style="border-radius: 12px;">
+                                <div class="mb-3">
+                                    <label for="">Product Name</label>
+                                    <input type="text" placeholder="Title" formControlName="title" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                    <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('title')?.invalid && addProductdata.get('title')?.touched " >*Invalid Title</div>
+                                </div>
+                                <div class="">
+                                    <label for="">Bussines Description</label>   
+                                    <!-- <input type="text" placeholder="description" formControlName="description" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  > -->
+                                    <textarea type="text" placeholder="description" formControlName="description" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  ></textarea>
+                                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('description')?.invalid && addProductdata.get('description')?.touched " >*Invalid description</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="">Category</h5>
+                            <div class="border p-3" style="border-radius: 12px;">
+                                <div class="mb-3">
+                                    <label for="">Product category</label>
+                                    <select class="form-select " formControlName="category" aria-label="Default select example" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                        <option class="text-secondary" selected disabled value="">--Category--</option>
+                                        <option  *ngFor="let i of category" [value]="i">{{i}}</option>
+                                        
+                                      </select>
+                                    <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('title')?.invalid && addProductdata.get('title')?.touched " >*Invalid Title</div>
+                                </div>
+                                <div class="">
+                                    <label for="">Add Category</label>   
+                                    <input type="text" placeholder="add" formControlName="title" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('description')?.invalid && addProductdata.get('description')?.touched " >*Invalid description</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-100 mb-3 ">
-                    <!-- <input type="text" placeholder="Category" formControlName="category" class="form-control p-3" style="background-color: black;color: #FFF;"  > -->
-                    <select class="form-select  text-light m-0 py-3" formControlName="category" aria-label="Default select example" style="background-color: black;color: #FFF;" >
-                        <option class="text-secondary" selected disabled value="">Category</option>
-                        <option  *ngFor="let i of category" [value]="i">{{i}}</option>
-                      </select>   
-                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('category')?.invalid && addProductdata.get('category')?.touched " >*Invalid category</div>
+                <div class="col-lg-5">
+                   <div class="m-4" style="background-color: rgba(128, 128, 128, 0.336);">
+    n
+                   </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div class="w-100 mb-3 ">
-                    <input type="text" placeholder="Tag(colour)" formControlName="tag" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('tag')?.invalid && addProductdata.get('tag')?.touched " >*Invalid Tag</div>
-                </div>
-                <div class="w-100 mb-3 ">
-                    <input type="number" placeholder="Rating" formControlName="rating" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;"  style="font-size: 12px;" *ngIf="addProductdata.get('rating')?.invalid && addProductdata.get('rating')?.touched ">*Invalid Rating</div>
-                </div>
-                <div class="w-100 mb-3 ">
-                    <input type="number" placeholder="Price" formControlName="price" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;"  style="font-size: 12px;" *ngIf="addProductdata.get('price')?.invalid && addProductdata.get('price')?.touched ">*Invalid price</div>
-                </div>
-            </div>
-            <div class="w-100 mb-3 ">
-                <input type="text" placeholder="description" formControlName="description" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('description')?.invalid && addProductdata.get('description')?.touched " >*Invalid description</div>
-            </div>
-            <div class="w-100 mb-3 ">
-                <input type="url" placeholder="Image Link 1" formControlName="image" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('image')?.invalid && addProductdata.get('image')?.touched " >*Invalid Link 1</div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div class="w-100 mb-3 ">
-                    <input type="url" placeholder="Image Link 1" formControlName="photos1" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('photos1')?.invalid && addProductdata.get('photos1')?.touched " >*Invalid Link 1</div>
-                </div>
-                <div class="w-100 mb-3 ">
-                    <input type="url" placeholder="Image Link 2" formControlName="photos2" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('photos2')?.invalid && addProductdata.get('photos2')?.touched " >*Invalid Link 2</div>
-                </div>
-                <div class="w-100 mb-3 ">
-                    <input type="url" placeholder="Image Link 3" formControlName="photos3" class="form-control p-3" style="background-color: black;color: #FFF;"  >
-                    <div class="text-danger" style="font-size: 12px;"  style="font-size: 12px;" *ngIf="addProductdata.get('photos3')?.invalid && addProductdata.get('photos3')?.touched ">*Invalid Link 3</div>
-                </div>
-            </div>
-            <div class="mt-3 w-100">
-                <button type="submit" class="btn btn-light w-100 p-3 text-uppercase" [disabled]="addProductdata.invalid">Add Product</button>
             </div>
         </form>
     </div>

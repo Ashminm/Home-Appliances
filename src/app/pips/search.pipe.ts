@@ -13,7 +13,11 @@ export class SearchPipe implements PipeTransform {
       
     value.forEach((item:any)=>{
       
-      if(item.title.trim().toLowerCase().includes(searchKey.trim().toLowerCase()) || item.price.toString().toLowerCase().includes(searchKey.trim().toLowerCase())){
+      if((item.username && item.username.trim().toLowerCase().includes(searchKey)) ||
+      (item.email && item.email.trim().toLowerCase().includes(searchKey)) ||
+      (item.title && item.title.trim().toLowerCase().includes(searchKey)) ||
+      (item.price && item.price.toString().toLowerCase().includes(searchKey))
+      ){
         result.push(item)
       }
       

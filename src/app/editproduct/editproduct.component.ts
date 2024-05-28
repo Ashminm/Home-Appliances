@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-editproduct',
@@ -14,8 +16,8 @@ export class EditproductComponent implements OnInit {
   currentPage: number = 1;
   productsPerPage: number = 12;
   totalPage: number = 0;
-
-  constructor(private api: ApiCallService) {}
+  searchKey:any=""
+  constructor(private api: ApiCallService,private tostr:ToastrService) {}
 
   ngOnInit() {
     this.getAllProducts();
@@ -65,7 +67,19 @@ export class EditproductComponent implements OnInit {
     });
   }
 
-
+deleteProductItem(id:any){
+  this.api.deteteProdectAdmiApi(id).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      this.getAllProducts()
+      this.tostr.success("Product Deleted!!")
+    },
+    error:(err)=>{
+      console.log(err);
+      this.tostr.error("Product Deletion faild!!")
+    }
+  })
+}
 
 
 }

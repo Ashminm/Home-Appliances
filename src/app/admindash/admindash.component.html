@@ -1,4 +1,4 @@
-<section class="h-100">
+<section style="min-height: calc(100vh - 56px);">
   <div class="container-fluid py-4 h-100">
     <nav class="row">
       <div class="col-12 d-flex justify-content-between align-items-center">
@@ -58,9 +58,27 @@
             </div>
           </div>
         </div>
-        <div class="d-flex w-100">
-          <input type="search" placeholder="search" class="form-control bg-transparent text-light mx-4 w-100 py-2">
-          <button class="btn btn-outline-light"><i class="fa-solid fa-arrow-right-from-bracket btn-outline-light bg-transparent"></i></button>
+        <div class="d-flex w-100 justify-content-end">
+          <button class="btn btn-outline-light" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"   ><i class="fa-solid fa-arrow-right-from-bracket btn-outline-light bg-transparent" ></i></button>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+              <div class="modal-content border-0 shadow-lg" >
+                <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+                  <div class="bg-transparent">
+                    <span class="bg-transparent"><i class="fa-solid fa-right-from-bracket text-danger p-4"  style="border-radius: 50%;background-color: rgba(243, 2, 2, 0.301);"></i></span>
+                  </div>
+                  <div class="mt-4 bg-transparent">
+                    <h4 class="bg-transparent">Logout Account?</h4>
+                    <p class="m-0 bg-transparent" style="font-size: 12px;">Are you sure you would like to log out of your account?</p>
+                  </div>
+
+                  <button class="text-uppercase btn btn-outline-danger w-100 mt-3" (click)="logout()">Log out</button>
+                </div> 
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </nav>
@@ -110,7 +128,10 @@
           >
             <div class="mb-4" style="margin-top: 35px;">
               <h1>Dashboard</h1>
-              <h6 class="text-uppercase p-3 rounded" style="background-color: rgba(94, 93, 93, 0.534);">Welcome name</h6>
+              <div class="p-3 pb-2 rounded d-flex justify-content-between align-items-center" style="background-color: rgba(94, 93, 93, 0.534);">
+                <h6 class="text-uppercase  bg-transparent" >Welcome <span class="text-warning bg-transparent">{{profilePicture.username}}</span></h6>
+              <p class="m-0 bg-transparent">{{today | date:'h:mm a'}}</p>
+              </div>
             </div>
             <div class="row mx-1 justify-content-between">
               <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
@@ -125,7 +146,7 @@
                         <div class="text-success mt-2">{{products.length}}</div>
                       </div>
                       <span>
-                        <i class="fa-solid fa-angles-right fa-lg" routerLink="/allpro"></i>
+                        <i class="fa-solid fa-angles-right fa-lg" routerLink="/editproduct"></i>
                       </span>
                     </div>
                   </div>
@@ -142,12 +163,51 @@
                         <div>Users</div>
                         <div class="text-success mt-2">{{allUser.length}}</div>
                       </div>
-                      <span>
+                      <span type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"  >
                         <i class="fa-solid fa-angles-right fa-lg"></i>
                       </span>
                     </div>
                   </div>
                 </div>
+                      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal">
+                          <div class="modal-content shadow-lg" style="border: 1px solid rgba(128, 128, 128, 0.671);">
+                            <div class="d-flex justify-content-between p-3" style="background-color: rgba(0, 0, 0, 0.89);">
+                              <h3 class="m-0 bg-transparent text-uppercase">Users</h3>
+                              <button  type="button" class="btn" data-bs-dismiss="modal"><i class="fa-brands fa-x-twitter fa-lg bg-transparent"></i></button>
+                            </div>
+                            <hr class="m-0">
+                            <div class="p-3 d-flex align-items-center">
+                              <span><i class="fa-solid fa-magnifying-glass fa-lg text-secondary"></i></span>
+                              <input type="search" class=" w-100 ps-2 bg-transparent border-0 text-light" style="outline: none;" placeholder="Search username, email" [(ngModel)]="searchKey" >
+                            </div>
+                            <hr class="m-0">
+                            <div class="text-center py-3 pt-0 px-2" style="background-color: rgba(0, 0, 0, 0.89);height: 310px;overflow-y: scroll;">
+                              <div class="bg-transparent"  *ngFor="let i of allUser | search:searchKey">
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center mb-3 bg-transparent px-3"        > 
+                                  <div class="d-flex align-items-center bg-transparent">
+                                    <div class="pe-3 bg-transparent">
+                                      <img [src]="i?.profileImage ? i.profileImage : 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'"  class="bg-transparent" style="width: 45px;height: 45px;border-radius: 50%;object-fit: cover;" alt="Prof">
+                                    </div>
+                                    <div class="text-start bg-transparent">
+                                      <h6 class="m-0 bg-transparent">{{i?.username}}</h6>
+                                      <p class="m-0 bg-transparent text-secondary">{{i?.email}}</p>
+                                    </div>
+                                  </div>
+                                  <div class="bg-transparent">
+                                   <button class="btn btn-outline-danger" (click)="deleteUser(i?._id)">Delete</button>
+                                  </div>
+                                </div>
+                               
+                              </div>
+                              <div ngClass="bg-transparent"  *ngIf="(allUser | search:searchKey).length === 0" class="text-center text-light w-100">
+                                <p class="m-0 pt-5 bg-transparent">"<span class="text-secondary">{{ searchKey }}</span>"not fount. please try different name or email</p>
+                            </div>
+                            </div> 
+                          </div>
+                        </div>
+                      </div>
               </div>
               <div class="col-lg-3 col-md-5 col-sm-12 mb-4">
                 <div class="card bg-transparent border">
@@ -186,7 +246,7 @@
             role="tabpanel"
             aria-labelledby="v-tabs-messages-tab"
           >
-          <app-editproduct></app-editproduct>
+          <app-editproduct ></app-editproduct>
           </div>
         </div>
     

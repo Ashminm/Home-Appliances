@@ -1,5 +1,5 @@
 <!-- <app-header></app-header> -->
-<section class="h-100">
+<section style="min-height: calc(100vh - 56px);">
   <h4 class="py-5 pb-4 container" routerLink="/"><i class="fa-solid fa-circle-arrow-left"></i></h4>
   <div class="container py-4">
     <div class="row ">
@@ -20,9 +20,45 @@
               </div>
             </div>
           </div>
-            <div class="">
-              <p style="cursor: pointer;" (click)="logout()" ><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
-              <p class="text-danger m-0" style="cursor: pointer;" (click)="deleteAccount()"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
+            <div >
+              <p style="cursor: pointer;"  type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
+
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                      <div class="modal-content border-0 shadow-lg" >
+                        <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+                          <div class="bg-transparent">
+                            <span class="bg-transparent"><i class="fa-solid fa-triangle-exclamation text-warning p-4"  style="border-radius: 50%;background-color: rgba(243, 207, 2, 0.301);"></i></span>
+                          </div>
+                          <div class="mt-4 bg-transparent">
+                            <h4 class="bg-transparent">Logout Account?</h4>
+                            <p class="m-0 bg-transparent" style="font-size: 12px;">Are you sure you would like to log out of your account?</p>
+                          </div>
+                    
+                          <button class="text-uppercase btn btn-outline-warning w-100 mt-3" (click)="logout()">Log out</button>
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
+              <p class="text-danger m-0" style="cursor: pointer;"type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
+
+          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+              <div class="modal-content border-0 shadow-lg" >
+                <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+                  <div class="bg-transparent">
+                    <span class="bg-transparent"><i class="fa-solid fa-trash-can text-danger p-4"  style="border-radius: 50%;background-color: rgba(243, 2, 2, 0.301);"></i></span>
+                  </div>
+                  <div class="mt-4 bg-transparent">
+                    <h4 class="bg-transparent">Delete Account?</h4>
+                    <p class="m-0 bg-transparent" style="font-size: 12px;">Are you sure you would like to <strong class="bg-transparent text-danger">Delete</strong> of your account?</p>
+                  </div>
+
+                  <button class="text-uppercase btn btn-outline-danger w-100 mt-3" (click)="deleteAccount()">Delete</button>
+                </div> 
+              </div>
+            </div>
+          </div>
             </div>
         </div>
       </div>
@@ -44,16 +80,14 @@
                   <div class="text-start">
                     <button class="mt-4 btn btn-light py-2 w-25 text-uppercase" style="border-radius: 20px;">Save</button>
                   </div>
-                  <p routerLink="/adash">dash</p>
             </form>
-              <!-- <p class="m-0 mt-5 text-uppercase">Last Update: {{lastModifyImg | date }}</p> -->
         </div>
         <div class="p-4 mt-4" style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.062), 0 6px 20px 0 rgba(255, 255, 255, 0.068);">
           <p class="text-uppercase">Your review</p>
           no review
         </div>
       </div>
-      <div class="col-md-5 col-lg-2" style="overflow-y: scroll;height: 70vh;box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.096);">
+      <div class="col-md-5 col-lg-2 py-3" style="overflow-y: scroll;height: 70vh;box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.096);">
         <h4 class="text-uppercase pt-2" style="font-size: 18px;">Recent added</h4>
         <div class="w-100 p-2" *ngFor="let i of suggestItem">
           

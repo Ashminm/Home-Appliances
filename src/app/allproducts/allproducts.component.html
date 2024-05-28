@@ -3,8 +3,9 @@
 <hr class="container" style="width: 20%;">
 <div class="container mt-5 d-flex justify-content-between">
     
-    <div class="w-100 d-flex justify-content-center">
-        <input type="search" class="form-control bg-transparent text-light  " style="width: 75%;" placeholder="Search for all appliances"  [(ngModel)]="searchKey" > 
+    <div class="w-100 d-flex justify-content-center align-items-center ">
+        <span><i class="fa-solid fa-magnifying-glass text-secondary"></i></span>
+        <input type="search" class="bg-transparent text-light ps-2 py-2 " style="width: 75%;outline: none;border:none;border-bottom: 1px solid #FFF;" placeholder="Search for all appliances"  [(ngModel)]="searchKey" > 
     </div>
     <div>
         <div class="dropdown me-3">
@@ -12,8 +13,8 @@
              Filter
             </p>
             <ul class="dropdown-menu bg-transparent shadow" style="border: 1px solid rgba(128, 128, 128, 0.068);" aria-labelledby="drop1">
-                <li><a class="dropdown-item text-light" (click)="lowToHight()" >Price: Low to High</a></li>
-                <li><a class="dropdown-item text-light" (click)="highToLow()" >Price: High to Low</a></li>
+                <li><a class="dropdown-item text-secondary" (click)="lowToHight()" >Price: Low to High</a></li>
+                <li><a class="dropdown-item text-secondary" (click)="highToLow()" >Price: High to Low</a></li>
             </ul>
           </div>
     </div>
@@ -33,15 +34,6 @@
                         <div class="mx-2"><a (click)="filterCate('electronics')">ELECTRONICS</a></div>
                         <div class="mx-2"><a (click)="filterCate('laundry')">LAUNDRY</a></div>
                         <div class="mx-2"><a (click)="filterCate('bathroom')">BATHROOM</a></div>
-                        <!-- <mat-tab-group>
-                            <mat-tab label="ALL" (click)="filterCate('')"></mat-tab>
-                            <mat-tab label="HOME" (click)="filterCate('home')"></mat-tab>
-                            <mat-tab label="KITCHEN" (click)="filterCate('kitchen')"></mat-tab>
-                            <mat-tab label="BEDROOM" (click)="filterCate('bedroom')"></mat-tab>
-                            <mat-tab label="ELECTRONICS" (click)="filterCate('electronics')"></mat-tab>
-                            <mat-tab label="LAUNDRY" (click)="filterCate('laundry')"></mat-tab>
-                            <mat-tab label="BATHROOM" (click)="filterCate('bathroom')"></mat-tab>
-                          </mat-tab-group> -->
                     </div>
                 </div>
             </div>

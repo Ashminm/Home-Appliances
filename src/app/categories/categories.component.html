@@ -1,14 +1,13 @@
-<!-- categories.component.html -->
-<section class="h-100">
+<app-header></app-header>
+<section style="min-height: calc(100vh - 56px);">
   <div class="container">
     <div class="d-flex justify-content-center py-5">
       <h1 class="text-uppercase">All Categories</h1>
     </div>
     <div class="row">
-      <!-- Iterate over each category -->
+
       <div class="col-lg-2 col-md-4" *ngFor="let i of categories">
         <div class="text-center">
-        
           <img src="{{ i.image }}" routerLink="/viewcate/{{i.name}}"  style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFF; background-color: rgb(126, 126, 126); mix-blend-mode: initial;">
           <p class="text-uppercase">{{ i.name }}</p>
           </div>
