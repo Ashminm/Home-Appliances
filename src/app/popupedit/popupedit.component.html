@@ -1,0 +1,132 @@
+<!-- Popup Edit Button -->
+<button type="button" class="btn btn-outline-light flex-fill w-100" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="getData()">
+    <i class="fa-solid fa-pen-to-square pe-1 bg-transparent btn-outline-light"></i>Edit
+  </button>
+  
+  <!-- Modal Section -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg">
+        <form autocomplete="off" (ngSubmit)="editProductData(editForm)" #editForm="ngForm">
+
+          <section style="min-height: calc(80vh - 56px);">
+            <div class="container">
+              <div class="d-flex align-items-center justify-content-between pt-5 mb-3">
+                <div class="d-flex align-items-center">
+                  <span class="px-3 py-2 btn btn-outline-light d-flex align-items-center justify-content-center" data-bs-dismiss="modal" style="border-radius: 50%;width: 40px;height: 40px;">
+                    <i class="fa-solid fa-arrow-left bg-transparent btn-outline-light"></i>
+                  </span>
+                  <h3 class="m-0 ps-3">Edit products</h3>
+                </div>
+                <div>
+                  <span class="btn btn-outline-light d-flex align-items-center justify-content-center" style="border-radius: 50%;width: 40px;height: 40px;">
+                    <i class="fa-solid fa-trash-can bg-transparent btn-outline-light"></i>
+                  </span>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-lg-6" style="border-radius: 12px 0 0 12px;background-color: rgba(128, 128, 128, 0.336);">
+                  <div class="m-4 mx-3 p-4 me-2" style="border-radius: 12px;">
+                    <div class="mb-5">
+                      <h5 class="">Description</h5>
+                      <div class="border p-3" style="border-radius: 12px;">
+                        <div class="mb-3">
+                          <label for="">Product Name</label>
+                          <input type="text" placeholder="Product Title" [(ngModel)]="editData.title" name="title" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                        <div class="">
+                          <label for="">Business Description</label>
+                          <textarea type="text" rows="5" placeholder="Add Description" [(ngModel)]="editData.description" name="description" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-5">
+                      <h5 class="">Category</h5>
+                      <div class="border p-3" style="border-radius: 12px;">
+                        <div class="mb-3">
+                          <label for="">Product category</label>
+                          <select [(ngModel)]="editData.category" name="category" class="form-select" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                            <option class="text-secondary" selected disabled value="">--Category--</option>
+                            <option *ngFor="let i of category" [value]="i">{{i}}</option>
+                          </select>
+                        </div>
+                        <div class="">
+                          <p class="text-center m-0">Or</p>
+                          <label for="">Add New Category</label>
+                          <input type="text" placeholder="Add Category" [(ngModel)]="editData.addcategory" name="addcategory" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6" style="border-radius: 0 12px 12px 0;background-color: rgba(128, 128, 128, 0.336);">
+                  <div class="m-4 mx-3 p-4 ms-2" style="border-radius: 12px;">
+                    <div class="mb-5">
+                      <h5 class="">Product Image</h5>
+                      <div class="border p-3" style="border-radius: 12px;">
+                        <div class="mb-3">
+                          <label for="">Product Image</label>
+                          <input type="url" placeholder="Product main image Link" [(ngModel)]="editData.image" name="image" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                        <div class="">
+                          <label for="">Product Angle Image</label>
+                          <div class="d-flex justify-content-between row">
+                            <div class="col-sm-12 mb-2">
+                              <input type="url" placeholder="Image Link 1" [(ngModel)]="editData.photos[0]" name="photos1" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                            </div>
+                            <div class="col-sm-12 mb-2">
+                              <input type="url" placeholder="Image Link 2" [(ngModel)]="editData.photos[1]" name="photos2" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                            </div>
+                            <div class="col-sm-12">
+                              <input type="url" placeholder="Image Link 3" [(ngModel)]="editData.photos[2]" name="photos3" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h5 class="">General</h5>
+                      <div class="border p-3" style="border-radius: 12px;">
+                        <div class="mb-3">
+                          <label for="">Product Id</label>
+                          <input type="number" placeholder="Product Id" [(ngModel)]="editData.id" name="id" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                        <div class="mb-3">
+                          <label for="">Product Price</label>
+                          <input type="number" placeholder="Product Price" [(ngModel)]="editData.price" name="price" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                        <div class="mb-3">
+                          <label for="">Product Colour</label>
+                          <input type="text" placeholder="Product Tag(colour)" [(ngModel)]="editData.tag" name="tag" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                        <div class="">
+                          <label for="">Product Rating</label>
+                          <input type="number" placeholder="Rating" [(ngModel)]="editData.rating" name="rating" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                          <button type="submit" class="form-control w-100 p-3 py-2 my-2 btn btn-outline-light bg-light text-dark" style="border-radius: 10px;">
+                            <i class="fa-solid fa-cart-plus text-dark" style="background-color: transparent;"></i> Update Product
+                          </button>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                          <button type="button" class="form-control w-100 p-3 py-2 my-2 btn btn-outline-light" style="border-radius: 10px;" data-bs-dismiss="modal">
+                            Discard
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div>
+    </div>
+  </div>
+  

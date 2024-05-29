@@ -1,36 +1,36 @@
 <section style="min-height: calc(100vh - 56px);">
     <div class="container">
-        <div class="d-flex align-items-center justify-content-between pt-5" >
+        <div class="d-flex align-items-center justify-content-between pt-5 mb-3" >
             <div class="d-flex align-items-center">
-                <span class="border px-3 py-2"><i class="fa-solid fa-arrow-left fa-lg"></i></span>
-            <h3 class="m-0 ps-4">New products</h3>
+                <span class="px-3 py-2 btn btn-outline-light d-flex align-items-center justify-content-center" style="border-radius: 50%;width: 40px;height: 40px;" routerLink="/adash"><i class="fa-solid fa-arrow-left  bg-transparant btn-outline-light"></i></span>
+            <h3 class="m-0 ps-3">New products</h3>
             </div>
-            <div class="">
-                <button class="btn btn-outline-light" (click)="cancelData()">Clear All</button>
+            <div >
+                <span class="btn btn-outline-light d-flex align-items-center justify-content-center" style="border-radius: 50%;width: 40px;height: 40px;" (click)="cancelData()"><i class="fa-solid fa-trash-can bg-transparant btn-outline-light"></i></span>
             </div>
         </div>
-        <hr>
-        <form autocomplete="off" [formGroup]="addProductdata"  (ngSubmit)="formProductData()" >
-            <div class="row" >
-                <div class="col-lg-6" style="border-radius: 12px;background-color: rgba(128, 128, 128, 0.336);">
-                    <div class="m-4 mx-3 p-4" style="border-radius: 12px;">
+
+        <form autocomplete="off" [formGroup]="addProductdata"  (ngSubmit)="formProductData()">
+            <div class="row">
+                <div class="col-lg-6" style="border-radius: 12px 0 0 12px;background-color: rgba(128, 128, 128, 0.336);">
+                    <div class="m-4 mx-3 p-4 me-2" style="border-radius: 12px;">
                         <div class="mb-5">
                             <h5 class="">Description</h5>
                             <div class="border p-3" style="border-radius: 12px;">
                                 <div class="mb-3">
                                     <label for="">Product Name</label>
-                                    <input type="text" placeholder="Title" formControlName="title" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                    <input type="text" placeholder="Product Title" formControlName="title" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
                                     <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('title')?.invalid && addProductdata.get('title')?.touched " >*Invalid Title</div>
                                 </div>
                                 <div class="">
                                     <label for="">Bussines Description</label>   
                                     <!-- <input type="text" placeholder="description" formControlName="description" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  > -->
-                                    <textarea type="text" placeholder="description" formControlName="description" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  ></textarea>
+                                    <textarea type="text" rows="5" placeholder="Add Description" formControlName="description" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  ></textarea>
                                     <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('description')?.invalid && addProductdata.get('description')?.touched " >*Invalid description</div>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="mb-5">
                             <h5 class="">Category</h5>
                             <div class="border p-3" style="border-radius: 12px;">
                                 <div class="mb-3">
@@ -40,21 +40,84 @@
                                         <option  *ngFor="let i of category" [value]="i">{{i}}</option>
                                         
                                       </select>
-                                    <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('title')?.invalid && addProductdata.get('title')?.touched " >*Invalid Title</div>
+                                    <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('category')?.invalid && addProductdata.get('category')?.touched " >*Invalid category</div>
                                 </div>
                                 <div class="">
-                                    <label for="">Add Category</label>   
-                                    <input type="text" placeholder="add" formControlName="title" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
-                                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('description')?.invalid && addProductdata.get('description')?.touched " >*Invalid description</div>
+                                    <p class="text-center m-0">Or</p>
+                                    <label for="">Add New Category</label>   
+                                    <input type="text" placeholder="add Category" formControlName="addcategory" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                    <!-- <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('addcategory')?.invalid && addProductdata.get('addcategory')?.touched " >*Invalid category</div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                   <div class="m-4" style="background-color: rgba(128, 128, 128, 0.336);">
-    n
-                   </div>
+                <div class="col-lg-6" style="border-radius: 0 12px 12px 0;background-color: rgba(128, 128, 128, 0.336);">
+                    <div class="m-4 mx-3 p-4 ms-2" style="border-radius: 12px;">
+                        <div class="mb-5">
+                            <h5 class="">Product Image</h5>
+                            <div class="border p-3" style="border-radius: 12px;">
+                                <div class="mb-3">
+                                    <label for="">Product Image</label>
+                                    <input type="url" placeholder="Product main image Link " formControlName="image" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('image')?.invalid && addProductdata.get('image')?.touched " >*Invalid Link 1</div>
+                                </div>
+                                <div class="">
+                                    <label for="">Product Angle Image</label>   
+                                    <div class="d-flex justify-content-between row">
+                                        <div class="col-md-4 col-sm-12 mb-2" >
+                                            <input type="url" placeholder="Image Link 1" formControlName="photos1" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                            <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('photos1')?.invalid && addProductdata.get('photos1')?.touched " >*Invalid Link 1</div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 mb-2">
+                                            <input type="url" placeholder="Image Link 2" formControlName="photos2" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                            <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('photos2')?.invalid && addProductdata.get('photos2')?.touched " >*Invalid Link 2</div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12">
+                                            <input type="url" placeholder="Image Link 3" formControlName="photos3" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                                            <div class="text-danger" style="font-size: 12px;"  style="font-size: 12px;" *ngIf="addProductdata.get('photos3')?.invalid && addProductdata.get('photos3')?.touched ">*Invalid Link 3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="">General</h5>
+                            <div class="border p-3" style="border-radius: 12px;">
+                                <div class="mb-3">
+                                    <label for="">Product Id</label>
+                                    <input type="number" placeholder="Product Id" formControlName="id" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;"  >
+                                    <div class="text-danger" style="font-size: 12px;" *ngIf="addProductdata.get('id')?.invalid && addProductdata.get('id')?.touched "  >*Invalid Id</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Product Price</label>
+                                    <input type="number" placeholder="Product Price" formControlName="price" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                                    <div class="text-danger" style="font-size: 12px;"  style="font-size: 12px;" *ngIf="addProductdata.get('price')?.invalid && addProductdata.get('price')?.touched ">*Invalid price</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Product Colour</label>   
+                                    <input type="text" placeholder="Product Tag(colour)" formControlName="tag" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;" >
+                                    <div class="text-danger" style="font-size: 12px;" style="font-size: 12px;" *ngIf="addProductdata.get('tag')?.invalid && addProductdata.get('tag')?.touched " >*Invalid Tag</div>
+                                </div>
+                                <div class="">
+                                    <label for="">Product Rating</label>   
+                                    <input type="number" placeholder="Rating" formControlName="rating" class="form-control p-3 py-2" style="background-color: transparent;color: #FFF;border-radius: 10px;">
+                                    <div class="text-danger" style="font-size: 12px;"  style="font-size: 12px;" *ngIf="addProductdata.get('rating')?.invalid && addProductdata.get('rating')?.touched ">*Invalid Rating</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <button type="submit" class="form-control w-100 p-3 py-2 my-2 btn btn-outline-light bg-light text-dark" style="border-radius: 10px;" [disabled]="addProductdata.invalid"><i class="fa-solid fa-cart-plus text-dark" style="background-color: transparent;"></i> Add Product</button>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <button type="button" class="form-control w-100 p-3 py-2 my-2 btn btn-outline-light" style="border-radius: 10px;" (click)="cancelData()" >Discard</button>
+                                </div>
+ 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

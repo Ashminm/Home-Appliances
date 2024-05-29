@@ -31,6 +31,7 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
 import { EditproductComponent } from './editproduct/editproduct.component';
+import { PopupeditComponent } from './popupedit/popupedit.component';
 
 // import {MatInputModule} from '@angular/material/input';
 // import {MatSelectModule} from '@angular/material/select';
@@ -57,7 +58,8 @@ import { EditproductComponent } from './editproduct/editproduct.component';
     AdmindashComponent,
     CalenderComponent,
     AddproductComponent,
-    EditproductComponent, 
+    EditproductComponent,
+    PopupeditComponent, 
   ],
   imports: [
     BrowserModule,

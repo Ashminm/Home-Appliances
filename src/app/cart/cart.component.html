@@ -20,7 +20,7 @@
                           <div class="row align-items-center p-3 shadow" style="border: 1px solid rgb(43, 42, 42);border-radius: 20px;" >
                           <div class="col-md-2 d-flex justify-content-center h-100" style="background-color: rgba(255, 255, 255, 0.61);border-radius: 10px;">
                               <img src="{{i?.image}}" routerLink="/view/{{i?.id}}"
-                              style="mix-blend-mode: multiply;width: 65%;object-fit: fill;aspect-ratio: 2/2;"  class="img-fluid h-100" alt="Generic placeholder image">
+                              style="mix-blend-mode: multiply;width: 65%;object-fit: cover;aspect-ratio: 2/2;"  class="img-fluid h-100" alt="Generic placeholder image">
                           </div>
                           <div class="col-md-2 d-flex  justify-content-center">
                               <div>
@@ -159,7 +159,7 @@
                     <div class="col me-5 d-flex justify-content-center" *ngFor="let item of trendingItems" style="cursor: auto;">
                         <div class="card h-100 border-0 bg-transparent rounded" style="width: 11rem; position: relative;"> 
                             <span class="text-uppercase" style="position: absolute;top: 130px;left: 10px;background-color: transparent;color: #000000;font-size: 11px;font-weight: 800;">recomment</span>
-                            <div style="background-color: rgba(255, 255, 255, 0.61); padding: 20px;border-radius: 10px;">
+                            <div style="background-color: rgba(255, 255, 255, 0.61); padding: 0px;border-radius: 10px;">
                                 <img class="card-img-top" routerLink="/view/{{item?.id}}" style="cursor: pointer; mix-blend-mode: multiply; aspect-ratio: 3/3; object-fit: cover;" src="{{item?.image}}" alt="...">
                             </div>
                                             

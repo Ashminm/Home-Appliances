@@ -1,2 +1,19 @@
 <app-header></app-header>
 
+<section style="min-height: calc(100vh - 56px);">
+    <div class="container">
+       <div >
+        <h3 class="text-uppercase">{{productCategory}} Equpments</h3>
+        <p class="text-secondary">Shop by categories</p>
+       </div>
+        <div class="row">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2" *ngFor="let i of categoryAllProducts" >
+                <img class="card-img-top" routerLink="/view/{{i?.id}}" style="cursor: pointer;aspect-ratio: 3/4; object-fit: cover;background-color: rgb(255, 255, 255);filter: brightness(80%);" src="{{i.image}}" alt="...">
+                <div class="card-body border-0 ps-1">
+                  <h6 class="text-uppercase">{{i.title.slice(0,15)}}...</h6>
+                  <p class="card-text" style="font-size: 11px;">{{i.price | currency:'INR'}}</p>
+                </div>
+              </div>
+        </div>
+    </div>
+</section>

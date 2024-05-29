@@ -16,7 +16,8 @@ export class SearchPipe implements PipeTransform {
       if((item.username && item.username.trim().toLowerCase().includes(searchKey)) ||
       (item.email && item.email.trim().toLowerCase().includes(searchKey)) ||
       (item.title && item.title.trim().toLowerCase().includes(searchKey)) ||
-      (item.price && item.price.toString().toLowerCase().includes(searchKey))
+      (item.price && item.price.toString().toLowerCase().includes(searchKey)) ||
+      (item.name && item.name.trim().toLowerCase().includes(searchKey)) 
       ){
         result.push(item)
       }

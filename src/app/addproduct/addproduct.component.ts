@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
-// import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OnInit } from '@angular/core';
 
@@ -27,28 +26,34 @@ export class AddproductComponent implements OnInit {
     price:['',[Validators.required, Validators.pattern('[0-9 .]*'),Validators.minLength(1)]],
     rating:['',[Validators.required,Validators.pattern('[0-9 .]*'),Validators.minLength(1)]],
     description:['',[Validators.required]],
-    category:['',[Validators.required]],
+    category: [''],
+    addcategory: [''],
     tag:['',[Validators.required]],
     image: ['', [Validators.required, Validators.pattern('https?://(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&/=]*)')]],
     photos1: ['', [Validators.required, Validators.pattern('https?://(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&/=]*)')]],
     photos2: ['', [Validators.required, Validators.pattern('https?://(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&/=]*)')]],
     photos3: ['', [Validators.required, Validators.pattern('https?://(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&/=]*)')]]
-  })
+  });
 
   formProductData() {
     const formValue = this.addProductdata.value;
     const photosArray = [formValue.photos1, formValue.photos2, formValue.photos3];
+    let categoryValue = formValue.category; 
+    if (!categoryValue && formValue.addcategory) {
+      categoryValue = formValue.addcategory;
+    }
     const productData = {
       ...formValue,
+      category: categoryValue, 
       photos: photosArray
     };
-    // console.log(productData);
+    console.log(productData);
   
     this.api.postProductForm(productData).subscribe({
       next: (res: any) => {
         console.log(res);
         this.toster.success("Product Added Successfully!!");
-        this.addProductdata.reset()
+        this.addProductdata.reset();
       },
       error: (err: any) => {
         console.log(err.error);
@@ -56,6 +61,8 @@ export class AddproductComponent implements OnInit {
       }
     });
   }
+  
+  
 
   getCategory() {
     this.api.getAllProducts().subscribe((res: any) => {

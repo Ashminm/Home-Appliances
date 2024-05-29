@@ -1,17 +1,24 @@
 <app-header></app-header>
-<section style="min-height: calc(100vh - 56px);">
+<section style="min-height: calc(70vh - 56px);">
   <div class="container">
-    <div class="d-flex justify-content-center py-5">
-      <h1 class="text-uppercase">All Categories</h1>
+    <div class="py-5 pb-3 text-center">
+      <h3 class="text-uppercase">All Categories</h3>
+      <p class="text-secondary" style="font-size: 12px;">Selelect category What you want</p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center pb-5">
+      <span><i class="fa-solid fa-magnifying-glass text-secondary"></i></span>
+      <input type="search" placeholder="Search for appliances" class="bg-transparent text-light ps-2 py-2 " style="width: 25%;outline: none;border:none;border-bottom: 1px solid #FFF;"  [(ngModel)]="searchKey" >
     </div>
     <div class="row">
-
-      <div class="col-lg-2 col-md-4" *ngFor="let i of categories">
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let i of categories | search:searchKey">
         <div class="text-center">
-          <img src="{{ i.image }}" routerLink="/viewcate/{{i.name}}"  style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFF; background-color: rgb(126, 126, 126); mix-blend-mode: initial;">
-          <p class="text-uppercase">{{ i.name }}</p>
+          <img src="{{ i.image }}" routerLink="/viewcate/{{i.name}}"  style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; background-color: rgb(126, 126, 126); mix-blend-mode: initial;">
+          <p class="text-uppercase mt-2">{{ i.name }}</p>
           </div>
         </div>
       </div>
+      <div *ngIf="(categories | search:searchKey).length === 0" class="text-center text-light w-100">
+        <p>We couldn't find category for "<span class="text-secondary">{{ searchKey }}</span>" with your filters. Try to refine your search.</p>
+    </div>
     </div>
 </section>

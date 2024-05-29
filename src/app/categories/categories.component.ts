@@ -7,8 +7,8 @@ import { ApiCallService } from '../services/api-call.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-
   categories:any[] = [];
+  searchKey:any=""
   constructor(private api: ApiCallService) { }
 
   ngOnInit() {

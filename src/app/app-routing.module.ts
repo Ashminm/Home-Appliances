@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'prof',canActivate:[authGuard],component:ProfileComponent},
   {path:'allpro',component:AllproductsComponent},
   {path:'cate',component:CategoriesComponent},
-  {path:'viewcate/:category',component:ViewCategoryComponent},
+  {path:'viewcate/:id',component:ViewCategoryComponent},
   {path:'contact',component:ContactComponent},
   {path:'adash',component:AdmindashComponent},
   {path:'addproduct',component:AddproductComponent},
