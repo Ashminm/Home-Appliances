@@ -14,7 +14,7 @@ export class ViewComponent implements OnInit{
   pid:any=0
   product:any={}
   trendingItems:any[]=[]
- 
+  userProfileData:any={}
   constructor(private aroute:ActivatedRoute, private api:ApiCallService,private toastr:ToastrService){
     this.aroute.params.subscribe((res:any)=>{
       // console.log(res.id);
@@ -26,6 +26,7 @@ export class ViewComponent implements OnInit{
   ngOnInit(){
     this.getData()
     this.getTrending()
+    this.getUser()
   }
 
   getData(){
@@ -84,6 +85,12 @@ export class ViewComponent implements OnInit{
     })
   }
 
-  
+  getUser(){
+    this.api.getAdminProfile().subscribe((res:any)=>{
+      this.userProfileData=res
+      // console.log("profile=",this.userProfileData);
+      
+    })
+  }
 
 }

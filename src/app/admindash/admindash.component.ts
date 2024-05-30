@@ -10,13 +10,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admindash.component.css']
 })
 export class AdmindashComponent implements OnInit{
-  today: number = Date.now();
+  today: number;
   profilePicture:any
   products:any[]=[]
   allUser:any[]=[]
   searchKey:String=''
   constructor(private api:ApiCallService,private route:Router,private tostr:ToastrService){
-    setInterval(() => {this.today = Date.now()}, 1);
+    this.today = Date.now();
+    setInterval(() => {
+        this.today = Date.now();
+    }, 1000);
   }
 
 ngOnInit(){

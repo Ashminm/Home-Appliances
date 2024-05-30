@@ -2,7 +2,7 @@
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="row gx-4 gx-lg-5 align-items-start">
             <div class="col-md-1 text-center d-flex flex-column"  [class.d-none]="!product.photos.length" *ngIf="product.photos.length > 0">
                 <div *ngFor="let item of product.photos" class="border me-3 mb-4 d-md-block d-none" style="border-radius: 10px;">
                     <img [src]="item" alt="" class="card-img-top1 " style="width: 100%;height: 100%; border-radius: 10px; aspect-ratio: 4/4;"/>
@@ -16,23 +16,59 @@
             <div class="col-md-5">
                 <p class="fw-bolder display-6 text-uppercase mb-1">{{product?.title}}</p>
                 <p style="font-size: 25px;">₹{{product?.price}}</p>
-                <p class="mb-1 mt-5">Rating: <span class="text-secondary h5
+                <p class="mb-2 mt-4">Rating: <span class="text-secondary h5
                     ">{{product?.rating}}</span></p>
                 <p class="lead">{{product?.description}}</p>
-              
-                <div class="mt-4" >
-                    <button type="button" style="border-radius: 16px;padding: 5px 15px 2px 15px;"  class="btn btn-outline-light  mx-3 ms-0" (click)="addToWish(product)"><i class="fa-regular fa-heart fa-lg text-secondary bg-transparent"></i></button>
-                    <button type="button" style="border-radius: 16px;padding: 5px 15px 5px 15px;" class="btn bg-light  " (click)="addToCart(product)" >add to cart</button>
+              <hr class="mt-5">
+                <div class="mt-4 mb-4" >
+                    <button type="button" style="border-radius: 16px;padding: 5px 15px 5px 15px;"  class="btn btn-outline-light  mx-3 ms-0 text-uppercase" (click)="addToWish(product)">Wishlist</button>
+                    <button type="button" style="border-radius: 16px;padding: 5px 15px 5px 15px;" class="btn bg-light text-uppercase " (click)="addToCart(product)" >add to cart</button>
                 </div>
+                <hr>
                 <div class="mt-5">
                     <p class="mb-1">ID: <span class="text-secondary">{{product?.id}}</span></p>
                     <p class="mb-1">catagry: <span class="text-secondary">{{product?.category}}</span></p>
-                    <p class="mb-1">Tag: <span class="text-secondary">{{product?.tag}}</span></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">Tag: <span class="text-secondary">{{product?.tag}}</span></p>
+                        <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal6" >Write a review <i class="fa-solid fa-pen btn-outline-warning bg-transparent"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <hr class="container">
     
+
+    <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal">
+        <div class="modal-content border-0 shadow-lg" >
+          <form class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+                <div class="row bg-transparent">
+                    <div class="col-lg-3 col-md-3 col-sm-3 bg-transparent">
+                        <img class="card-img-top mb-5 mb-md-0 w-100" style="object-fit: cover;aspect-ratio: 4/4;background-color: rgb(255, 255, 255);" src="{{product?.image}}" alt="..." />
+                    </div>
+                    <div class="col lg-9 col-md-9 col-sm-9 bg-transparent d-flex flex-column align-items-start">
+                        <p class="h2 bg-transparent text-start">{{product?.title}}</p>
+                        <p class="mb-0 bg-transparent">₹{{product?.price}}</p>
+                    </div>
+                    <div class="mt-5 mb-4 bg-transparent d-flex flex-column align-items-start">
+                        <label for="" class="bg-transparent">Review title</label>
+                        <input type="text" class="form-control bg-transparent text-light" placeholder="Review title">
+                        <label for="" class="bg-transparent mt-4">Write your review</label>
+                        <textarea name="" rows="3" class="form-control bg-transparent" placeholder="Write your review"></textarea>
+                    </div>
+                    <div class="bg-transparent  d-flex flex-column align-items-start">
+                        <h5 class="m-0 bg-transparent text-uppercase">Your Profile</h5>
+                        <input type="text" class="form-control bg-transparent text-light" placeholder="Your name" name="uname" [(ngModel)]="userProfileData.username">
+                    </div>
+                </div>
+            <button class="text-uppercase btn btn-outline-warning w-100 mt-3" >Submin</button>
+          </form> 
+        </div>
+      </div>
+    </div>
+
+    <hr class="container">
     <div class="container">
         <h5 class="text-uppercase py-4">Trending products</h5>
         <div class="container d-flex justify-content-start" style="overflow-x: scroll;">
