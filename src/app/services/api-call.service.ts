@@ -121,13 +121,13 @@ export class ApiCallService {
   postProductForm(data:any){
     return this.http.post(`${this.SERVER_URL}/add-product`,data) 
   }
-  editProductForm(id:any){
-    return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`,this.appendTokenToHeader()) 
-  }
+  editProductForm(id:String,data:any) {
+    return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`, data, this.appendTokenToHeader());
+}
 
-  getSpecificProduct(id:any){
-    return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`,this.appendTokenToHeader())
-  }
+  // getSpecificProduct(id:any){
+  //   return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`,this.appendTokenToHeader())
+  // }
   
   deteteProdectAdmiApi(id:any){
   return this.http.delete(`${this.SERVER_URL}/product-delete/${id}`,this.appendTokenToHeader()) 

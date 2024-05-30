@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditproductComponent implements OnInit {
 
-  productItem:any=[];
+  // productItem:any=[];
   products: any[] = [];
   validCards: any[] = [];
   currentPage: number = 1;
@@ -59,18 +59,18 @@ export class EditproductComponent implements OnInit {
     }
   }
 
-  getSpecificItem(id: any) {
-    this.api.getSpecificProduct(id).subscribe((res: any) => {
-      this.productItem = res; 
-      console.log(this.productItem);
-      this.getAllProducts()
-    });
-  }
+  // getSpecificItem(id: any) {
+  //   this.api.getSpecificProduct(id).subscribe((res: any) => {
+  //     this.productItem = res; 
+  //     console.log(this.productItem);
+  //     this.getAllProducts()
+  //   });
+  // }
 
 deleteProductItem(id:any){
   this.api.deteteProdectAdmiApi(id).subscribe({
     next:(res:any)=>{
-      console.log(res);
+      // console.log(res);
       this.getAllProducts()
       this.tostr.success("Product Deleted!!")
     },

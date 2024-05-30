@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-popupedit',
@@ -10,9 +13,9 @@ import { NgForm } from '@angular/forms';
 })
 export class PopupeditComponent implements OnInit {
   category:any;
-  editData:any={}
+  editData:any={};
 
-  constructor(private api:ApiCallService){}
+  constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
   @Input() itemData:any=''
 
 ngOnInit() {
@@ -20,39 +23,54 @@ ngOnInit() {
   this.getCategory()
 }
 
-  getData(){
-    this.editData = { ...this.itemData };
-    // console.log(this.editData);
-    
-  }
+getData() {
+  this.editData = { ...this.itemData }
+  console.log(this.editData);
+}
 
-  editProductData(form: NgForm) {
-    if (form.valid) {
-      this.api.editProductForm(this.editData).subscribe({
-        next:(res:any)=>{
-          console.log("Finel products",res);
-          
-        },
-        error:(err:any)=>{
-          console.log(err);
-          
-        }
+editProductData() {
+  const { _id, title, price, description, category, tag, image, rating, photos } = this.editData;
+  if (_id && title && price && description && category && tag && image && rating && photos) {
+    this.api.editProductForm(_id, this.editData).subscribe(
+      (res: any) => {
+        // console.log(res);
+        this.toastr.success("Product Updated Successfully!!");
+        this.route.navigateByUrl('/addproduct')
+        this.getData()
+      },
+      (err: any) => {
+        console.log(err);
+        this.toastr.error("Update Failed!!");
       }
-       
-      );
-    } else {
-      console.error('Form is invalid');
-    }
+    );
+  } else {
+    this.toastr.info("Enter valid details");
   }
+}
+
 
   getCategory() {
     this.api.getAllProducts().subscribe((res: any) => {
       const allCategories = res.map((product: any) => product.category);
-      const uniqueCategories = Array.from(new Set(allCategories));
-      
+      const uniqueCategories = Array.from(new Set(allCategories));   
       this.category = uniqueCategories;
       // console.log(this.category);
     });
+  }
+
+  cancelData() {
+    this.editData = {
+      _id: '',
+      id: '',
+      title: '',
+      price: '',
+      rating: '',
+      description: '',
+      category: '',
+      tag: '',
+      image: '',
+      photos: []
+    };
   }
 }
 
