@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiCallService } from '../services/api-call.service';
 import { OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-view',
@@ -15,7 +17,10 @@ export class ViewComponent implements OnInit{
   product:any={}
   trendingItems:any[]=[]
   userProfileData:any={}
-  constructor(private aroute:ActivatedRoute, private api:ApiCallService,private toastr:ToastrService){
+  reviewproduct:any=[]
+  show:boolean= false
+
+  constructor(private aroute:ActivatedRoute, private api:ApiCallService,private toastr:ToastrService,private FormB:FormBuilder){
     this.aroute.params.subscribe((res:any)=>{
       // console.log(res.id);
       this.pid=res.id
@@ -23,12 +28,59 @@ export class ViewComponent implements OnInit{
     })
   }
 
+  addReviewData=this.FormB.group({
+    reviewTitle:['',[Validators.required]],
+    description:['',[Validators.required]],
+    username:['',[Validators.required]],
+    
+  })
+
   ngOnInit(){
     this.getData()
     this.getTrending()
     this.getUser()
+    this.getAdmin()
+    this.getReviewProductBase()
+    this.showAdmi()
   }
 
+  
+  handleReview() {
+    const defaultImage = 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp';
+    const reviewData = this.addReviewData.value;
+    const allReviewData = {
+      ...reviewData,
+      id: this.product.id,
+      title: this.product.title,
+      rating: this.product.rating,
+      image: this.userProfileData.profileImage ? this.userProfileData.profileImage : defaultImage
+    };
+  
+    // console.log(allReviewData);
+    this.api.reviewDataPostApi(allReviewData).subscribe({
+      next:(res:any)=>{
+        // console.log(res);
+        this.toastr.success("Review posted!!")
+        this.addReviewData.reset()
+      },
+      error:(err:any)=>{
+        this.toastr.error(err.error)
+      }
+    })
+  }
+
+  getReviewProductBase(){
+    this.api.getReviewProduct().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+       this.reviewproduct=res.filter((item:any)=> item.id == this.pid)
+       console.log("id based=",this.reviewproduct);
+       
+      }
+    })
+  }
+  
+  
   getData(){
     this.api.getProduct(this.pid).subscribe((res:any)=>{
       this.product=res
@@ -75,8 +127,6 @@ export class ViewComponent implements OnInit{
     }
   }
 
-  
-
   getTrending(){
     this.api.getTrendingProducts().subscribe((res:any)=>{
       this.trendingItems=res
@@ -85,12 +135,44 @@ export class ViewComponent implements OnInit{
     })
   }
 
-  getUser(){
+  getAdmin(){
     this.api.getAdminProfile().subscribe((res:any)=>{
+      this.userProfileData=res
+      // console.log("profile admin=",this.userProfileData);
+      
+    })
+  }
+  getUser(){
+    this.api.getUserProfile().subscribe((res:any)=>{
       this.userProfileData=res
       // console.log("profile=",this.userProfileData);
       
     })
+  }
+
+  showAdmi(){
+    const existingAdmin =sessionStorage.getItem("existingAdmin");
+    const role= sessionStorage.getItem("role")
+    if(existingAdmin && role ==="admin"){
+      this.show=true
+    }else{
+      this.show=false
+    }
+  }
+
+  deleteReview(id:any){
+    this.api.deleteUserReview(id).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.toastr.success("Review Deleted!!")
+        this.getData()
+      },
+      error:(err:any)=>{
+        console.log(err); 
+        this.toastr.error("Deletion Faild!!")
+      }
+    })
+    
   }
 
 }

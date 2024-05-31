@@ -137,6 +137,16 @@ export class ApiCallService {
   return this.http.delete(`${this.SERVER_URL}/delete-user/${id}`,this.appendTokenToHeader()) 
   }
 
+  reviewDataPostApi(data:any){
+    return this.http.post(`${this.SERVER_URL}/user-review-data`,data, this.appendTokenToHeader());
+  }
+ getReviewProduct() {
+  return this.http.get(`${this.SERVER_URL}/get-review-product`)
+}
+
+deleteUserReview(id:any){
+  return this.http.delete(`${this.SERVER_URL}/delete-review/${id}`,this.appendTokenToHeader()) 
+}
 
 
 

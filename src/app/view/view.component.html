@@ -10,7 +10,7 @@
             </div>
             
             <div class="col-md-4 text-center " style="padding: 0px;background-color: rgb(212, 213, 214);border-radius: 10px; ">
-                <img class="card-img-top mb-5 mb-md-0 w-100 card-img-top1" style="mix-blend-mode: multiply;object-fit: cover;aspect-ratio: 4/4;background-color: rgb(255, 255, 255);" src="{{product?.image}}" alt="..." />
+                <img class="card-img-top mb-5 mb-md-0 w-100 card-img-top1" style="mix-blend-mode: multiply;object-fit: cover;aspect-ratio: 4/4;background-color: rgb(255, 255, 255);" [src]="product?.image ? product?.image:'https://facesconsent.com/images/default-product-image.png' " alt="..." />
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-5">
@@ -41,7 +41,7 @@
     <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal">
         <div class="modal-content border-0 shadow-lg" >
-          <form class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+          <form class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);" [formGroup]="addReviewData" (ngSubmit)="handleReview()">
                 <div class="row bg-transparent">
                     <div class="col-lg-3 col-md-3 col-sm-3 bg-transparent">
                         <img class="card-img-top mb-5 mb-md-0 w-100" style="object-fit: cover;aspect-ratio: 4/4;background-color: rgb(255, 255, 255);" src="{{product?.image}}" alt="..." />
@@ -52,41 +52,64 @@
                     </div>
                     <div class="mt-5 mb-4 bg-transparent d-flex flex-column align-items-start">
                         <label for="" class="bg-transparent">Review title</label>
-                        <input type="text" class="form-control bg-transparent text-light" placeholder="Review title">
+                        <input type="text" class="form-control bg-transparent text-light" formControlName="reviewTitle" placeholder="Review title">
+                        <div class="text-danger bg-transparant" style="font-size: 12px;" *ngIf="addReviewData.get('reviewTitle')?.invalid && addReviewData.get('reviewTitle')?.touched">*Invalid ReviewTitle</div>
                         <label for="" class="bg-transparent mt-4">Write your review</label>
-                        <textarea name="" rows="3" class="form-control bg-transparent" placeholder="Write your review"></textarea>
+                        <textarea name="" rows="3" class="form-control bg-transparent text-light" formControlName="description" placeholder="Write your review"></textarea>
+                        <div class="text-danger bg-transparant" style="font-size: 12px;" *ngIf="addReviewData.get('description')?.invalid && addReviewData.get('description')?.touched">*Invalid Description</div>
                     </div>
                     <div class="bg-transparent  d-flex flex-column align-items-start">
                         <h5 class="m-0 bg-transparent text-uppercase">Your Profile</h5>
-                        <input type="text" class="form-control bg-transparent text-light" placeholder="Your name" name="uname" [(ngModel)]="userProfileData.username">
+                        <input type="text" class="form-control bg-transparent text-light" formControlName="username" placeholder="Your name" name="uname" [(ngModel)]="userProfileData.username">
+                        <div class="text-danger bg-transparant" style="font-size: 12px;" *ngIf="addReviewData.get('username')?.invalid && addReviewData.get('username')?.touched">*Invalid Username</div>
                     </div>
                 </div>
-            <button class="text-uppercase btn btn-outline-warning w-100 mt-3" >Submin</button>
+            <button class="text-uppercase btn btn-outline-warning w-100 mt-3"[disabled]="addReviewData.invalid" >Submit</button>
           </form> 
         </div>
       </div>
     </div>
     <div class="container">
         <p><span style="font-size: 10px;">Powerd by </span><span>Homease</span></p>
-        <div class="my-4 mx-5">
+        <div class="my-4 row mx-5">
             <h1>{{product?.rating}}</h1>
-            <p>Based on 4 Reviews</p>
+            <ng-container *ngIf="reviewproduct.length > 0; else noReviews">
+                <p>Based on {{ reviewproduct.length }} Reviews</p>
+            </ng-container>
+            <ng-template #noReviews>
+                <p>Based on admin added Reviews</p>
+            </ng-template>
+            
         </div>
     </div>
     <hr class="container">
 <div class="container">
-    <div class="row mx-5 d-flex align-items-center">
-        <div class="col-lg-1 ">
-            <img class="card-img-top " style="object-fit: cover;width: 45px;height: 45px;background-color: rgb(255, 255, 255);border-radius: 50%;" src="{{product?.image}}" alt="..." />    
+    <ng-container *ngIf="reviewproduct.length > 0; else elsediv">
+        <div class="row mx-5 d-flex align-items-center" *ngFor="let review of reviewproduct">
+            <div class="col-lg-1 d-flex justify-content-end">
+                <img class="card-img-top" style="object-fit: cover;width: 45px;height: 45px;background-color: rgb(255, 255, 255);border-radius: 50%;"  [src]="review?.image ? review.image : 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'" alt="User Image" />
+            </div>
+            <div class="col-lg-1 ps-0 text-start">
+                <p class="text-start m-0">{{ review.username }}</p>
+                <p style="font-size: 9px;" class="text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" class="bi bi-patch-check pe-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                    <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/>
+                  </svg>Verifyed</p>
+            </div>
+            <div class="col-lg-9 pt-4">
+                <p class="m-0 h6">{{ review.reviewTitle }}</p>
+                <p class="text-secondary">{{ review.description.slice(0, 350) }}...</p>
+            </div>
+            <div class="col-lg-1" *ngIf="show">
+                <span class="text-end" title="remove review" (click)="deleteReview(review._id)" ><i class="fa-solid fa-xmark btn-outline-danger"></i></span>
+            </div>
         </div>
-        <div class="col-lg-1 text-start">
-            <p class="text-start">{{userProfileData.username}}</p>
-        </div>
-        <div class="col-lg-10">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo eligendi neque labore quae omnis voluptatibus quasi nostrum! Architecto reprehenderit ullam sapiente? Ad, corporis officia fuga harum error aliquam quo tempore!</p>
-        </div>
-    </div>
+    </ng-container>
+    <ng-template #elsediv>
+        <p class="text-light text-center mt-5 mb-4">No one can review this product</p>
+    </ng-template>
 </div>
+
     <hr class="container">
     <div class="container">
         <h5 class="text-uppercase py-4">Trending products</h5>

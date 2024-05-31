@@ -46,7 +46,7 @@ export class LoginComponent {
       },
       error: (err: any) => {
         console.log(err.error);
-        this.toastr.error(err);
+        this.toastr.error("Please Enter correct email and password");
       }
     });
   }
