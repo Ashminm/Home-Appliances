@@ -15,13 +15,16 @@ export class ProfileComponent implements OnInit {
   profilePicture:string='https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'
   userData:any={}
   suggestItem:any[]=[]
-  
+  allReviews:any[]=[]
+  show:String=''
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
   ngOnInit() {
     this.getUser()
     this.getRecent()
    this.getAdmin()
+    this.reviewSection()
+    this.showAdmi()
   }
 
   getUser(){
@@ -45,6 +48,35 @@ export class ProfileComponent implements OnInit {
     })
   
   }
+
+  reviewSection(){
+    if(sessionStorage.getItem("existingAdmin")){
+      this.api.getAllAdminReviews().subscribe({
+        next:(res:any)=>{
+          console.log("Reviews=",res);
+          this.allReviews=res
+          // console.log(this.allReviews);  
+        },
+        error:(err:any)=>{
+          console.log(err);
+          
+        }
+      })
+    }else if(sessionStorage.getItem("existingUser")){
+      this.api.getyourReviews().subscribe({
+        next:(res:any)=>{
+          console.log("Reviews=",res);
+          this.allReviews=res
+          // console.log(this.allReviews);  
+        },
+        error:(err:any)=>{
+          console.log(err);
+          
+        }
+      })
+    }
+  }
+
 
   getFile(event:any){
     const file=event.target.files[0]
@@ -112,8 +144,7 @@ export class ProfileComponent implements OnInit {
     }
     else{
       this.toastr.info("Your an admin")
-    }
-    
+    } 
   }
 
   getRecent(){
@@ -122,6 +153,16 @@ export class ProfileComponent implements OnInit {
       // console.log("Recent",res);
       
     })
+  }
+
+  showAdmi(){
+    const existingAdmin =sessionStorage.getItem("existingAdmin");
+    const role= sessionStorage.getItem("role")
+    if(existingAdmin && role ==="admin"){
+      this.show='customers reviews'
+    }else{
+      this.show='Your review'
+    }
   }
 
   logout() { 

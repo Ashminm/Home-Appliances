@@ -38,8 +38,7 @@ export class ViewComponent implements OnInit{
   ngOnInit(){
     this.getData()
     this.getTrending()
-    this.getUser()
-    this.getAdmin()
+    this.getuserAdmiData()
     this.getReviewProductBase()
     this.showAdmi()
   }
@@ -74,8 +73,8 @@ export class ViewComponent implements OnInit{
       next:(res:any)=>{
         console.log(res);
        this.reviewproduct=res.filter((item:any)=> item.id == this.pid)
-       console.log("id based=",this.reviewproduct);
-       
+      //  console.log("id based=",this.reviewproduct);
+       this.getData()
       }
     })
   }
@@ -115,7 +114,7 @@ export class ViewComponent implements OnInit{
         next:(res:any)=>{
           console.log(res);
           this.api.getCartListCountApi()
-          this.toastr.success("Item Added to Cart")
+          // this.toastr.success("Item Added to Cart")
         },
         error:(err)=>[
           this.toastr.error(err.error)
@@ -135,19 +134,18 @@ export class ViewComponent implements OnInit{
     })
   }
 
-  getAdmin(){
-    this.api.getAdminProfile().subscribe((res:any)=>{
-      this.userProfileData=res
-      // console.log("profile admin=",this.userProfileData);
-      
-    })
-  }
-  getUser(){
-    this.api.getUserProfile().subscribe((res:any)=>{
-      this.userProfileData=res
-      // console.log("profile=",this.userProfileData);
-      
-    })
+  getuserAdmiData(){
+    if(sessionStorage.getItem("existingUser")){
+      this.api.getUserProfile().subscribe((res:any)=>{
+        this.userProfileData=res
+        // console.log(this.userProfileData);
+      })
+    } else if(sessionStorage.getItem("existingAdmin")){
+      this.api.getAdminProfile().subscribe((res:any)=>{
+        this.userProfileData=res
+        // console.log(this.userProfileData);
+      })
+    }
   }
 
   showAdmi(){
@@ -165,7 +163,7 @@ export class ViewComponent implements OnInit{
       next:(res:any)=>{
         console.log(res);
         this.toastr.success("Review Deleted!!")
-        this.getData()
+      this.getReviewProductBase()
       },
       error:(err:any)=>{
         console.log(err); 

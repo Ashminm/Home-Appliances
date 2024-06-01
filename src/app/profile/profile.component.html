@@ -1,102 +1,148 @@
 <!-- <app-header></app-header> -->
 <section style="min-height: calc(100vh - 56px);">
-  <h4 class="py-5 pb-4 container" routerLink="/"><i class="fa-solid fa-circle-arrow-left"></i></h4>
+  <h4 class="py-5 pb-4 container" routerLink="/">
+    <i class="fa-solid fa-circle-arrow-left"></i>
+  </h4>
   <div class="container py-4">
-    <div class="row ">
-      <div class="col-md-5 col-lg-3">
-        <div class="p-5" style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.068), 0 6px 20px 0 rgba(255, 255, 255, 0.082);">
-          <div class=" d-flex justify-content-center flex-column align-items-center ">
+    <div class="row">
+      <!-- Profile -->
+      <div class="col-md-5 col-lg-3 mb-4">
+        <div class="p-5 shadow">
+          <div class="d-flex justify-content-center flex-column align-items-center">
             <img [src]="profilePicture"
-                    style="width: 80px; height: 80px; border-radius: 50%;object-fit: cover; border: 1px solid #c5c5c5;padding: 3px;" alt="Profile Picture">
-                <label for="imageUpload" style="cursor: pointer;">
-                    <p class="m-0 p-1" style="font-size: 10px;"><i class="fa-solid fa-cloud-arrow-up pe-1"></i>Upload</p>
-                </label>
-                <input id="imageUpload" type="file" (change)="getFile($event)" accept="image/*" style="display: none;">
+                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 1px solid #c5c5c5; padding: 3px;"
+                 alt="Profile Picture">
+            <label for="imageUpload" style="cursor: pointer;">
+              <p class="m-0 p-1" style="font-size: 10px;">
+                <i class="fa-solid fa-cloud-arrow-up pe-1"></i>Upload
+              </p>
+            </label>
+            <input id="imageUpload" type="file" (change)="getFile($event)" accept="image/*" style="display: none;">
             <div style="height: 25vh;">
               <h5 class="mt-4 mb-3 text-center text-uppercase">{{userData.username}}</h5>
-              <div style="background-color: rgba(43, 43, 43, 0.897);border-radius: 15px;">
+              <div style="background-color: rgba(43, 43, 43, 0.897); border-radius: 15px;">
                 <p class="m-0 p-2 px-4 bg-transparent">{{userData.email}}</p>
-              <p class="text-center m-0 pb-2 bg-transparent" style="font-size: 9px;">ID: {{userData._id}}</p>
+                <p class="text-center m-0 pb-2 bg-transparent" style="font-size: 9px;">ID: {{userData._id}}</p>
               </div>
             </div>
           </div>
-            <div >
-              <p style="cursor: pointer;"  type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" ><i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out</p>
-
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-sm">
-                      <div class="modal-content border-0 shadow-lg" >
-                        <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
-                          <div class="bg-transparent">
-                            <span class="bg-transparent"><i class="fa-solid fa-triangle-exclamation text-warning p-4"  style="border-radius: 50%;background-color: rgba(243, 207, 2, 0.301);"></i></span>
-                          </div>
-                          <div class="mt-4 bg-transparent">
-                            <h4 class="bg-transparent">Logout Account?</h4>
-                            <p class="m-0 bg-transparent" style="font-size: 12px;">Are you sure you would like to log out of your account?</p>
-                          </div>
-                    
-                          <button class="text-uppercase btn btn-outline-warning w-100 mt-3" (click)="logout()">Log out</button>
-                        </div> 
-                      </div>
+          <div>
+            <p style="cursor: pointer;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-arrow-right-from-bracket pe-2"></i>Log out
+            </p>
+            <!-- Logout Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content border-0 shadow-lg">
+                  <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+                    <div class="bg-transparent">
+                      <span class="bg-transparent">
+                        <i class="fa-solid fa-triangle-exclamation text-warning p-4"
+                           style="border-radius: 50%; background-color: rgba(243, 207, 2, 0.301);"></i>
+                      </span>
                     </div>
-                  </div>
-              <p class="text-danger m-0" style="cursor: pointer;"type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account</p>
-
-          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm">
-              <div class="modal-content border-0 shadow-lg" >
-                <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
-                  <div class="bg-transparent">
-                    <span class="bg-transparent"><i class="fa-solid fa-trash-can text-danger p-4"  style="border-radius: 50%;background-color: rgba(243, 2, 2, 0.301);"></i></span>
-                  </div>
-                  <div class="mt-4 bg-transparent">
-                    <h4 class="bg-transparent">Delete Account?</h4>
-                    <p class="m-0 bg-transparent" style="font-size: 12px;">Are you sure you would like to <strong class="bg-transparent text-danger">Delete</strong> of your account?</p>
-                  </div>
-
-                  <button class="text-uppercase btn btn-outline-danger w-100 mt-3" (click)="deleteAccount()">Delete</button>
-                </div> 
-              </div>
-            </div>
-          </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="col-md-7 col-lg-6 ">
-        <div class="px-4 py-5 " style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.075), 0 6px 20px 0 rgba(255, 255, 255, 0.068);">
-          <h5 class="pb-4 text-uppercase">Profile Info</h5>
-            <form (ngSubmit)="handleUpdateProfile()">
-                <div class="d-flex justify-content-between w-100">
-                    <div class="w-100">
-                      <p class="m-0" style="font-size: 12px;">User Name Change</p>
-                      <input type="text" class="form-control bg-transparent text-light" style="width: 95%;border-radius: 20px;" placeholder="Name" name="uname" [(ngModel)]="userData.username" >
+                    <div class="mt-4 bg-transparent">
+                      <h4 class="bg-transparent">Logout Account?</h4>
+                      <p class="m-0 bg-transparent" style="font-size: 12px;">
+                        Are you sure you would like to log out of your account?
+                      </p>
                     </div>
-                    <div class="w-100">
-                      <p class="m-0" style="font-size: 12px;">Password Change</p>
-                      <input type="text" class="form-control bg-transparent text-light" style="width: 95%;border-radius: 20px;" placeholder="Password" name="psw" [(ngModel)]="userData.password">
-                    </div>
+                    <button class="text-uppercase btn btn-outline-warning w-100 mt-3" (click)="logout()">Log out</button>
+                  </div>
                 </div>
-                  <div class="text-start">
-                    <button class="mt-4 btn btn-light py-2 w-25 text-uppercase" style="border-radius: 20px;">Save</button>
+              </div>
+            </div>
+            <p class="text-danger m-0" style="cursor: pointer;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+              <i class="fa-solid fa-xmark pe-2 text-danger"></i>Delete Account
+            </p>
+            <!-- Delete Account -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content border-0 shadow-lg">
+                  <div class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);">
+                    <div class="bg-transparent">
+                      <span class="bg-transparent">
+                        <i class="fa-solid fa-trash-can text-danger p-4"
+                           style="border-radius: 50%; background-color: rgba(243, 2, 2, 0.301);"></i>
+                      </span>
+                    </div>
+                    <div class="mt-4 bg-transparent">
+                      <h4 class="bg-transparent">Delete Account?</h4>
+                      <p class="m-0 bg-transparent" style="font-size: 12px;">
+                        Are you sure you would like to <strong class="bg-transparent text-danger">Delete</strong> your account?
+                      </p>
+                    </div>
+                    <button class="text-uppercase btn btn-outline-danger w-100 mt-3" (click)="deleteAccount()">Delete</button>
                   </div>
-            </form>
-        </div>
-        <div class="p-4 mt-4" style="box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.062), 0 6px 20px 0 rgba(255, 255, 255, 0.068);">
-          <p class="text-uppercase">Your review</p>
-          no review
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-5 col-lg-2 py-3" style="overflow-y: scroll;height: 70vh;box-shadow: 0 4px 8px 0 rgba(255, 254, 254, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.096);">
+      <!-- Profile Info and Reviews -->
+      <div class="col-md-7 col-lg-6 mb-4">
+        <div class="px-4 py-5 shadow">
+          <h5 class="pb-4 text-uppercase">Profile Info</h5>
+          <form (ngSubmit)="handleUpdateProfile()">
+            <div class="d-flex justify-content-between w-100">
+              <div class="w-100 me-2">
+                <p class="m-0" style="font-size: 12px;">User Name Change</p>
+                <input type="text" class="form-control bg-transparent text-light" style="border-radius: 20px;" placeholder="Name" name="uname" [(ngModel)]="userData.username">
+              </div>
+              <div class="w-100 ms-2">
+                <p class="m-0" style="font-size: 12px;">Password Change</p>
+                <input type="text" class="form-control bg-transparent text-light" style="border-radius: 20px;" placeholder="Password" name="psw" [(ngModel)]="userData.password">
+              </div>
+            </div>
+            <div class="text-start">
+              <button class="mt-4 btn btn-light py-2 px-5 text-uppercase" style="border-radius: 20px;">Save</button>
+            </div>
+          </form>
+        </div>
+        <div class="p-4 mt-4 shadow"  style="overflow-y: scroll; height: 42vh;">
+          <p class="text-uppercase mb-5 h5 position-sticky" style="top: 0;z-index: 1;" *ngIf="show">{{show}}</p>
+          <ng-container *ngIf="allReviews.length>0; else elsediv">
+            <div class="card border-secondary mb-3" *ngFor="let i of allReviews" style="max-width: 100%;" >
+              <div class="d-flex px-3 pt-3">
+                <img [src]="i.image" style="width: 45px; height: 45px; object-fit: cover; border-radius: 50%;" alt="">
+                <div class="ms-3 d-flex align-items-center">
+                  <p class="m-0">{{i.username}}</p>
+                  <p style="font-size: 10px;" class="text-secondary m-0 ms-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-patch-check text-primary" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                      <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/>
+                    </svg>
+                  </p>
+                </div>
+              </div>
+              <div class="card-body text-secondary">
+                <h5 class="card-title">{{i.reviewTitle}}</h5>
+                <p class="card-text">{{i.description}}.</p>
+              </div>
+              <div class="p-4 pt-1">
+                <span routerLink="/view/{{i?.id}}">
+                  <i class="fa-solid fa-arrow-up-right-from-square text-secondary"></i>
+                </span>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #elsediv>
+              <h5 class="d-flex justify-content-center align-items-end text-danger">No reviews</h5>
+          </ng-template>
+        </div>
+      </div>
+      <!-- Recent  -->
+      <div class="col-md-5 col-lg-3 py-3 mb-4 shadow-lg" style="overflow-y: scroll; height: 70vh;">
         <h4 class="text-uppercase pt-2" style="font-size: 18px;">Recent added</h4>
-        <div class="w-100 p-2" *ngFor="let i of suggestItem">
-          
-          <div class="card" style="width: 100%;">
-            <img src="{{i.image}}" routerLink="/view/{{i?.id}}" class="card-img-top" height="120px" style="object-fit: cover;" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{i?.title}}</h5>
-              <p class="card-text">{{i?.price|currency:'INR'}}</p>
-      
+        <div class="row">
+          <div class="col-6 col-sm-6 mb-4" *ngFor="let i of suggestItem">
+            <div class="card shadow-sm" style="width: 100%;">
+              <img [src]="i.image" routerLink="/view/{{i?.id}}" class="card-img-top" height="120px" style="object-fit: cover;" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{i?.title}}</h5>
+                <p class="card-text">{{i?.price | currency: 'INR'}}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -147,6 +147,12 @@ export class ApiCallService {
 deleteUserReview(id:any){
   return this.http.delete(`${this.SERVER_URL}/delete-review/${id}`,this.appendTokenToHeader()) 
 }
+getyourReviews(){
+  return this.http.get(`${this.SERVER_URL}/get-your-review`,this.appendTokenToHeader()) 
+}
+getAllAdminReviews(){
+  return this.http.get(`${this.SERVER_URL}/get-admin-all-review`,this.appendTokenToHeader()) 
+}
 
 
 
