@@ -25,7 +25,7 @@ ngOnInit() {
 
 getData() {
   this.editData = { ...this.itemData }
-  console.log(this.editData);
+  // console.log(this.editData);
 }
 
 editProductData() {

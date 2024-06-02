@@ -65,17 +65,17 @@ checkForm() {
 
   initConfig() {
     this.payPalConfig = {
-        currency: 'EUR',
+        currency: 'USD',
         clientId: 'sb',
         createOrderOnClient: (data) => < ICreateOrderRequest > {
             intent: 'CAPTURE',
             purchase_units: [{
                 amount: {
-                    currency_code: 'EUR',
+                    currency_code: 'USD',
                     value: this.total,
                     breakdown: {
                         item_total: {
-                            currency_code: 'EUR',
+                            currency_code: 'USD',
                             value: this.total
                         }
                     }
@@ -88,7 +88,8 @@ checkForm() {
         },
         style: {
             label: 'paypal',
-            layout: 'vertical'
+            layout: 'vertical',
+            color:'silver'
         },
         onApprove: (data, actions) => {
             console.log('onApprove - transaction was approved, but not authorized', data, actions);

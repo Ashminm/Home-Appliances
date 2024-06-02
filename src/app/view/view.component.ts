@@ -73,7 +73,7 @@ export class ViewComponent implements OnInit{
       next:(res:any)=>{
         console.log(res);
        this.reviewproduct=res.filter((item:any)=> item.id == this.pid)
-      //  console.log("id based=",this.reviewproduct);
+       console.log("id based=",this.reviewproduct);
        this.getData()
       }
     })
@@ -114,7 +114,7 @@ export class ViewComponent implements OnInit{
         next:(res:any)=>{
           console.log(res);
           this.api.getCartListCountApi()
-          // this.toastr.success("Item Added to Cart")
+          this.toastr.success("Item Added to Cart")
         },
         error:(err)=>[
           this.toastr.error(err.error)

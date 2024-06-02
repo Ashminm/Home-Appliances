@@ -15,6 +15,7 @@ export class AdmindashComponent implements OnInit{
   products:any[]=[]
   allUser:any[]=[]
   searchKey:String=''
+
   constructor(private api:ApiCallService,private route:Router,private tostr:ToastrService){
     this.today = Date.now();
     setInterval(() => {
@@ -37,7 +38,7 @@ getdata(){
 getUser(){
   this.api.getAllUseraApi().subscribe((res:any)=>{
     this.allUser=res
-    console.warn(this.allUser);
+    console.log(this.allUser);
   })
   this.api.getAdminProfile().subscribe((res:any)=>{
     this.profilePicture=res
