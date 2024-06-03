@@ -37,7 +37,6 @@ export class ViewComponent implements OnInit{
 
   ngOnInit(){
     this.getData()
-    this.getTrending()
     this.getuserAdmiData()
     this.getReviewProductBase()
     this.showAdmi()
@@ -50,6 +49,7 @@ export class ViewComponent implements OnInit{
     const allReviewData = {
       ...reviewData,
       id: this.product.id,
+      productId: this.product.id,
       title: this.product.title,
       rating: this.product.rating,
       image: this.userProfileData.profileImage ? this.userProfileData.profileImage : defaultImage
@@ -72,8 +72,8 @@ export class ViewComponent implements OnInit{
     this.api.getReviewProduct().subscribe({
       next:(res:any)=>{
         console.log(res);
-       this.reviewproduct=res.filter((item:any)=> item.id == this.pid)
-       console.log("id based=",this.reviewproduct);
+       this.reviewproduct=res.filter((item:any)=> item.productId == this.pid)
+       console.log("Filtered by product ID =", this.reviewproduct);
        this.getData()
       }
     })
@@ -83,6 +83,11 @@ export class ViewComponent implements OnInit{
   getData(){
     this.api.getProduct(this.pid).subscribe((res:any)=>{
       this.product=res
+      
+    })
+    this.api.getTrendingProducts().subscribe((res:any)=>{
+      this.trendingItems=res
+      // console.log("trending",res);
       
     })
   }
@@ -126,14 +131,6 @@ export class ViewComponent implements OnInit{
     }
   }
 
-  getTrending(){
-    this.api.getTrendingProducts().subscribe((res:any)=>{
-      this.trendingItems=res
-      // console.log("trending",res);
-      
-    })
-  }
-
   getuserAdmiData(){
     if(sessionStorage.getItem("existingUser")){
       this.api.getUserProfile().subscribe((res:any)=>{
@@ -163,7 +160,8 @@ export class ViewComponent implements OnInit{
       next:(res:any)=>{
         console.log(res);
         this.toastr.success("Review Deleted!!")
-      this.getReviewProductBase()
+        this.getReviewProductBase()
+        this.getData()
       },
       error:(err:any)=>{
         console.log(err); 

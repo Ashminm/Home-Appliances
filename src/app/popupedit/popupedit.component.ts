@@ -13,39 +13,26 @@ import { Router } from '@angular/router';
 })
 export class PopupeditComponent implements OnInit {
   category:any;
-  editData:any={};
 
+  eProduct:any={}
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
-  @Input() itemData:any=''
+  @Input() itemId:String=''
 
 ngOnInit() {
-  this.getData()
+  // this.getData()
   this.getCategory()
+  
 }
 
 getData() {
-  this.editData = { ...this.itemData }
-  // console.log(this.editData);
-}
-
-editProductData() {
-  const { _id, title, price, description, category, tag, image, rating, photos } = this.editData;
-  if (_id && title && price && description && category && tag && image && rating && photos) {
-    this.api.editProductForm(_id, this.editData).subscribe(
-      (res: any) => {
-        // console.log(res);
-        this.toastr.success("Product Updated Successfully!!");
-        this.route.navigateByUrl('/addproduct')
-        this.getData()
-      },
-      (err: any) => {
-        console.log(err);
-        this.toastr.error("Update Failed!!");
-      }
-    );
-  } else {
-    this.toastr.info("Enter valid details");
-  }
+  this.api.getAllProducts().subscribe({
+    next:(res:any)=>{
+      // console.log(res);
+      this.eProduct=res.filter((item:any)=> item.id ==this.itemId)
+      console.log("Filter:",this.eProduct);
+      
+    }
+  })
 }
 
 
@@ -58,19 +45,6 @@ editProductData() {
     });
   }
 
-  cancelData() {
-    this.editData = {
-      _id: '',
-      id: '',
-      title: '',
-      price: '',
-      rating: '',
-      description: '',
-      category: '',
-      tag: '',
-      image: '',
-      photos: []
-    };
-  }
+
 }
 

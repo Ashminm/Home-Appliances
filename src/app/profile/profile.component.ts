@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUser()
-    this.getRecent()
    this.getAdmin()
     this.reviewSection()
     this.showAdmi()
@@ -34,6 +33,11 @@ export class ProfileComponent implements OnInit {
       if(this.userData.profileImage){
         this.profilePicture=res.profileImage
       }
+    })
+    this.api.getrecentProducts().subscribe((res:any)=>{
+      this.suggestItem=res
+      // console.log("Recent",res);
+      
     })
   
   }
@@ -145,14 +149,6 @@ export class ProfileComponent implements OnInit {
     else{
       this.toastr.info("Your an admin")
     } 
-  }
-
-  getRecent(){
-    this.api.getrecentProducts().subscribe((res:any)=>{
-      this.suggestItem=res
-      // console.log("Recent",res);
-      
-    })
   }
 
   showAdmi(){

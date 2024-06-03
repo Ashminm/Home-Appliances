@@ -17,7 +17,7 @@
               <h6 class="text-primary mb-1">{{ i?.price | currency: 'INR' }}</h6>
             </div>
             <div class="mt-auto d-flex">
-              <app-popupedit [itemData]="i" class="w-100"></app-popupedit>
+              <app-popupedit [itemId]="i.id" class="w-100"></app-popupedit>
               <button type="button" class="btn btn-dark flex-fill ms-1 w-100" (click)="deleteProductItem(i._id)">
                 Delete
               </button>
