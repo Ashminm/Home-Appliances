@@ -9,14 +9,31 @@
       <div class="col-md-5 col-lg-3 mb-4">
         <div class="p-5 shadow">
           <div class="d-flex justify-content-center flex-column align-items-center">
-            <img [src]="profilePicture"
+            <img [src]="profilePicture" data-bs-toggle="modal" data-bs-target="#exampleModal6"
                  style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 1px solid #c5c5c5; padding: 3px;"
                  alt="Profile Picture">
             <label for="imageUpload" style="cursor: pointer;">
-              <p class="m-0 p-1" style="font-size: 10px;">
+              <p class="m-0 p-1" style="font-size: 13px;">
                 <i class="fa-solid fa-cloud-arrow-up pe-1"></i>Upload
               </p>
             </label>
+          
+          <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+            <div class="modal-dialog modal-dialog-centered ">
+              <div class="modal-content border-0 shadow-lg" >
+                <img [src]="profilePicture" alt="Profile Picture">
+                <div class="d-flex justify-content-between py-3">
+                  <button type="button" class="btn"><label for="imageUpload" style="cursor: pointer;">
+                    <i class="fa-solid fa-pen-to-square h3" ></i>
+                  </label></button>
+                  <button type="button" class="btn" (click)="discardChanges()" ><i class="fa-solid fa-rotate fa-xl"></i></button>
+                  <button type="button" class="btn" (click)="deleteImg()" ><i class="fa-regular fa-trash-can fa-xl"></i></button>
+                  <button type="button" data-bs-dismiss="modal" class="btn"><i class="fa-regular fa-circle-xmark fa-xl"></i></button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
             <input id="imageUpload" type="file" (change)="getFile($event)" accept="image/*" style="display: none;">
             <div style="height: 25vh;">
               <h5 class="mt-4 mb-3 text-center text-uppercase">{{userData.username}}</h5>
@@ -101,11 +118,13 @@
           </form>
         </div>
         <div class="p-4 mt-4 shadow"  style="overflow-y: scroll; height: 42vh;">
-          <p class="text-uppercase mb-5 h5 position-sticky" style="top: 0;z-index: 1;" *ngIf="show">{{show}}</p>
+          <p class="text-uppercase mb-5 h5 " style="z-index: 1;" *ngIf="show">{{show}}</p>
           <ng-container *ngIf="allReviews.length>0; else elsediv">
             <div class="card border-secondary mb-3" *ngFor="let i of allReviews" style="max-width: 100%;" >
-              <div class="d-flex px-3 pt-3">
-                <img [src]="i.image" style="width: 45px; height: 45px; object-fit: cover; border-radius: 50%;" alt="">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex px-3 pt-3">
+                  <img [src]="i.image" style="width: 45px; height: 45px; object-fit: cover; border-radius: 50%;" alt="">
+                
                 <div class="ms-3 d-flex align-items-center">
                   <p class="m-0">{{i.username}}</p>
                   <p style="font-size: 10px;" class="text-secondary m-0 ms-2">
@@ -115,15 +134,21 @@
                     </svg>
                   </p>
                 </div>
+                </div>
+                <div class="dropdown me-3 ">
+                  <span class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                  <ul class="dropdown-menu py-0" aria-labelledby="dropdownMenuButton1" style="border: 1px solid rgba(128, 128, 128, 0.356);">
+                    <li *ngIf="showdelete">
+                      <a class="dropdown-item  text-secondary" (click)="deleteReview(i._id)">{{ showdelete }}</a>
+                    </li>
+                    
+                    <li><a class="dropdown-item  text-secondary" routerLink="/view/{{i?.id}}" >Go to product</a></li>
+                  </ul>
+                </div>
               </div>
               <div class="card-body text-secondary">
                 <h5 class="card-title">{{i.reviewTitle}}</h5>
                 <p class="card-text">{{i.description}}.</p>
-              </div>
-              <div class="p-4 pt-1">
-                <span routerLink="/view/{{i?.id}}">
-                  <i class="fa-solid fa-arrow-up-right-from-square text-secondary"></i>
-                </span>
               </div>
             </div>
           </ng-container>

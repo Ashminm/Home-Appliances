@@ -121,7 +121,7 @@ export class ApiCallService {
   postProductForm(data:any){
     return this.http.post(`${this.SERVER_URL}/add-product`,data) 
   }
-  editProductForm(id:String,data:any) {
+  editProductForm(data:any,id:any) {
     return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`, data, this.appendTokenToHeader());
 }
 

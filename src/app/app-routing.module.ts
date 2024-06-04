@@ -34,7 +34,7 @@ const routes: Routes = [
   {path:'adash',component:AdmindashComponent},
   {path:'addproduct',component:AddproductComponent},
   {path:'editproduct',component:EditproductComponent},
-  {path:'popupedit',component:PopupeditComponent},
+  {path:'popupedit/:id',component:PopupeditComponent},
   {path:'**',redirectTo:''}
 ];
 

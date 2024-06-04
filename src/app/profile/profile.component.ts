@@ -12,11 +12,15 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  profilePicture:string='https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp'
+  defaultProfilePicture: string = 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp';
+  profilePicture: string = this.defaultProfilePicture;
   userData:any={}
   suggestItem:any[]=[]
   allReviews:any[]=[]
   show:String=''
+  originalUserData:any={}
+  showdelete:String= ''
+
   constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
   ngOnInit() {
@@ -24,15 +28,15 @@ export class ProfileComponent implements OnInit {
    this.getAdmin()
     this.reviewSection()
     this.showAdmi()
+    this.showadDelete()
   }
 
   getUser(){
     this.api.getUserProfile().subscribe((res:any)=>{
-      this.userData=res
-      console.log("profile=",this.userData);
-      if(this.userData.profileImage){
-        this.profilePicture=res.profileImage
-      }
+      this.userData=res ||{}
+      this.originalUserData = { ...res };
+      this.profilePicture = this.userData.profileImage || this.defaultProfilePicture;
+      console.log("profile=", this.userData);
     })
     this.api.getrecentProducts().subscribe((res:any)=>{
       this.suggestItem=res
@@ -44,12 +48,11 @@ export class ProfileComponent implements OnInit {
 
   getAdmin(){
     this.api.getAdminProfile().subscribe((res:any)=>{
-      this.userData=res
-      // console.log("profile=",this.userData);
-      if(this.userData.profileImage){
-        this.profilePicture=res.profileImage
-      }
-    })
+      this.userData=res || {}
+      this.originalUserData = { ...res }; 
+      this.profilePicture = this.userData.profileImage || this.defaultProfilePicture;
+      // console.log("profile=", this.userData);
+    });
   
   }
 
@@ -80,20 +83,47 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+  getFile(event: any) {
+    const file = event.target.files[0];
+    let fr = new FileReader();
+
+    fr.onload = (event: any) => {
+        this.profilePicture = event.target.result;
+        if (!this.userData) {
+            this.userData = {}; // Initialize userData if it's null
+        }
+        this.userData.profileImage = event.target.result;
+        // console.log(this.userData.profileImage);
+    };
+
+    fr.readAsDataURL(file);
+}
 
 
-  getFile(event:any){
-    const file=event.target.files[0]
-    // console.log(file);
-    // this.lastModifyImg=file.lastModifiedDate
-    // console.log(this.lastModifyImg);
+  // getFile(event:any){
+  //   const file=event.target.files[0]
+  //   // console.log(file);
+  //   // this.lastModifyImg=file.lastModifiedDate
+  //   // console.log(this.lastModifyImg);
     
-    let fr=new FileReader()
-    fr.readAsDataURL(file)
-    fr.onload=(event:any)=>{
-      // console.log(event.target.result);
-      this.profilePicture=event.target.result
-      this.userData.profileImage=event.target.result
+  //   let fr=new FileReader()
+  //   fr.readAsDataURL(file)
+  //   fr.onload=(event:any)=>{
+  //     // console.log(event.target.result);
+  //     this.profilePicture=event.target.result
+  //     this.userData.profileImage=event.target.result
+  //     console.log(this.userData.profileImage);
+      
+  //   }
+  // }
+
+  showadDelete(){
+    const existingAdmin =sessionStorage.getItem("existingAdmin");
+    const role= sessionStorage.getItem("role")
+    if(existingAdmin && role ==="admin"){
+      this.showdelete='Delete'
+    }else{
+      this.showdelete=''
     }
   }
 
@@ -122,8 +152,6 @@ export class ProfileComponent implements OnInit {
       );
     }
   }
-  
-  
   
   deleteAccount(){
     const existingAdmin =sessionStorage.getItem("existingUser");
@@ -161,6 +189,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  deleteReview(id:any){
+    this.api.deleteUserReview(id).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        this.toastr.success("Review Deleted!!")
+        this.reviewSection()
+      },
+      error:(err:any)=>{
+        console.log(err); 
+        this.toastr.error("Deletion Faild!!")
+      }
+    })
+    
+  }
+
   logout() { 
     sessionStorage.clear();
     localStorage.clear();
@@ -169,5 +212,13 @@ export class ProfileComponent implements OnInit {
     this.route.navigateByUrl('/log')
 }
 
+discardChanges() {
+  this.userData = { ...this.originalUserData };
+  this.profilePicture = this.originalUserData.profileImage || this.defaultProfilePicture; 
+}
 
+deleteImg() {
+  this.profilePicture = this.defaultProfilePicture;
+  this.userData.profileImage = ''; 
+}
 }

@@ -51,14 +51,13 @@ export class ViewComponent implements OnInit{
       id: this.product.id,
       productId: this.product.id,
       title: this.product.title,
-      rating: this.product.rating,
       image: this.userProfileData.profileImage ? this.userProfileData.profileImage : defaultImage
     };
   
     // console.log(allReviewData);
     this.api.reviewDataPostApi(allReviewData).subscribe({
       next:(res:any)=>{
-        // console.log(res);
+        console.log(res);
         this.toastr.success("Review posted!!")
         this.addReviewData.reset()
       },

@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditproductComponent implements OnInit {
 
-  // productItem:any=[];
   products: any[] = [];
   validCards: any[] = [];
   currentPage: number = 1;
@@ -58,14 +57,6 @@ export class EditproductComponent implements OnInit {
       this.updateValidCards();
     }
   }
-
-  // getSpecificItem(id: any) {
-  //   this.api.getSpecificProduct(id).subscribe((res: any) => {
-  //     this.productItem = res; 
-  //     console.log(this.productItem);
-  //     this.getAllProducts()
-  //   });
-  // }
 
 deleteProductItem(id:any){
   this.api.deteteProdectAdmiApi(id).subscribe({

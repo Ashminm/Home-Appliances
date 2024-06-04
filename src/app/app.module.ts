@@ -28,14 +28,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatNativeDateModule} from '@angular/material/core';
 import { AddproductComponent } from './addproduct/addproduct.component';
-
 import {MatTabsModule} from '@angular/material/tabs';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { PopupeditComponent } from './popupedit/popupedit.component';
-
-// import {MatInputModule} from '@angular/material/input';
-// import {MatSelectModule} from '@angular/material/select';
-// import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -75,9 +71,7 @@ import { PopupeditComponent } from './popupedit/popupedit.component';
     MatNativeDateModule,
 
     MatTabsModule,
-    // MatInputModule,
-    // MatSelectModule,
-    // MatFormFieldModule
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

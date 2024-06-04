@@ -16,8 +16,9 @@
             <div class="col-md-5">
                 <p class="fw-bolder display-6 text-uppercase mb-1">{{product?.title}}</p>
                 <p style="font-size: 25px;">₹{{product?.price}}</p>
-                <p class="mb-2 mt-4">Rating: <span class="text-secondary h5
-                    ">{{product?.rating}}</span><span class="text-secondary" >({{reviewproduct.length}})</span></p>
+                <p class="mb-2 mt-4">Rating: <span class="text-secondary h6
+                    ">{{product?.rating}}</span><i class="fa-solid fa-star text-warning"></i></p>
+                    <label for="" class="text-secondary">Description:</label>
                 <p class="lead">{{product?.description}}</p>
               <hr class="mt-5">
                 <div class="mt-4 mb-4" >
@@ -41,7 +42,7 @@
     <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal">
         <div class="modal-content border-0 shadow-lg" >
-          <form class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);" [formGroup]="addReviewData" (ngSubmit)="handleReview()">
+          <form class="text-center p-5" style="background-color: rgba(31, 30, 30, 0.925);" [formGroup]="addReviewData" >
                 <div class="row bg-transparent">
                     <div class="col-lg-3 col-md-3 col-sm-3 bg-transparent">
                         <img class="card-img-top mb-5 mb-md-0 w-100" style="object-fit: cover;aspect-ratio: 4/4;background-color: rgb(255, 255, 255);" src="{{product?.image}}" alt="..." />
@@ -64,7 +65,7 @@
                         <div class="text-danger bg-transparant" style="font-size: 12px;" *ngIf="addReviewData.get('username')?.invalid && addReviewData.get('username')?.touched">*Invalid Username</div>
                     </div>
                 </div>
-            <button class="text-uppercase btn btn-outline-warning w-100 mt-3"[disabled]="addReviewData.invalid" >Submit</button>
+            <button class="text-uppercase btn btn-outline-warning w-100 mt-3"[disabled]="addReviewData.invalid" (click)="handleReview()" >Submit</button>
           </form> 
         </div>
       </div>
@@ -72,7 +73,7 @@
     <div class="container">
         <p><span style="font-size: 10px;">Powerd by </span><span>Homease</span></p>
         <div class="my-4 row mx-5">
-            <h1>{{product?.rating}}</h1>
+            <h1>{{product?.rating}}<i class="fa-solid fa-star ps-1 text-warning" style="font-size: 21px;"></i></h1>
             <ng-container *ngIf="reviewproduct.length > 0; else noReviews">
                 <p>Based on {{ reviewproduct.length }} Reviews</p>
             </ng-container>
