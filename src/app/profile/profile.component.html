@@ -9,9 +9,15 @@
       <div class="col-md-5 col-lg-3 mb-4">
         <div class="p-5 shadow">
           <div class="d-flex justify-content-center flex-column align-items-center">
-            <img [src]="profilePicture" data-bs-toggle="modal" data-bs-target="#exampleModal6"
-                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 1px solid #c5c5c5; padding: 3px;"
-                 alt="Profile Picture">
+            <div class="image-container">
+              <span class="expand" data-bs-toggle="modal" data-bs-target="#exampleModal6">
+                  <i class="fa-solid fa-expand fa-xl text-warning bg-transparent"></i>
+              </span>
+              <img [src]="profilePicture" data-bs-toggle="modal" data-bs-target="#exampleModal6"
+                  style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 1px solid #c5c5c5; padding: 3px;"
+                  class="profile-image" alt="Profile Picture">
+          </div>
+          
             <label for="imageUpload" style="cursor: pointer;">
               <p class="m-0 p-1" style="font-size: 13px;">
                 <i class="fa-solid fa-cloud-arrow-up pe-1"></i>Upload

@@ -1,3 +1,30 @@
 .dropdown-toggle::after {
-    display: none !important; /* Hide the arrow */
+    display: none !important; 
 }
+
+.image-container {
+    position: relative;
+    display: inline-block; /* Ensure that the container takes up only as much space as the image */
+}
+
+.expand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    display: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.image-container:hover .expand {
+    display: block;
+}
+
+.image-container:hover img {
+    filter: brightness(60%);
+    transition: 100ms;
+
+}
+
