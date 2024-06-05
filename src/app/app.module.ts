@@ -31,7 +31,6 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { PopupeditComponent } from './popupedit/popupedit.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -69,9 +68,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     MatDatepickerModule,
     MatCardModule,
-    MatNativeDateModule,
-    MatSnackBarModule
-    
+    MatNativeDateModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

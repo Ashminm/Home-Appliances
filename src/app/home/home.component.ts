@@ -3,7 +3,7 @@ import { ApiCallService } from '../services/api-call.service';
 import { OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   filterCategory: any[] = [];
   products:any[]=[]
 
-  constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router,private snack:MatSnackBar){}
+  constructor(private api:ApiCallService,private toastr:ToastrService,private route:Router){}
 
 
   ngOnInit() {
@@ -71,7 +71,6 @@ export class HomeComponent implements OnInit {
         next:(res:any)=>{
           console.log(res);
           this.api.getCartListCountApi()
-          // this.snack.open("Item Added to Cart", '',{duration:1000})
           this.toastr.success("Item Added to Cart")
         },
         error:(err)=>[
