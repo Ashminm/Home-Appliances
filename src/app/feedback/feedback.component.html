@@ -1,0 +1,36 @@
+<section class="mt-4">
+    <div class="d-flex justify-content-between align-items-center mx-2">
+        <h3>All FeedBacks</h3>
+       <button class="btn btn-outline-warning mb-2" (click)="clearAllFeed()">Clear all</button>
+    </div>
+    <table class="table table-hover table-transperant">
+        <thead>
+          <tr class="border">
+            <th scope="col" class="py-4">Firstname</th>
+            <th scope="col" class="py-4">Lastname</th>
+            <th scope="col" class="py-4">Email</th>
+            <th scope="col" class="py-4">Subject</th>
+            <th scope="col" class="py-4">Messege</th>
+            <th scope="col" class="py-4">Delete</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="allFeed.length > 0; else elsediv">
+            <tr *ngFor="let i of allFeed">
+              <th class="py-3 text-secondary" scope="row">{{ i.firstname }}</th>
+              <td class="py-3" [style.color]="i.lastname ? 'gray' : 'yellow'">{{ i.lastname || 'Not Enterd' }}</td>
+              <td class="py-3 text-secondary">{{ i.email }}</td>
+              <td class="py-3 text-secondary">{{ i.subject }}</td>
+              <td class="py-3 text-secondary w-50">{{ i.messege }}</td>
+              <td class="py-3 text-secondary"><button class="btn btn-outline-danger" (click)="deleteFeedBackUser(i._id)">Delete</button></td>
+            </tr>
+          </tbody>
+          <div >
+            <ng-template #elsediv>
+                <tr>
+                    <th  colspan="6" class="text-center py-5 h3 text-danger border">No FeedBacks</th>
+                </tr>
+              </ng-template>
+          </div>
+          
+      </table>
+</section>

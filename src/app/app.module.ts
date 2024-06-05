@@ -28,10 +28,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatNativeDateModule} from '@angular/material/core';
 import { AddproductComponent } from './addproduct/addproduct.component';
-import {MatTabsModule} from '@angular/material/tabs';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { PopupeditComponent } from './popupedit/popupedit.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CalenderComponent,
     AddproductComponent,
     EditproductComponent,
-    PopupeditComponent, 
+    PopupeditComponent,
+    FeedbackComponent, 
   ],
   imports: [
     BrowserModule,
@@ -69,9 +69,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule,
-
-    MatTabsModule,
-    MatSnackBarModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

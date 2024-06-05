@@ -7,40 +7,46 @@
                 <h1 style="font-size: 45px;">Lets Have a Chat 👋🏻</h1>
                 <p class="text-center text-secondary" style="font-size: 17px;">Questions about our products/interface, order. or just want to say hello? We're hear to healp</p>
             </div>
-           <form action="" class="mt-4">
+           <form class="mt-4" [formGroup]="conForm" >
             <div class="d-flex mb-3">
                
                 <div class="me-3 w-100">
                     <label for="">First name</label>
-                    <input type="text" class="form-control bg-transparent text-light " placeholder="Alex">
+                    <input type="text" formControlName="firstname" class="form-control bg-transparent text-light " placeholder="Alex">
+                    <div class="text-danger" style="font-size: 12px;" *ngIf="conForm.get('firstname')?.invalid && conForm.get('firstname')?.touched" >*Invalid Name</div>
                 </div>
                 <div class="w-100">
                     <label for="">Last name</label>
-                    <input type="text" class="form-control bg-transparent text-light" placeholder="Js">
+                    <input type="text" formControlName="lastname" class="form-control bg-transparent text-light" placeholder="Js">
                 </div>
             </div>
             <div class="d-flex mb-3">
                <div class="w-100 me-3">
                 <label for="">Email</label>
-                <input type="email"   class="form-control bg-transparent text-light" placeholder="alex@gmail.com">
+                <input type="email" formControlName="email"  class="form-control bg-transparent text-light" placeholder="alex@gmail.com">
+                <div class="text-danger" style="font-size: 12px;" *ngIf="conForm.get('email')?.invalid && conForm.get('email')?.touched" >*Invalid email</div>
+
                </div>
                 <div class="w-100">
                     <label for="">Phone number</label>
-                    <input type="text" class="form-control bg-transparent text-light" placeholder="Subject">
+                    <input type="text" formControlName="subject" class="form-control bg-transparent text-light" placeholder="Subject">
+                    <div class="text-danger" style="font-size: 12px;" *ngIf="conForm.get('subject')?.invalid && conForm.get('subject')?.touched" >*Invalid subject</div>
                 </div>
             </div>
             <label for="">Message</label>
-            <textarea name="" id="" rows="4" class="form-control bg-transparent text-light" placeholder="Hey i have some issues activating my account..."></textarea>
-            <div class="mt-4">
-                <button class="btn bg-light text-dark w-100">Just send</button>
+            <textarea name="" id="" rows="4" formControlName="messege" class="form-control bg-transparent text-light" placeholder="Hey i have some issues activating my account..."></textarea>
+            <div class="text-danger" style="font-size: 12px;" *ngIf="conForm.get('messege')?.invalid && conForm.get('messege')?.touched" >*Invalid messege</div>
+            <div class="mt-4 d-flex">
+                <button class="btn bg-light text-dark w-100 me-1" [disabled]="conForm.invalid" (click)="handleContactForm()" >Just send</button>
+                <button class="btn btn-outline-light" title="Reset Form" [disabled]="conForm.invalid" (click)="resetForm()"><i class="fa-solid fa-rotate btn-outline-light"></i></button>
             </div>
            </form>
            <div class="d-flex justify-content-center align-items-center mt-2 text-secondary">
-            <hr style="width: 36%;">
+            <hr style="width: 40%;">
             <i class="fa-brands fa-x-twitter px-3 text-secondary"></i>
             <i class="fa-brands fa-instagram text-secondary"></i>
             <i class="fa-brands fa-whatsapp px-3 text-secondary"></i>
-            <hr style="width: 36%;">
+            <hr style="width: 40%;">
            </div>
         </div>
     </div>

@@ -114,6 +114,15 @@
             aria-controls="v-tabs-messages"
             aria-selected="false"
           >Editproduct</a>
+          <a
+            class="nav-link text-secondary"
+            id="v-tabs-feed-tab"
+            data-bs-toggle="tab"
+            href="#v-tabs-feed"
+            role="tab"
+            aria-controls="v-tabs-feed"
+            aria-selected="false"
+          >FeedBack</a>
         </div>
         <!-- Tab navs -->
       </div>
@@ -231,6 +240,9 @@
                 <app-calender></app-calender>
               </div>
             </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <app-feedback></app-feedback>
+            </div>
           </div>
           <div
             class="tab-pane fade"
@@ -247,6 +259,14 @@
             aria-labelledby="v-tabs-messages-tab"
           >
           <app-editproduct ></app-editproduct>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="v-tabs-feed"
+            role="tabpanel"
+            aria-labelledby="v-tabs-feed-tab"
+          >
+          <app-feedback ></app-feedback>
           </div>
         </div>
     

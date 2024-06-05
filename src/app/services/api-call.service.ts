@@ -125,10 +125,6 @@ export class ApiCallService {
     return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`, data, this.appendTokenToHeader());
 }
 
-  // getSpecificProduct(id:any){
-  //   return this.http.put(`${this.SERVER_URL}/admin-edit-product/${id}`,this.appendTokenToHeader())
-  // }
-  
   deteteProdectAdmiApi(id:any){
   return this.http.delete(`${this.SERVER_URL}/product-delete/${id}`,this.appendTokenToHeader()) 
   }
@@ -153,7 +149,18 @@ getyourReviews(){
 getAllAdminReviews(){
   return this.http.get(`${this.SERVER_URL}/get-admin-all-review`,this.appendTokenToHeader()) 
 }
-
+contactUserApi(data:any){
+  return this.http.post(`${this.SERVER_URL}/user-feedback`,data) 
+}
+getUseFeed(){
+  return this.http.get(`${this.SERVER_URL}/get-user-feedback`,this.appendTokenToHeader()) 
+}
+deleteFeed(id:any){
+  return this.http.delete(`${this.SERVER_URL}/delete-feed/${id}`,this.appendTokenToHeader()) 
+}
+deleteAllFeedBack(){
+  return this.http.delete(`${this.SERVER_URL}/delete-all-feed`,this.appendTokenToHeader()) 
+}
 
 
   getWishlistCountApi(){
