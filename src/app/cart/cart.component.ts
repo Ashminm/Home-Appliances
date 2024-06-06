@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
+  dataLoaded = false;
+  
   products:any[]=[]
   totalAmount:any=0
   cartOffer:any=false
@@ -38,6 +39,10 @@ export class CartComponent implements OnInit {
         
       }
     })
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 1000);
   }
 
   deleteCartItem(id:any){

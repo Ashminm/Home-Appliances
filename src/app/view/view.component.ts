@@ -5,6 +5,7 @@ import { OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-view',
@@ -12,7 +13,9 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit{
-
+  dataLoaded = false;
+  panelOpenState = false;
+  
   pid:any=0
   product:any={}
   trendingItems:any[]=[]
@@ -76,6 +79,10 @@ export class ViewComponent implements OnInit{
        this.getData()
       }
     })
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 600);
   }
   
   

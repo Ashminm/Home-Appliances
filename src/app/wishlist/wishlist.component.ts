@@ -9,7 +9,7 @@ import { OnInit } from '@angular/core';
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
-
+  dataLoaded = false;
   products:any[]=[]
   constructor(private api:ApiCallService,private toastr:ToastrService){}
 
@@ -28,6 +28,10 @@ export class WishlistComponent implements OnInit {
         
       }
     })
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 1000);
   }
 
   deleteItem(id:any){

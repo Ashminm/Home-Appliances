@@ -7,6 +7,7 @@ import { ApiCallService } from '../services/api-call.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+  dataLoaded = false;
   categories:any[] = [];
   searchKey:any=""
   constructor(private api: ApiCallService) { }
@@ -34,5 +35,11 @@ export class CategoriesComponent implements OnInit {
         }
       }
     );
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 700);
   }
+
+
 }

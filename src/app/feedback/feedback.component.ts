@@ -54,6 +54,20 @@ ngOnInit() {
     })
   }
 
+  sortByname(){
+    this.allFeed.sort((user1:any,user2:any)=>user1.firstname.localeCompare(user2.firstname))
+  }
 
+  sortByMessege(){
+    this.allFeed.sort((msg1:any,msg2:any)=>msg1.messege.localeCompare(msg2.messege))
+
+  }
+  sortByAvailable() {
+    this.allFeed.sort((user1: any, user2: any) => {
+      const name1 = user1.lastname || "Not Entered";
+      const name2 = user2.lastname || "Not Entered";
+      return name1.localeCompare(name2);
+    });
+  }
 
 }

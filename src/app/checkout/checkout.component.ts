@@ -16,6 +16,8 @@ import { OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit{
 
+  dataLoaded = false;
+
   LowPriceItems:any[]=[]
   checkOutStatus:boolean=false
   total:any=sessionStorage.getItem('totalAmount')
@@ -35,6 +37,10 @@ export class CheckoutComponent implements OnInit{
       // console.log("trending",res);
       
     })
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 700);
   }
 
   checkOutForm = this.FormBu.group({
@@ -61,6 +67,8 @@ checkForm() {
 
   cancelCheckOut(){
     this.checkOutForm.reset()
+    sessionStorage.removeItem('totalAmount');
+    sessionStorage.removeItem('totalProduct');
   }
 
   initConfig() {

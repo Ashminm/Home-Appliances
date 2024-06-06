@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
 
+  dataLoaded = false;
+
   filterCategory: any[] = [];
   products:any[]=[]
 
@@ -28,6 +30,9 @@ export class HomeComponent implements OnInit {
       // console.log(res);
       this.products=res
       this.filterCategory = res;
+      setTimeout(() => {
+        this.dataLoaded = true;
+      }, 1000);
     },
     (err:any)=>{
       console.log(err);

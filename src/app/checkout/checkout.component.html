@@ -1,12 +1,26 @@
 <app-header></app-header>
-
-<section style="min-height: calc(100vh - 56px);">
-    <div class="d-flex justify-content-center align-items-center " >
+<div *ngIf="!dataLoaded" class="container">
+    <ngx-skeleton-loader count="20"
+        appearance="line"
+        animation="progress-dark"
+        [theme]="{
+            'background-color': '#333',
+            'border-radius': '4px',
+            'height': '20px',
+            'margin-bottom': '10px',
+            'width': '100%'
+        }"
+        loadingText="Loading content"
+        ariaLabel="Content is loading">
+</ngx-skeleton-loader>
+  </div>
+<section style="min-height: calc(100vh - 56px);" *ngIf="dataLoaded">
+    <div class="d-flex justify-content-center align-items-center ">
         <div class="col-lg-3 col-md-6 shadow" style="border: 1px solid rgb(150, 149, 149);border-radius: 20px;">   
             <form class="p-4 w-100" style="border-radius: 20px;" autocomplete="off" [formGroup]="checkOutForm" *ngIf="!checkOutStatus" >
                 <div class="d-flex justify-content-between">
                     <p class="m-0  m-0 p-3 pb-5 pe-0" (click)="cancelCheckOut()" style="cursor: pointer;"><i class="fa-regular fa-circle-xmark fa-xl pe-2"></i>Cancel</p>
-                    <p class="text-end m-0 p-3 pb-5 pe-0" ><span >({{totalProduct}})Items<i class="fa-solid fa-bag-shopping fa-xl bg-transparent ps-2"></i></span></p>
+                    <p class="text-end m-0 p-3 pb-5 pe-0" ><span >({{ totalProduct || 0 }}) Items<i class="fa-solid fa-bag-shopping fa-xl bg-transparent ps-2"></i></span></p>
                 </div>
                 <h5 class="mb-5 mt-5">How would you like to get your order?</h5>
                 <div class="d-flex justify-content-between w-100 mb-5">

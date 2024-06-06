@@ -1,6 +1,21 @@
 <app-header></app-header>
+<div *ngIf="!dataLoaded" class="container">
+    <ngx-skeleton-loader count="15"
+        appearance="line"
+        animation="progress-dark"
+        [theme]="{
+            'background-color': '#333',
+            'border-radius': '4px',
+            'height': '20px',
+            'margin-bottom': '10px',
+            'width': '100%'
+        }"
+        loadingText="Loading content"
+        ariaLabel="Content is loading">
+</ngx-skeleton-loader>
+  </div>
 
-<section class="py-5">
+<section class="py-5" *ngIf="dataLoaded">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-start">
             <div class="col-md-1 text-center d-flex flex-column"  [class.d-none]="!product.photos.length" *ngIf="product.photos.length > 0">
@@ -49,7 +64,7 @@
                     </div>
                     <div class="col lg-9 col-md-9 col-sm-9 bg-transparent d-flex flex-column align-items-start">
                         <p class="h2 bg-transparent text-start">{{product?.title}}</p>
-                        <p class="mb-0 bg-transparent">₹{{product?.price}}</p>
+                        <p class="mb-0 bg-transparent text-secondary">₹{{product?.price}}</p>
                     </div>
                     <div class="mt-5 mb-4 bg-transparent d-flex flex-column align-items-start">
                         <label for="" class="bg-transparent">Review title</label>
@@ -65,6 +80,18 @@
                         <div class="text-danger bg-transparant" style="font-size: 12px;" *ngIf="addReviewData.get('username')?.invalid && addReviewData.get('username')?.touched">*Invalid Username</div>
                     </div>
                 </div>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle   class="bg-dark">
+                        <mat-expansion-panel-header class="bg-dark m-0">
+                          <mat-panel-title class="text-light bg-dark m-0">
+                            Conditions for submission of review:
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p class="mb-1 text-start ">* You can review even if you change defult username.</p>
+                        <p class="mb-1 text-start ">* Review cannot be edited or deleted after submission.</p>
+                        <p class="mb-1 text-start ">* if your review sexual or violent, admin will check and delete it.</p>
+                      </mat-expansion-panel>
+                </mat-accordion>
             <button class="text-uppercase btn btn-outline-warning w-100 mt-3"[disabled]="addReviewData.invalid" (click)="handleReview()" >Submit</button>
           </form> 
         </div>

@@ -31,6 +31,9 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { PopupeditComponent } from './popupedit/popupedit.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { FeedbackComponent } from './feedback/feedback.component';
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule, 
+    MatExpansionModule,
+    NgxSkeletonLoaderModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-category.component.css']
 })
 export class ViewCategoryComponent implements OnInit {
+  dataLoaded = false;
   categoryAllProducts:any=[]
   productCategory:any=[]
   constructor(private api: ApiCallService,private aroute:ActivatedRoute) {
@@ -33,6 +34,10 @@ export class ViewCategoryComponent implements OnInit {
         
       }
     })
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 900);
   }
 
 }

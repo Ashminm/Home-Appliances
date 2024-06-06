@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./allproducts.component.css']
 })
 export class AllproductsComponent implements OnInit {
-
+  dataLoaded = false;
   filterCategory: any[] = [];
   allproducts:any[]=[]
   searchKey:any=""
@@ -24,6 +24,9 @@ export class AllproductsComponent implements OnInit {
       // console.log(res);
       this.allproducts=res
       this.filterCategory = res;
+      setTimeout(() => {
+        this.dataLoaded = true;
+      }, 1000);
     },
     (err:any)=>{
       console.log(err);

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
+  dataLoaded = false;
+
   defaultProfilePicture: string = 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp';
   profilePicture: string = this.defaultProfilePicture;
   userData:any={}
@@ -43,6 +45,10 @@ export class ProfileComponent implements OnInit {
       // console.log("Recent",res);
       
     })
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 2500);
   
   }
 
@@ -99,23 +105,6 @@ export class ProfileComponent implements OnInit {
     fr.readAsDataURL(file);
 }
 
-
-  // getFile(event:any){
-  //   const file=event.target.files[0]
-  //   // console.log(file);
-  //   // this.lastModifyImg=file.lastModifiedDate
-  //   // console.log(this.lastModifyImg);
-    
-  //   let fr=new FileReader()
-  //   fr.readAsDataURL(file)
-  //   fr.onload=(event:any)=>{
-  //     // console.log(event.target.result);
-  //     this.profilePicture=event.target.result
-  //     this.userData.profileImage=event.target.result
-  //     console.log(this.userData.profileImage);
-      
-  //   }
-  // }
 
   showadDelete(){
     const existingAdmin =sessionStorage.getItem("existingAdmin");

@@ -1,36 +1,53 @@
 <section class="mt-4">
-    <div class="d-flex justify-content-between align-items-center mx-2">
-        <h3>All FeedBacks</h3>
-       <button class="btn btn-outline-warning mb-2" (click)="clearAllFeed()">Clear all</button>
+  <div class="d-flex justify-content-between align-items-center mx-2 mb-3 rounded">
+    <div>
+      <div class="dropdown ">
+          <p class=" pe-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dop1" style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 14px 5px 14px;background-color: rgba(56, 56, 56, 0.829);">
+            <i class="fa-solid fa-filter" style="background-color: rgba(56, 56, 56, 0.829);"></i> Filter
+          </p>
+          <ul class="dropdown-menu bg-transparent shadow" style="border: 1px solid rgba(128, 128, 128, 0.068);" aria-labelledby="drop1">
+              <li><a class="dropdown-item text-secondary" (click)="sortByname()" >Name: A-Z</a></li>
+              <li><a class="dropdown-item text-secondary" (click)="sortByMessege()">Messsege: A-Z</a></li>
+              <li><a class="dropdown-item text-secondary" (click)="sortByAvailable()">Lastname: Available</a></li>
+          </ul>
+        </div>
+      </div>
+    <h3 class="text-uppercase">All Feedbacks</h3>
+    <div class="d-flex">
+      <p class="mx-3 d-none d-sm-block" style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 14px 5px 14px;background-color: rgba(56, 56, 56, 0.829);">items:{{allFeed.length || 0 }}</p>
+      <button class="btn btn-outline-warning mb-2" (click)="clearAllFeed()">Clear</button>
     </div>
-    <table class="table table-hover table-transperant">
-        <thead>
-          <tr class="border">
-            <th scope="col" class="py-4">Firstname</th>
-            <th scope="col" class="py-4">Lastname</th>
-            <th scope="col" class="py-4">Email</th>
-            <th scope="col" class="py-4">Subject</th>
-            <th scope="col" class="py-4">Messege</th>
-            <th scope="col" class="py-4">Delete</th>
-          </tr>
-        </thead>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover table-transparent">
+      <thead>
+        <tr class="border">
+          <th scope="col" class="py-4 text-uppercase">Firstname<i class="fa-solid fa-sort ps-1 btn-outline-light" (click)="sortByname()"></i></th>
+          <th scope="col" class="py-4 text-uppercase">Lastname<i class="fa-solid fa-sort ps-1 btn-outline-light" (click)="sortByAvailable()"></i></th>
+          <th scope="col" class="py-4 text-uppercase">Email</th>
+          <th scope="col" class="py-4 text-uppercase">Subject</th>
+          <th scope="col" class="py-4 text-uppercase">Message<i class="fa-solid fa-sort ps-1 btn-outline-light" (click)="sortByMessege()"></i></th>
+          <th scope="col" class="py-4 text-uppercase text-danger">Delete</th>
+        </tr>
+      </thead>
         <tbody *ngIf="allFeed.length > 0; else elsediv">
-            <tr *ngFor="let i of allFeed">
-              <th class="py-3 text-secondary" scope="row">{{ i.firstname }}</th>
-              <td class="py-3" [style.color]="i.lastname ? 'gray' : 'yellow'">{{ i.lastname || 'Not Enterd' }}</td>
-              <td class="py-3 text-secondary">{{ i.email }}</td>
-              <td class="py-3 text-secondary">{{ i.subject }}</td>
-              <td class="py-3 text-secondary w-50">{{ i.messege }}</td>
-              <td class="py-3 text-secondary"><button class="btn btn-outline-danger" (click)="deleteFeedBackUser(i._id)">Delete</button></td>
-            </tr>
-          </tbody>
-          <div >
-            <ng-template #elsediv>
-                <tr>
-                    <th  colspan="6" class="text-center py-5 h3 text-danger border">No FeedBacks</th>
-                </tr>
-              </ng-template>
-          </div>
-          
-      </table>
+          <tr *ngFor="let i of allFeed">
+            <td class="py-3 text-secondary" data-label="Firstname">{{ i.firstname }}</td>
+            <td class="py-3" [style.color]="i.lastname ? 'gray' : 'yellow'" data-label="Lastname">{{ i.lastname || 'Not Entered' }}</td>
+            <td class="py-3 text-secondary" data-label="Email">{{ i.email }}</td>
+            <td class="py-3 text-secondary" data-label="Subject">{{ i.subject }}</td>
+            <td class="py-3 text-secondary" data-label="Message">{{ i.messege.slice(0,100)}}...</td>
+
+            <td class="py-3 text-secondary" data-label="Delete">
+              <button class="btn btn-outline-danger" (click)="deleteFeedBackUser(i._id)"><i class="fa-solid fa-xmark fa-lg bg-transparent"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      <ng-template #elsediv>
+        <tr>
+          <td colspan="6" class="text-center py-5 h3 text-danger border">No Feedbacks</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
 </section>

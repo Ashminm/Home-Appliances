@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditproductComponent implements OnInit {
 
+  dataLoaded = false;
+
   products: any[] = [];
   validCards: any[] = [];
   currentPage: number = 1;
@@ -28,6 +30,10 @@ export class EditproductComponent implements OnInit {
       this.calculateTotalPages();
       this.updateValidCards();
     });
+
+    setTimeout(() => {
+      this.dataLoaded = true;
+    }, 1000);
   }
 
   calculateTotalPages() {

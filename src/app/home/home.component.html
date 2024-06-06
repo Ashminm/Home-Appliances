@@ -73,6 +73,23 @@
     </div>
 </div>
 
+<div *ngIf="!dataLoaded" class="container">
+    <ngx-skeleton-loader count="10"
+        appearance="line"
+        animation="progress-dark"
+        [theme]="{
+            'background-color': '#333',
+            'border-radius': '4px',
+            'height': '20px',
+            'margin-bottom': '10px',
+            'width': '100%'
+        }"
+        loadingText="Loading content"
+        ariaLabel="Content is loading">
+</ngx-skeleton-loader>
+  </div>
+
+<div  *ngIf="dataLoaded">
 <section class="py-5">
     <div class="container-fluid px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
@@ -102,8 +119,11 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+           
         </div>
         <p class="text-center"><button class="btn btn-outline-light text-uppercase" style="border-radius: 20px;padding: 8px 27px 8px 27px;" (click)="moreAllProducts()">Shop all collections</button></p>
     </div>
 </section>
+</div>
+

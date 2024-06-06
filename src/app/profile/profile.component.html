@@ -1,5 +1,19 @@
-<!-- <app-header></app-header> -->
-<section style="min-height: calc(100vh - 56px);">
+<div *ngIf="!dataLoaded" class="container" style="padding-top: 6%;">
+  <ngx-skeleton-loader count="10"
+      appearance="line"
+      animation="progress-dark"
+      [theme]="{
+          'background-color': '#333',
+          'border-radius': '4px',
+          'height': '20px',
+          'margin-bottom': '10px',
+          'width': '100%'
+      }"
+      loadingText="Loading content"
+      ariaLabel="Content is loading">
+</ngx-skeleton-loader>
+</div>
+<section style="min-height: calc(100vh - 56px);" *ngIf="dataLoaded">
   <h4 class="py-5 pb-4 container" routerLink="/">
     <i class="fa-solid fa-circle-arrow-left"></i>
   </h4>

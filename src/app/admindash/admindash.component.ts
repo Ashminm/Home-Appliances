@@ -10,6 +10,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admindash.component.css']
 })
 export class AdmindashComponent implements OnInit{
+
+  dataLoaded = false;
+
   today: number;
   profilePicture:any
   products:any[]=[]
@@ -32,6 +35,10 @@ getdata(){
   this.api.getAllProducts().subscribe((res:any)=>{
     this.products=res
   })
+
+  setTimeout(() => {
+        this.dataLoaded = true;
+      }, 1000);
 }
 
 
