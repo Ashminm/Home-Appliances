@@ -42,7 +42,7 @@ ngOnInit() {
   clearAllFeed(){
     this.api.deleteAllFeedBack().subscribe({
       next:(res:any)=>{
-        console.log(res.deletedCount);
+        // console.log(res.deletedCount);
         this.tostr.success(`Clear all FeedBacks!! ${res.deletedCount} Items`)
         this.getData()
       },

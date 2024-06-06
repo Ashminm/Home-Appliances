@@ -161,6 +161,9 @@ deleteFeed(id:any){
 deleteAllFeedBack(){
   return this.http.delete(`${this.SERVER_URL}/delete-all-feed`,this.appendTokenToHeader()) 
 }
+clearAllreview(){
+  return this.http.delete(`${this.SERVER_URL}/detete-all-review`,this.appendTokenToHeader()) 
+}
 
 
   getWishlistCountApi(){

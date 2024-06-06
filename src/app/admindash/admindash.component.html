@@ -1,3 +1,4 @@
+
 <section style="min-height: calc(100vh - 56px);">
   <div class="container-fluid py-4 h-100">
     <nav class="row">
@@ -123,6 +124,15 @@
             aria-controls="v-tabs-feed"
             aria-selected="false"
           >FeedBack</a>
+          <a
+            class="nav-link text-secondary text-uppercase"
+            id="v-tabs-review-tab"
+            data-bs-toggle="tab"
+            href="#v-tabs-review"
+            role="tab"
+            aria-controls="v-tabs-review"
+            aria-selected="false"
+          >Reviews</a>
         </div>
         <!-- Tab navs -->
       </div>
@@ -267,6 +277,73 @@
             aria-labelledby="v-tabs-feed-tab"
           >
           <app-feedback ></app-feedback>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="v-tabs-review"
+            role="tabpanel"
+            aria-labelledby="v-tabs-review-tab"
+          >      
+<!-- ----------------------------------- -->
+
+<section class="mt-4 container">
+  <div class="d-flex justify-content-between align-items-center mx-2 mb-3 rounded">
+    <div>
+      <div class="dropdown ">
+          <p class=" pe-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dop1" style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 14px 5px 14px;background-color: rgba(56, 56, 56, 0.829);">
+            <i class="fa-solid fa-filter" style="background-color: rgba(56, 56, 56, 0.829);"></i> Filter
+          </p>
+          <ul class="dropdown-menu bg-transparent shadow" style="border: 1px solid rgba(128, 128, 128, 0.068);" aria-labelledby="drop1">
+              <li><a class="dropdown-item text-secondary"  >Name: A-Z</a></li>
+              <li><a class="dropdown-item text-secondary" >Review: A-Z</a></li>
+          </ul>
+        </div>
+      </div>
+    <h3 class="text-uppercase">All Reviews</h3>
+    <div class="d-flex">
+      <p class="mx-3 d-none d-sm-block" style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 14px 5px 14px;background-color: rgba(56, 56, 56, 0.829);">items:{{reviews.length || 0}}</p>
+      <button class="btn btn-outline-danger mb-2" (click)="clearAllReview()" ><i class="fa-solid fa-trash-can fa-sm bg-transparent"></i></button>
+    </div>
+  </div>
+  <div class="p-4 mt-4 shadow">
+    <ng-container *ngIf="reviews.length>0; else elsediv">
+      <div class="card border-secondary mb-3 " *ngFor="let i of reviews" style="max-width: 100%;" >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex px-3 pt-3">
+            <img [src]="i.image" style="width: 45px; height: 45px; object-fit: cover; border-radius: 50%;" alt="">
+          <div class="ms-3 d-flex align-items-center">
+            <p class="m-0">{{i.username}}</p>
+            <p style="font-size: 10px;" class="text-secondary m-0 ms-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-patch-check text-primary" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/>
+              </svg>
+            </p>
+          </div>
+          </div>
+          <div class="dropdown me-3 ">
+            <span class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" ><i class="fa-solid fa-ellipsis-vertical"></i></span>
+            <ul class="dropdown-menu py-0" aria-labelledby="dropdownMenuButton1" style="border: 1px solid rgba(128, 128, 128, 0.356);">
+              <li >
+                <a class="dropdown-item  text-secondary" (click)="deleteReview(i._id)" >Delete</a>
+              </li>
+              
+              <li><a class="dropdown-item  text-secondary" routerLink="/view/{{i?.id}}" >Go to product</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body text-secondary">
+          <h5 class="card-title">{{i.reviewTitle}}</h5>
+          <p class="card-text">{{i.description}}.</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elsediv>
+        <h5 class="d-flex justify-content-center align-items-end text-danger">No reviews</h5>
+    </ng-template>
+  </div>
+</section>
+<!-- ------------------------------------- -->
           </div>
         </div>
     

@@ -23,7 +23,7 @@ export class LoginComponent {
   getFormLogData() {
     this.api.userLoginApi(this.logForm.value).subscribe({
       next: (res: any) => {
-        console.log(res);
+        // console.log(res);
         if (res.role === 'user') {
           sessionStorage.removeItem('existingAdmin');
           sessionStorage.setItem('existingUser', JSON.stringify(res.existingUser));

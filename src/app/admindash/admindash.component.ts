@@ -11,13 +11,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AdmindashComponent implements OnInit{
 
-  dataLoaded = false;
-
   today: number;
   profilePicture:any
   products:any[]=[]
   allUser:any[]=[]
   searchKey:String=''
+  reviews:any[]=[]
 
   constructor(private api:ApiCallService,private route:Router,private tostr:ToastrService){
     this.today = Date.now();
@@ -35,10 +34,12 @@ getdata(){
   this.api.getAllProducts().subscribe((res:any)=>{
     this.products=res
   })
+this.api.getAllAdminReviews().subscribe((res:any)=>{
+  this.reviews=res
+  // console.log("Reviws:",this.reviews);
+  
+})
 
-  setTimeout(() => {
-        this.dataLoaded = true;
-      }, 1000);
 }
 
 
@@ -64,6 +65,34 @@ deleteUser(id:any){
     error:(err:any)=>{
       console.log(err); 
       this.tostr.error("Account Deletion Faild!!")
+    }
+  })
+}
+
+deleteReview(id:any){
+  this.api.deleteUserReview(id).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      this.tostr.success("Review Deleted!!")
+      this.getdata()
+    },
+    error:(err:any)=>{
+      console.log(err); 
+      this.tostr.error("Deletion Faild!!")
+    }
+  })
+}
+
+clearAllReview(){
+  this.api.clearAllreview().subscribe({
+    next:(res:any)=>{
+      this.tostr.success(`Delete all reviews!!`)
+      this.getdata()
+    },
+    error:(err:any)=>{
+      this.tostr.error("Detetion Faild!!")
+      console.log(err);
+      
     }
   })
 }
