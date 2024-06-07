@@ -17,7 +17,8 @@ export class AdmindashComponent implements OnInit{
   allUser:any[]=[]
   searchKey:String=''
   reviews:any[]=[]
-
+  originalReviews: any[]=[];
+  feetCount:any=sessionStorage.getItem('feedCount')
   constructor(private api:ApiCallService,private route:Router,private tostr:ToastrService){
     this.today = Date.now();
     setInterval(() => {
@@ -37,6 +38,7 @@ getdata(){
 this.api.getAllAdminReviews().subscribe((res:any)=>{
   this.reviews=res
   // console.log("Reviws:",this.reviews);
+  this.originalReviews = [...res]
   
 })
 
@@ -95,6 +97,16 @@ clearAllReview(){
       
     }
   })
+}
+
+sortByName(){
+  this.reviews.sort((name1:any,name2:any)=>name1.username.localeCompare(name2.username))
+}
+sortedByTitle(){
+  this.reviews.sort((ti1:any,ti2:any)=>ti1.reviewTitle.localeCompare(ti2.reviewTitle))
+}
+clearSortReview() {
+  this.reviews = [...this.originalReviews];
 }
 
 logout() { 

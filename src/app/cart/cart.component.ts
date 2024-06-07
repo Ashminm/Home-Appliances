@@ -150,6 +150,8 @@ export class CartComponent implements OnInit {
     sessionStorage.setItem('totalAmount',this.totalAmount)
     sessionStorage.setItem('totalProduct', this.products.length.toString());
     sessionStorage.setItem('discount', this.cartDiscount);
+
+    sessionStorage.setItem('CartProducts', JSON.stringify(this.products));
     this.router.navigateByUrl('/checkout')
   }
 

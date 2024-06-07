@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class FeedbackComponent implements OnInit {
 
   allFeed:any=[]
-  
+  originalFeed:any[]=[]
 constructor(private api:ApiCallService,private tostr:ToastrService){}
 
 ngOnInit() {
@@ -21,6 +21,8 @@ ngOnInit() {
   getData(){
     this.api.getUseFeed().subscribe((res:any)=>{
       this.allFeed=res
+      this.originalFeed=[...res]
+      sessionStorage.setItem("feedCount", this.allFeed.length.toString());
     })
   }
 
@@ -69,5 +71,10 @@ ngOnInit() {
       return name1.localeCompare(name2);
     });
   }
+
+  clearFeedSort(){
+    this.allFeed= [...this.originalFeed]
+  }
+
 
 }

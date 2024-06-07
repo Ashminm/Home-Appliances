@@ -9,16 +9,17 @@
               <li><a class="dropdown-item text-secondary" (click)="sortByname()" >Name: A-Z</a></li>
               <li><a class="dropdown-item text-secondary" (click)="sortByMessege()">Messsege: A-Z</a></li>
               <li><a class="dropdown-item text-secondary" (click)="sortByAvailable()">Lastname: Available</a></li>
+              <li><a class="dropdown-item text-secondary" (click)="clearFeedSort()">Clear Sort</a></li>
           </ul>
         </div>
       </div>
-    <h3 class="text-uppercase">All Feedbacks</h3>
+    <h3 class="text-uppercase">Feedbacks</h3>
     <div class="d-flex">
       <p class="mx-3 d-none d-sm-block" style="cursor: pointer; border: 1px solid rgb(43, 42, 42);border-radius: 20px 20px 20px 20px;padding: 5px 14px 5px 14px;background-color: rgba(56, 56, 56, 0.829);">items:{{allFeed.length || 0 }}</p>
-      <button class="btn btn-outline-warning mb-2" (click)="clearAllFeed()"><i class="fa-solid fa-trash-can fa-sm bg-transparent"></i></button>
+      <button class="btn btn-outline-danger mb-2" (click)="clearAllFeed()"><i class="fa-solid fa-trash-can fa-sm bg-transparent"></i></button>
     </div>
   </div>
-  <div class="table-responsive">
+  <div class="table-responsive" style="height: 78vh;overflow-y: scroll;">
     <table class="table table-hover table-transparent">
       <thead>
         <tr class="border">

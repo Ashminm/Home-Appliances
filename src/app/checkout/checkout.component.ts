@@ -57,18 +57,24 @@ export class CheckoutComponent implements OnInit{
 checkForm() {
   if (this.checkOutForm.valid) {
     this.checkOutStatus=true
-      console.log('Form is valid. Form data:', this.checkOutForm.value);
+      // console.log('Form is valid. Form data:', this.checkOutForm.value);
       this.initConfig()
   } else {
       this.toster.info('Invalid form data. try again!!');
   }
 }
 
+isDisabled(): boolean {
+  const totalAmount = sessionStorage.getItem('totalAmount');
+  const totalProduct = sessionStorage.getItem('totalProduct');
+  return !(totalAmount && totalProduct);
+}
 
   cancelCheckOut(){
     this.checkOutForm.reset()
     sessionStorage.removeItem('totalAmount');
     sessionStorage.removeItem('totalProduct');
+    sessionStorage.removeItem('discount');
   }
 
   initConfig() {
@@ -120,7 +126,6 @@ checkForm() {
         onCancel: (data, actions) => {
             console.log('OnCancel', data, actions);
             this.toster.error("Transaction has been Cancelled!!")
-
         },
         onError: err => {
             console.log('OnError', err);

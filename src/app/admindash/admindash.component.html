@@ -48,8 +48,8 @@
                   <i class="fa-solid fa-circle-plus pe-2"></i>Add product
                 </li>
                 <li class="list-group-item bg-transparent text-light text-uppercase d-flex justify-content-between align-items-center">
-                  <span><i class="fa-solid fa-arrow-trend-up pe-2"></i>Order</span>
-                  <span class="badge border badge-pill text-danger">0</span>
+                  <span><i class="fa-solid fa-arrow-trend-up pe-2"></i>Feedbacks</span>
+                  <span class="badge border badge-pill text-danger">{{feetCount}}</span>
                 </li>
                 <li class="list-group-item bg-transparent text-light text-uppercase d-flex justify-content-between align-items-center">
                   <span><i class="fa-solid fa-user pe-2"></i>users</span>
@@ -236,8 +236,8 @@
                         <i class="fa-solid fa-arrow-trend-up fa-xl bg-transparent"></i>
                       </div>
                       <div class="px-4 flex w-100">
-                        <div>Order</div>
-                        <div class="text-success mt-2">0</div>
+                        <div>FeedBacks</div>
+                        <div class="text-success mt-2">{{feetCount}}</div>
                       </div>
                       <span>
                         <i class="fa-solid fa-angles-right fa-lg"></i>
@@ -294,8 +294,9 @@
             <i class="fa-solid fa-filter" style="background-color: rgba(56, 56, 56, 0.829);"></i> Filter
           </p>
           <ul class="dropdown-menu bg-transparent shadow" style="border: 1px solid rgba(128, 128, 128, 0.068);" aria-labelledby="drop1">
-              <li><a class="dropdown-item text-secondary"  >Name: A-Z</a></li>
-              <li><a class="dropdown-item text-secondary" >Review: A-Z</a></li>
+              <li><a class="dropdown-item text-secondary" (click)="sortByName()" >Name: A-Z</a></li>
+              <li><a class="dropdown-item text-secondary" (click)="sortedByTitle()" >Review: A-Z</a></li>
+              <li><a class="dropdown-item text-secondary" (click)="clearSortReview()" >Clear Sort</a></li>
           </ul>
         </div>
       </div>
@@ -305,7 +306,7 @@
       <button class="btn btn-outline-danger mb-2" (click)="clearAllReview()" ><i class="fa-solid fa-trash-can fa-sm bg-transparent"></i></button>
     </div>
   </div>
-  <div class="p-4 mt-4 shadow">
+  <div class="p-4 mt-4 shadow" style="height: 78vh;overflow-y: scroll;">
     <ng-container *ngIf="reviews.length>0; else elsediv">
       <div class="card border-secondary mb-3 " *ngFor="let i of reviews" style="max-width: 100%;" >
         <div class="d-flex justify-content-between align-items-center">
