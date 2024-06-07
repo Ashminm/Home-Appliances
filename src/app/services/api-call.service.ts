@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ApiCallService {
 
-  SERVER_URL="http://localhost:3000"
+  SERVER_URL="https://home-appliances-server.onrender.com"
   wishListCount=new BehaviorSubject(0)
   cartListCount=new BehaviorSubject(0)
 
@@ -87,9 +87,6 @@ export class ApiCallService {
   getQuadecreaseApi(id:any){
     return this.http.get(`${this.SERVER_URL}/decri-item/${id}`,this.appendTokenToHeader()) 
   }
-  // getQuaViewdecreaseApi(id:any){
-  //   return this.http.get(`${this.SERVER_URL}/decri-view-item/${id}`,this.appendTokenToHeader()) 
-  // }
   getClearCart(){
     return this.http.delete(`${this.SERVER_URL}/clear-cart`,this.appendTokenToHeader()) 
   }
