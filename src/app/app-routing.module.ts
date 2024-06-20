@@ -31,10 +31,10 @@ const routes: Routes = [
   {path:'cate',component:CategoriesComponent},
   {path:'viewcate/:id',component:ViewCategoryComponent},
   {path:'contact',component:ContactComponent},
-  {path:'adash',component:AdmindashComponent},
-  {path:'addproduct',component:AddproductComponent},
-  {path:'editproduct',component:EditproductComponent},
-  {path:'popupedit/:id',component:PopupeditComponent},
+  {path:'adash',canActivate:[authGuard],component:AdmindashComponent},
+  {path:'addproduct',canActivate:[authGuard],component:AddproductComponent},
+  {path:'editproduct',canActivate:[authGuard],component:EditproductComponent},
+  {path:'popupedit/:id',canActivate:[authGuard],component:PopupeditComponent},
   {path:'**',redirectTo:''}
 ];
 
